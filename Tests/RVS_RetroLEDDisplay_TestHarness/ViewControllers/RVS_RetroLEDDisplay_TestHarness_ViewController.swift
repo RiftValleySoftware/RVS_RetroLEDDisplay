@@ -22,10 +22,11 @@
 
 import UIKit
 
+/* ###################################################################################################################################### */
+// MARK: - Main Screen View Controller -
+/* ###################################################################################################################################### */
+/**
+ The View Controller for the main screen.
+ */
 class RVS_RetroLEDDisplay_TestHarness_ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
 }

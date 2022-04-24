@@ -24,5 +24,11 @@
 
 import UIKit
 
+/* ###################################################################################################################################### */
+// MARK: - Retro LED Display As An Image View -
+/* ###################################################################################################################################### */
+/**
+ The display is a subclass of UIImageView. We do this, so we can easily have a background image.
+ */
 class RVS_RetroLEDDisplay: UIImageView {
 }

@@ -1,5 +1,5 @@
 // swift-tools-version:5.5
-// © Copyright 2021, The Great Rift Valley Software Company
+// © Copyright 2022, The Great Rift Valley Software Company
 //
 // LICENSE:
 //
@@ -22,16 +22,16 @@
 import PackageDescription
 
 let package = Package(
-    name: "RVS_Checkbox",
+    name: "RVS_RetroLEDDisplay",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v14)
     ],
     products: [
-        .library(name: "RVS-Checkbox",
-                 targets: ["RVS_Checkbox"]
+        .library(name: "RVS-RetroLEDDisplay",
+                 targets: ["RVS_RetroLEDDisplay"]
         )
     ],
     targets: [
-        .target(name: "RVS_Checkbox")
+        .target(name: "RVS_RetroLEDDisplay")
     ]
 )

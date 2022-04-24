@@ -4,4 +4,26 @@
    <FileRef
       location = "group:RVS_RetroLEDDisplay.xcodeproj">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "Meta">
+      <FileRef
+         location = "group:README.md">
+      </FileRef>
+      <FileRef
+         location = "group:CHANGELOG.md">
+      </FileRef>
+      <FileRef
+         location = "group:Package.swift">
+      </FileRef>
+      <FileRef
+         location = "group:jazzy.command">
+      </FileRef>
+      <FileRef
+         location = "group:CODEOWNERS">
+      </FileRef>
+      <FileRef
+         location = "group:LICENSE">
+      </FileRef>
+   </Group>
 </Workspace>
