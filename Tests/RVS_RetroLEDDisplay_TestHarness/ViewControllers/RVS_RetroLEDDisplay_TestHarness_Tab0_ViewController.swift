@@ -30,4 +30,9 @@ import RVS_RetroLEDDisplay
  The View Controller for the Tab 0 (Single Character) screen.
  */
 class RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController: RVS_RetroLEDDisplay_TestHarness_BaseViewController {
+    /* ################################################################## */
+    /**
+     This is the instance of a single "LED" digit to be tested.
+    */
+    @IBOutlet weak var testTargetImage: RVS_RetroLEDDisplayBase?
 }

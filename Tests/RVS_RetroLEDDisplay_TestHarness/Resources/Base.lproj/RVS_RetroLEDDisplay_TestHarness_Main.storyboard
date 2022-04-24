@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rrX-Ad-wDD">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,18 +11,37 @@
         <!--SLUG-TAB-0-TITLE-->
         <scene sceneID="kiH-xh-o6K">
             <objects>
-                <viewController id="egX-1G-hMU" customClass="RVS_RetroLEDDisplay_TestHarness_BaseViewController" customModule="RVS_RetroLEDDisplay_TestHarness" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="egX-1G-hMU" customClass="RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController" customModule="RVS_RetroLEDDisplay_TestHarness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5lG-E1-Z0v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lGt-iQ-8qX" customClass="RVS_RetroLEDSingleDigitDisplay" customModule="RVS_RetroLEDDisplay">
+                                <rect key="frame" x="83" y="241" width="248" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lGt-iQ-8qX" secondAttribute="height" multiplier="3:5" id="wxV-Ja-bdh"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="WjK-8Z-hAs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lGt-iQ-8qX" firstAttribute="width" secondItem="5lG-E1-Z0v" secondAttribute="width" priority="750" id="7S7-QL-0dq"/>
+                            <constraint firstItem="lGt-iQ-8qX" firstAttribute="height" relation="lessThanOrEqual" secondItem="5lG-E1-Z0v" secondAttribute="height" multiplier="0.6" id="Eyg-c8-P0R"/>
+                            <constraint firstItem="lGt-iQ-8qX" firstAttribute="width" relation="lessThanOrEqual" secondItem="5lG-E1-Z0v" secondAttribute="width" multiplier="0.6" id="FnF-R5-jmD"/>
+                            <constraint firstItem="lGt-iQ-8qX" firstAttribute="height" secondItem="5lG-E1-Z0v" secondAttribute="height" priority="750" id="KmC-i7-5Ul"/>
+                            <constraint firstItem="lGt-iQ-8qX" firstAttribute="centerY" secondItem="5lG-E1-Z0v" secondAttribute="centerY" id="fHf-Tx-MbH"/>
+                            <constraint firstItem="lGt-iQ-8qX" firstAttribute="centerX" secondItem="5lG-E1-Z0v" secondAttribute="centerX" id="gGQ-jq-zbF"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="SLUG-TAB-0-TITLE" image="SingleCharacter" id="tzO-k8-SCB"/>
+                    <connections>
+                        <outlet property="testTargetImage" destination="lGt-iQ-8qX" id="R89-XP-PEP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kws-Ei-177" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1299" y="-698"/>
+            <point key="canvasLocation" x="1298.5507246376812" y="-698.4375"/>
         </scene>
         <!--RetroLED Display Test Harness Tab Bar Controller-->
         <scene sceneID="xNy-0q-AiC">
