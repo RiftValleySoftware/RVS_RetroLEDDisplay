@@ -24,10 +24,10 @@ import UIKit
 import RVS_RetroLEDDisplay
 
 /* ###################################################################################################################################### */
-// MARK: - Main Screen View Controller -
+// MARK: - Main Screen View Controller For Tab 0 (Single Character) -
 /* ###################################################################################################################################### */
 /**
- The View Controller for the main screen.
+ The View Controller for the Tab 0 (Single Character) screen.
  */
-class RVS_RetroLEDDisplay_TestHarness_ViewController: RVS_RetroLEDDisplay_TestHarness_BaseViewController {
+class RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController: RVS_RetroLEDDisplay_TestHarness_BaseViewController {
 }
