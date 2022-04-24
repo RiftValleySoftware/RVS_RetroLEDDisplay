@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D45A2C582814B80C00AEE770 /* RVS-RetroLEDDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4C3B8F42814B16D00BA3B41 /* RVS-RetroLEDDisplay.framework */; platformFilter = ios; };
-		D45A2C592814B80C00AEE770 /* RVS-RetroLEDDisplay.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4C3B8F42814B16D00BA3B41 /* RVS-RetroLEDDisplay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D45A2C582814B80C00AEE770 /* RVS_RetroLEDDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4C3B8F42814B16D00BA3B41 /* RVS_RetroLEDDisplay.framework */; platformFilter = ios; };
+		D45A2C592814B80C00AEE770 /* RVS_RetroLEDDisplay.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4C3B8F42814B16D00BA3B41 /* RVS_RetroLEDDisplay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D47EA89F2814B9C500337D4B /* RVS_RetroLEDDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47EA89E2814B9C500337D4B /* RVS_RetroLEDDisplay.swift */; };
 		D47EA8A22814BA2E00337D4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D47EA8A02814BA2E00337D4B /* Localizable.strings */; };
 		D4C3B90A2814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness_AppSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C3B9092814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness_AppSceneDelegate.swift */; };
@@ -16,6 +16,7 @@
 		D4C3B9112814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness_Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4C3B90F2814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness_Main.storyboard */; };
 		D4C3B9132814B2BD00BA3B41 /* RVS_RetroLEDDisplay_TestHarness_Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4C3B9122814B2BD00BA3B41 /* RVS_RetroLEDDisplay_TestHarness_Assets.xcassets */; };
 		D4C3B9162814B2BD00BA3B41 /* RVS_RetroLEDDisplay_TestHarness_LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4C3B9142814B2BD00BA3B41 /* RVS_RetroLEDDisplay_TestHarness_LaunchScreen.storyboard */; };
+		D4EEA3CC28158C0700FA8887 /* RVS_RetroLEDDisplay_TestHarness_BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EEA3CB28158C0700FA8887 /* RVS_RetroLEDDisplay_TestHarness_BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +36,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D45A2C592814B80C00AEE770 /* RVS-RetroLEDDisplay.framework in Embed Frameworks */,
+				D45A2C592814B80C00AEE770 /* RVS_RetroLEDDisplay.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,7 +46,7 @@
 /* Begin PBXFileReference section */
 		D47EA89E2814B9C500337D4B /* RVS_RetroLEDDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_RetroLEDDisplay.swift; sourceTree = "<group>"; };
 		D47EA8A12814BA2E00337D4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Tests/RVS_RetroLEDDisplay_TestHarness/Resources/Base.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
-		D4C3B8F42814B16D00BA3B41 /* RVS-RetroLEDDisplay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "RVS-RetroLEDDisplay.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4C3B8F42814B16D00BA3B41 /* RVS_RetroLEDDisplay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RVS_RetroLEDDisplay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C3B9072814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RVS_RetroLEDDisplay_TestHarness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C3B9092814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness_AppSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_RetroLEDDisplay_TestHarness_AppSceneDelegate.swift; sourceTree = "<group>"; };
 		D4C3B90D2814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RVS_RetroLEDDisplay_TestHarness_ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		D4C3B9152814B2BD00BA3B41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RVS_RetroLEDDisplay_TestHarness_LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D4C3B9172814B2BD00BA3B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4C3B91C2814B35A00BA3B41 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
+		D4EEA3CB28158C0700FA8887 /* RVS_RetroLEDDisplay_TestHarness_BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVS_RetroLEDDisplay_TestHarness_BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D45A2C582814B80C00AEE770 /* RVS-RetroLEDDisplay.framework in Frameworks */,
+				D45A2C582814B80C00AEE770 /* RVS_RetroLEDDisplay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +91,7 @@
 		D4C3B8F52814B16D00BA3B41 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D4C3B8F42814B16D00BA3B41 /* RVS-RetroLEDDisplay.framework */,
+				D4C3B8F42814B16D00BA3B41 /* RVS_RetroLEDDisplay.framework */,
 				D4C3B9072814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness.app */,
 			);
 			name = Products;
@@ -168,6 +170,7 @@
 		D4C3B91F2814B3B000BA3B41 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D4EEA3CB28158C0700FA8887 /* RVS_RetroLEDDisplay_TestHarness_BaseViewController.swift */,
 				D4C3B90D2814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness_ViewController.swift */,
 			);
 			path = ViewControllers;
@@ -176,9 +179,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D4C3B8F32814B16D00BA3B41 /* RVS-RetroLEDDisplay */ = {
+		D4C3B8F32814B16D00BA3B41 /* RVS_RetroLEDDisplay */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D4C3B8FB2814B16D00BA3B41 /* Build configuration list for PBXNativeTarget "RVS-RetroLEDDisplay" */;
+			buildConfigurationList = D4C3B8FB2814B16D00BA3B41 /* Build configuration list for PBXNativeTarget "RVS_RetroLEDDisplay" */;
 			buildPhases = (
 				D47EA89D2814B95E00337D4B /* SwiftLint */,
 				D4C3B8F02814B16D00BA3B41 /* Sources */,
@@ -187,9 +190,9 @@
 			);
 			dependencies = (
 			);
-			name = "RVS-RetroLEDDisplay";
+			name = RVS_RetroLEDDisplay;
 			productName = RVS_RetroLEDDisplay;
-			productReference = D4C3B8F42814B16D00BA3B41 /* RVS-RetroLEDDisplay.framework */;
+			productReference = D4C3B8F42814B16D00BA3B41 /* RVS_RetroLEDDisplay.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D4C3B9062814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness */ = {
@@ -243,7 +246,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D4C3B8F32814B16D00BA3B41 /* RVS-RetroLEDDisplay */,
+				D4C3B8F32814B16D00BA3B41 /* RVS_RetroLEDDisplay */,
 				D4C3B9062814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness */,
 			);
 		};
@@ -298,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4C3B90E2814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness_ViewController.swift in Sources */,
+				D4EEA3CC28158C0700FA8887 /* RVS_RetroLEDDisplay_TestHarness_BaseViewController.swift in Sources */,
 				D4C3B90A2814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness_AppSceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,7 +312,7 @@
 		D45A2C5B2814B80C00AEE770 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
-			target = D4C3B8F32814B16D00BA3B41 /* RVS-RetroLEDDisplay */;
+			target = D4C3B8F32814B16D00BA3B41 /* RVS_RetroLEDDisplay */;
 			targetProxy = D45A2C5A2814B80C00AEE770 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -484,7 +488,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-RetroLEDDisplay";
-				PRODUCT_NAME = "RVS-RetroLEDDisplay";
+				PRODUCT_NAME = RVS_RetroLEDDisplay;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -515,7 +519,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-RetroLEDDisplay";
-				PRODUCT_NAME = "RVS-RetroLEDDisplay";
+				PRODUCT_NAME = RVS_RetroLEDDisplay;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -594,7 +598,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D4C3B8FB2814B16D00BA3B41 /* Build configuration list for PBXNativeTarget "RVS-RetroLEDDisplay" */ = {
+		D4C3B8FB2814B16D00BA3B41 /* Build configuration list for PBXNativeTarget "RVS_RetroLEDDisplay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D4C3B8FC2814B16D00BA3B41 /* Debug */,

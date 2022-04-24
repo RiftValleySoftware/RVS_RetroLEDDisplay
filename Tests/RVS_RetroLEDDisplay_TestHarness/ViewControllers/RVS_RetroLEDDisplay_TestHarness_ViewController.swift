@@ -29,5 +29,5 @@ import RVS_RetroLEDDisplay
 /**
  The View Controller for the main screen.
  */
-class RVS_RetroLEDDisplay_TestHarness_ViewController: UIViewController {
+class RVS_RetroLEDDisplay_TestHarness_ViewController: RVS_RetroLEDDisplay_TestHarness_BaseViewController {
 }
