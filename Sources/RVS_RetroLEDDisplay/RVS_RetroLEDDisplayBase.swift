@@ -28,6 +28,16 @@ import UIKit
 // MARK: - Internal Extension Utilities -
 
 /* ###################################################################################################################################### */
+// MARK: - Private BinaryInteger Extension For Accessing UInt Components -
+/* ###################################################################################################################################### */
+fileprivate extension BinaryInteger {
+    /**
+     This comes pretty much [directly from here](https://www.hackingwithswift.com/example-code/language/how-to-split-an-integer-into-an-array-of-its-digits)
+     */
+    var digits: [Int] { String(describing: self).compactMap { Int(String($0)) } }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Private CGPoint Extension For Rotating Points -
 /* ###################################################################################################################################### */
 fileprivate extension CGPoint {
@@ -131,7 +141,7 @@ extension LED_Element {
     /**
      The maximum value of this Array (it is calculated by default, from the number of digits).
      */
-    var maxVal: Int { Int(pow(Double(16),Double(numberOfDigits))) }
+    var maxVal: Int { max(Int.max, Int(pow(Double(16), Double(numberOfDigits))) - 1) }
 }
 
 /* ###################################################################################################################################### */
@@ -551,6 +561,7 @@ class LED_MultipleDigits {
      This is a linear array of digits.
      This array has them all, and they are arranged as a single number, from MSB (left) to LSB (right).
      No separators or decimal points. Those should be provided separately.
+     The first element [0] in the array will be the MSB, and the last will be the LSB.
      */
     private var _digitArray: [LED_SingleDigit] = []
 
@@ -559,8 +570,10 @@ class LED_MultipleDigits {
     /* ################################################################## */
     /**
      - parameter inValue: value, from -2 to maxVal.
+     - parameter numberOfDigits: The number of digits. This should be enough to hold the value. If not specified, then it is 1.
      */
-    init(_ inValue: Int) {
+    init(_ inValue: Int, numberOfDigits inNumberOfDigits: Int = 1) {
+        for _ in 0..<inNumberOfDigits { _digitArray.append(LED_SingleDigit(0)) }
         value = inValue
     }
 }
@@ -634,8 +647,35 @@ extension LED_MultipleDigits: LED_Element {
      This will not display negative values (no -A, for example).
      */
     var value: Int {
-        get { return 0 }
-        set { _ = max(-2, min(maxVal, newValue)) }
+        get {
+            return _digitArray.reduce(0) { current, next in
+                if 0 <= next.value {
+                    return (current * 16) + next.value
+                } else if -1 == next.value {
+                    return -1
+                } else {
+                    return -2
+                }
+            }
+        }
+        
+        set {
+            let totalValue = max(-2, min(maxVal, newValue))
+            
+            if 0 > totalValue {
+                _digitArray.forEach { $0.value = totalValue }
+            } else {
+                var index = numberOfDigits - 1
+                totalValue.digits.reversed().forEach {
+                    _digitArray[index].value = $0
+                    index += 1
+                }
+                // We hide the rest.
+                while 0 < index {
+                    _digitArray[index].value = -2
+                }
+            }
+        }
     }
 
     /* ################################################################## */
@@ -652,6 +692,12 @@ extension LED_MultipleDigits: LED_Element {
  The display is a subclass of UIImageView. We do this, so we can easily have a background image.
  */
 open class RVS_RetroLEDDisplayBase: UIImageView {
+    /* ################################################################## */
+    /**
+     This holds the instance that will generate the paths we use for display.
+     */
+    private var _digitFactory: LED_MultipleDigits?
+    
     /* ################################################################## */
     /**
      This caches the original background color. It is set at load time.
