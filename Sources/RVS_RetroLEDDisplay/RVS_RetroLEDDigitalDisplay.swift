@@ -691,7 +691,8 @@ extension LED_MultipleDigits: LED_Element {
 /**
  The display is a subclass of UIImageView. We do this, so we can easily have a background image.
  */
-open class RVS_RetroLEDDisplayBase: UIImageView {
+@IBDesignable
+open class RVS_RetroLEDDigitalDisplay: UIImageView {
     /* ################################################################## */
     /**
      This holds the instance that will generate the paths we use for display.
@@ -791,12 +792,18 @@ open class RVS_RetroLEDDisplayBase: UIImageView {
             setNeedsLayout()
         }
     }
+
+    /* ################################################################## */
+    /**
+     This is the LED digit[s] that is|are used to produce the bezier paths for this display.
+     */
+    private var _ledPathMaker: LED_MultipleDigits?
 }
 
 /* ###################################################################################################################################### */
 // MARK: Private Computed Properties
 /* ###################################################################################################################################### */
-private extension RVS_RetroLEDDisplayBase {
+private extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
      This returns the background gradient layer, rendering it, if necessary.
@@ -807,7 +814,7 @@ private extension RVS_RetroLEDDisplayBase {
 /* ###################################################################################################################################### */
 // MARK: Private Instance Methods
 /* ###################################################################################################################################### */
-private extension RVS_RetroLEDDisplayBase {
+private extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
      This creates the gradient layer, using our specified start and stop colors.
@@ -835,7 +842,7 @@ private extension RVS_RetroLEDDisplayBase {
 /* ###################################################################################################################################### */
 // MARK: Public Computed Properties
 /* ###################################################################################################################################### */
-public extension RVS_RetroLEDDisplayBase {
+public extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
      The starting color for the "On" gradient.
@@ -903,54 +910,36 @@ public extension RVS_RetroLEDDisplayBase {
         get { _offGradientAngleInDegrees }
         set { _offGradientAngleInDegrees = newValue }
     }
-}
 
-/* ###################################################################################################################################### */
-// MARK: - Retro LED Display (Single LED Digit) -
-/* ###################################################################################################################################### */
-/**
- */
-@IBDesignable
-open class RVS_RetroLEDSingleDigitDisplay: RVS_RetroLEDDisplayBase {
-    /* ################################################################################################################################## */
-    // MARK: Private Stored Properties
-    /* ################################################################################################################################## */
     /* ################################################################## */
     /**
-     This is the LED digit that is used to produce the bezier paths for this display.
-     */
-    private var _ledPathMaker: LED_SingleDigit?
-}
-
-/* ###################################################################################################################################### */
-// MARK: Public Computed Properties
-/* ###################################################################################################################################### */
-public extension RVS_RetroLEDSingleDigitDisplay {
-    /* ################################################################## */
-    /**
-     This is the value that is to be displayed. It can be -2 (not shown), -1 (negative sign), or 0-15 (10-15 are A, b, C, d, E, and F).
+     This is the value that is to be displayed. It can be -2 (not shown), -1 (negative sign), or 0...maxVal
      */
     @IBInspectable var value: Int {
         get { _ledPathMaker?.value ?? -2 }
         set {
-            if (-2..<16).contains(newValue) {
-                _ledPathMaker = LED_SingleDigit(newValue)
-                setNeedsDisplay()
-            }
+            _ledPathMaker = LED_MultipleDigits(newValue, numberOfDigits: newValue.digits.count)
+            setNeedsLayout()
         }
     }
+    
+    /* ################################################################## */
+    /**
+     The maximum value of this Array
+     */
+    var maxVal: Int { _ledPathMaker?.maxVal ?? 0 }
 }
 
 /* ###################################################################################################################################### */
 // MARK: Public Base Class Overrides
 /* ###################################################################################################################################### */
-public extension RVS_RetroLEDSingleDigitDisplay {
+public extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
      Called to render this image.
      
      - parameter inDrawingRect: The rect in which to render the digit.
      */
-    override func draw(_ inDrawingRect: CGRect) {
-    }
+//    override func draw(_ inDrawingRect: CGRect) {
+//    }
 }

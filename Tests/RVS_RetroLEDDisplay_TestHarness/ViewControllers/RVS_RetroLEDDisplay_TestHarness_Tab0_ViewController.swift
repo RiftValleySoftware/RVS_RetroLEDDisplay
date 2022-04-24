@@ -34,5 +34,5 @@ class RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController: RVS_RetroLEDDisplay_T
     /**
      This is the instance of a single "LED" digit to be tested.
     */
-    @IBOutlet weak var testTargetImage: RVS_RetroLEDDisplayBase?
+    @IBOutlet weak var testTargetImage: RVS_RetroLEDDigitalDisplay?
 }
