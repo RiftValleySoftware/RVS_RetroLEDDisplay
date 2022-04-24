@@ -28,67 +28,6 @@ import UIKit
 // MARK: - Internal Extension Utilities -
 
 /* ###################################################################################################################################### */
-// MARK: - Private UIImage Extension For Resizing -
-/* ###################################################################################################################################### */
-fileprivate extension UIImage {
-    /* ################################################################## */
-    /**
-     This allows an image to be resized, given a maximum dimension, and a scale will be determined to meet that dimension.
-     If the image is currently smaller than the maximum size, it will not be scaled.
-     
-     - parameter toMaximumSize: The maximum size, in either the X or Y axis, of the image, in pixels.
-     
-     - returns: A new image, with the given dimensions. May be nil, if there was an error.
-     */
-    func _resized(toMaximumSize: CGFloat) -> UIImage? {
-        let scaleX: CGFloat = toMaximumSize / size.width
-        let scaleY: CGFloat = toMaximumSize / size.height
-        return _resized(toScaleFactor: min(1.0, min(scaleX, scaleY)))
-    }
-
-    /* ################################################################## */
-    /**
-     This allows an image to be resized, given a maximum dimension, and a scale will be determined to meet that dimension.
-     
-     - parameter toScaleFactor: The scale of the resulting image, as a multiplier of the current size.
-     
-     - returns: A new image, with the given scale. May be nil, if there was an error.
-     */
-    func _resized(toScaleFactor inScaleFactor: CGFloat) -> UIImage? { _resized(toNewWidth: size.width * inScaleFactor, toNewHeight: size.height * inScaleFactor) }
-    
-    /* ################################################################## */
-    /**
-     This allows an image to be resized, given both a width and a height, or just one of the dimensions.
-     
-     - parameters:
-         - toNewWidth: The width (in pixels) of the desired image. If not provided, a scale will be determined from the toNewHeight parameter.
-         - toNewHeight: The height (in pixels) of the desired image. If not provided, a scale will be determined from the toNewWidth parameter.
-     
-     - returns: A new image, with the given dimensions. May be nil, if no width or height was supplied, or if there was an error.
-     */
-    func _resized(toNewWidth inNewWidth: CGFloat? = nil, toNewHeight inNewHeight: CGFloat? = nil) -> UIImage? {
-        guard nil == inNewWidth,
-              nil == inNewHeight else {
-            var scaleX: CGFloat = (inNewWidth ?? size.width) / size.width
-            var scaleY: CGFloat = (inNewHeight ?? size.height) / size.height
-
-            scaleX = nil == inNewWidth ? scaleY : scaleX
-            scaleY = nil == inNewHeight ? scaleX : scaleY
-
-            let destinationSize = CGSize(width: size.width * scaleX, height: size.height * scaleY)
-            let destinationRect = CGRect(origin: .zero, size: destinationSize)
-
-            UIGraphicsBeginImageContextWithOptions(destinationSize, false, 0)
-            defer { UIGraphicsEndImageContext() }   // This makes sure that we get rid of the offscreen context.
-            draw(in: destinationRect, blendMode: .normal, alpha: 1)
-            return UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(renderingMode)
-        }
-        
-        return nil
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Private CGPoint Extension For Rotating Points -
 /* ###################################################################################################################################### */
 fileprivate extension CGPoint {
@@ -129,20 +68,16 @@ fileprivate extension CGPoint {
 // MARK: - Main Implementation -
 
 /* ###################################################################################################################################### */
+// MARK: LED Element Protocol
+/* ###################################################################################################################################### */
 /**
  This protocol specifies the interface for an element that is to be incorporated into an LED display group.
- The idea of this file is to provide LED elements that are expressed as UIBezierPath objects, and can be scaled, transformed, filled and drawn.
+ The idea of this file is to provide LED elements that are expressed as UIBezierPath objects.
  
  The deal with classes that use this protocol, is that they will deliver their displays as UIBezierPath objects, which can be resized, filled,
  combined with other paths, rotated, etc.
  */
-public protocol LED_Element {
-    /* ################################################################## */
-    /**
-     Get the drawing size of this element.
-     */
-    var drawingSize: CGSize {get}
-    
+protocol LED_Element {
     /* ################################################################## */
     /**
      Get all segments as one path.
@@ -160,10 +95,47 @@ public protocol LED_Element {
      Get "inactive" segments as one path.
      */
     var inactiveSegments: UIBezierPath {get}
+    
+    /* ################################################################## */
+    /**
+     Get the drawing size of this element (or set of elements).
+     This size is really a "baseline." It is probably not the size the digits will actually be rendered at.
+     It should be used as a way to get a "starting point" for scaling and aspect ratio purposes.
+     */
+    var drawingSize: CGSize {get}
+    
+    /* ################################################################## */
+    /**
+     This is the value that is assigned to the element (or set of elements).
+     */
+    var value: Int {get set}
+    
+    /* ################################################################## */
+    /**
+     This is the number of digits, represented by this instance.
+     */
+    var numberOfDigits: Int {get}
+    
+    /* ################################################################## */
+    /**
+     The maximum value of this Array.
+     */
+    var maxVal: Int {get}
 }
 
 /* ###################################################################################################################################### */
-// MARK: - "LED Digit" Class -
+// MARK: LED Element Protocol Defaults
+/* ###################################################################################################################################### */
+extension LED_Element {
+    /* ################################################################## */
+    /**
+     The maximum value of this Array (it is calculated by default, from the number of digits).
+     */
+    var maxVal: Int { Int(pow(Double(16),Double(numberOfDigits))) }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - "LED Single Digit" Class -
 /* ###################################################################################################################################### */
 /**
  This class represents a single LED digit.
@@ -178,7 +150,7 @@ public protocol LED_Element {
  We set up an arbitrary size of 250 X 492 as the control size, as it allows us to size things.
  However, it is expected that the control will be rendered at sizes more related to implementation.
  */
-class LED_SingleDigit: LED_Element {
+class LED_SingleDigit {
     /* ################################################################## */
     // MARK: Class Enums
     /* ################################################################## */
@@ -282,8 +254,14 @@ class LED_SingleDigit: LED_Element {
     private let _bottomSegment: UIBezierPath?
     /// The bezier path for the center segment
     private let _centerSegment: UIBezierPath?
-    /// The value of this digit
-    private var _value: Int
+
+    /* ################################################################## */
+    // MARK: Private Instance Properties
+    /* ################################################################## */
+    /**
+     The value expressed by this instance -2...15
+     */
+    private var _value: Int = -2
     
     /* ################################################################## */
     // MARK: Initializer
@@ -291,7 +269,7 @@ class LED_SingleDigit: LED_Element {
     /**
      Instantiates each of the segments.
      
-     - parameter A: value, from -2 to 15 (-2 is nothing. -1 is the minus sign).
+     - parameter inValue: value, from -2 to 15 (-2 is nothing. -1 is the minus sign).
      */
     init(_ inValue: Int) {
         _topSegment = Self._newSegmentShape(inSegment: .kTopSegment)
@@ -301,30 +279,107 @@ class LED_SingleDigit: LED_Element {
         _bottomRightSegment = Self._newSegmentShape(inSegment: .kBottomRightSegment)
         _bottomSegment = Self._newSegmentShape(inSegment: .kBottomSegment)
         _centerSegment = Self._newSegmentShape(inSegment: .kCenterSegment)
-        _value = max(-2, min(15, inValue))
+        value = inValue
     }
-    
+}
+
+/* ###################################################################################################################################### */
+// MARK: Private Class Functions
+/* ###################################################################################################################################### */
+extension LED_SingleDigit {
     /* ################################################################## */
-    // MARK: Internal Instance Calculated Properties
+    // MARK: Private Class Functions
     /* ################################################################## */
     /**
-     Public accessor for the value of this digit (-1 through 15).
+     Creates a path containing a segment shape.
+     
+     - parameter inSegment: This indicates which segment we want (Will affect rotation and selection of shape).
+     
+     - returns: a new path, in the shape of the requested segment
      */
-    var value: Int {
-        get { return _value }
-        set { _value = max(-2, min(15, newValue)) }
+    private class func _newSegmentShape(inSegment: SegmentIndexes) -> UIBezierPath {
+        let ret = UIBezierPath()
+        
+        let points: [CGPoint] = (.kCenterSegment == inSegment) ? _c_g_CenterShapePoints: _c_g_StandardShapePoints
+        
+        ret.move(to: (points[0]))
+        
+        _ = points.map { ret.addLine(to: $0) }
+        
+        ret.addLine(to: points[0])
+        
+        var rotDiv: CGFloat = 0.0
+        
+        switch inSegment {
+        case .kTopLeftSegment:
+            rotDiv = CGFloat(Double.pi / -2.0)
+        case .kBottomLeftSegment:
+            rotDiv = CGFloat(Double.pi / -2.0)
+        case .kTopRightSegment:
+            rotDiv = CGFloat(Double.pi / 2.0)
+        case .kBottomRightSegment:
+            rotDiv = CGFloat(Double.pi / 2.0)
+        case .kBottomSegment:
+            rotDiv = -CGFloat(Double.pi)
+        default:
+            break
+        }
+        
+        let rotation = CGAffineTransform(rotationAngle: rotDiv)
+        ret.apply(rotation)
+        let bounds = ret.cgPath.boundingBox
+        if let offset = _c_g_viewOffsets[inSegment] {
+            var toOrigin: CGAffineTransform
+            switch inSegment {
+            case .kBottomSegment:
+                toOrigin = CGAffineTransform(translationX: -bounds.origin.x + offset.x, y: -bounds.origin.y + offset.y)
+            case .kTopLeftSegment:
+                toOrigin = CGAffineTransform(translationX: offset.x, y: -bounds.origin.y + offset.y)
+            case .kBottomLeftSegment:
+                toOrigin = CGAffineTransform(translationX: offset.x, y: -bounds.origin.y + offset.y)
+            case .kTopRightSegment:
+                toOrigin = CGAffineTransform(translationX: -bounds.origin.x + offset.x, y: -bounds.origin.y + offset.y)
+            case .kBottomRightSegment:
+                toOrigin = CGAffineTransform(translationX: -bounds.origin.x + offset.x, y: -bounds.origin.y + offset.y)
+            default:
+                toOrigin = CGAffineTransform(translationX: offset.x, y: offset.y)
+            }
+            ret.apply(toOrigin)
+        }
+        
+        return ret
     }
-    
-    /* ################################################################## */
-    // MARK: LED_Element Protocol Calculated Properties
+}
+
+/* ###################################################################################################################################### */
+// MARK: Private Instance Methods
+/* ###################################################################################################################################### */
+extension LED_SingleDigit {
     /* ################################################################## */
     /**
-     Get the bounding box of this segment.
+     Returns true, if the segment is selected for the current value.
+     
+     - parameter inSegment: This indicates which segment we want to test.
+     
+     - returns: true, if the segment is selected, false, otherwise
      */
-    var drawingSize: CGSize {
-        return Self._c_g_displaySize
-    }
+    private func _isSegmentSelected(_ inSegment: SegmentIndexes) -> Bool {
+        var ret: Bool = false
+        let selectedSegments = Self._c_g_segmentSelection[_value + 2]
     
+        for segmentPathIndex in selectedSegments where segmentPathIndex == inSegment {
+            ret = true
+            break
+        }
+        
+        return ret
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: LED_Element Conformance
+/* ###################################################################################################################################### */
+extension LED_SingleDigit: LED_Element {
     /* ################################################################## */
     /**
      Get all segments as one path.
@@ -461,89 +516,133 @@ class LED_SingleDigit: LED_Element {
     }
     
     /* ################################################################## */
-    // MARK: Private Class Functions
+    /**
+     Get the bounding box of this segment.
+     */
+    var drawingSize: CGSize {
+        return Self._c_g_displaySize
+    }
+    
     /* ################################################################## */
     /**
-     Creates a path containing a segment shape.
-     
-     - parameter inSegment: This indicates which segment we want (Will affect rotation and selection of shape).
-     
-     - returns: a new path, in the shape of the requested segment
+     Public accessor for the value of this digit (-1 through 15).
      */
-    private class func _newSegmentShape(inSegment: SegmentIndexes) -> UIBezierPath {
-        let ret = UIBezierPath()
+    var value: Int {
+        get { return _value }
+        set { _value = max(-2, min(15, newValue)) }
+    }
+    
+    /* ################################################################## */
+    /**
+     This is the number of digits, represented by this instance.
+     In this class, it is always 1.
+     */
+    var numberOfDigits: Int { 1 }
+}
+
+/* ###################################################################################################################################### */
+// MARK: - "LED Multiple Digit" Class -
+/* ###################################################################################################################################### */
+/**
+ */
+class LED_MultipleDigits {
+    /* ################################################################## */
+    /**
+     This is a linear array of digits.
+     This array has them all, and they are arranged as a single number, from MSB (left) to LSB (right).
+     No separators or decimal points. Those should be provided separately.
+     */
+    private var _digitArray: [LED_SingleDigit] = []
+
+    /* ################################################################## */
+    // MARK: Initializer
+    /* ################################################################## */
+    /**
+     - parameter inValue: value, from -2 to maxVal.
+     */
+    init(_ inValue: Int) {
+        value = inValue
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: LED_Element Conformance
+/* ###################################################################################################################################### */
+extension LED_MultipleDigits: LED_Element {
+    /* ################################################################## */
+    /**
+     Get all segments as one path.
+     */
+    var allSegments: UIBezierPath {
+        let ret: UIBezierPath = UIBezierPath()
         
-        let points: [CGPoint] = (.kCenterSegment == inSegment) ? _c_g_CenterShapePoints: _c_g_StandardShapePoints
+        _digitArray.forEach { ret.append($0.allSegments) }
         
-        ret.move(to: (points[0]))
+        return ret
+    }
+    
+    /* ################################################################## */
+    /**
+     Get "active" segments as one path.
+     */
+    var activeSegments: UIBezierPath {
+        let ret: UIBezierPath = UIBezierPath()
         
-        _ = points.map { ret.addLine(to: $0) }
+        _digitArray.forEach { ret.append($0.activeSegments) }
         
-        ret.addLine(to: points[0])
+        return ret
+    }
+    
+    /* ################################################################## */
+    /**
+     Get "inactive" segments as one path.
+     */
+    var inactiveSegments: UIBezierPath {
+        let ret: UIBezierPath = UIBezierPath()
         
-        var rotDiv: CGFloat = 0.0
+        _digitArray.forEach { ret.append($0.inactiveSegments) }
         
-        switch inSegment {
-        case .kTopLeftSegment:
-            rotDiv = CGFloat(Double.pi / -2.0)
-        case .kBottomLeftSegment:
-            rotDiv = CGFloat(Double.pi / -2.0)
-        case .kTopRightSegment:
-            rotDiv = CGFloat(Double.pi / 2.0)
-        case .kBottomRightSegment:
-            rotDiv = CGFloat(Double.pi / 2.0)
-        case .kBottomSegment:
-            rotDiv = -CGFloat(Double.pi)
-        default:
-            break
-        }
+        return ret
+    }
+    
+    /* ################################################################## */
+    /**
+     Get the drawing size of this set of elements.
+     The bezier paths will all be within a bounds rect, of this size (origin: 0, 0).
+     This size is really a "baseline." It is probably not the size the digits will actually be rendered at.
+     It should be used as a way to get a "starting point" for scaling and aspect ratio purposes.
+     This assumes that each element is horizontally attached to the next, so the size is the sum of all elements, horizontally, and the largest element, vertically.
+     */
+    var drawingSize: CGSize {
+        var ret = CGSize.zero
         
-        let rotation = CGAffineTransform(rotationAngle: rotDiv)
-        ret.apply(rotation)
-        let bounds = ret.cgPath.boundingBox
-        if let offset = _c_g_viewOffsets[inSegment] {
-            var toOrigin: CGAffineTransform
-            switch inSegment {
-            case .kBottomSegment:
-                toOrigin = CGAffineTransform(translationX: -bounds.origin.x + offset.x, y: -bounds.origin.y + offset.y)
-            case .kTopLeftSegment:
-                toOrigin = CGAffineTransform(translationX: offset.x, y: -bounds.origin.y + offset.y)
-            case .kBottomLeftSegment:
-                toOrigin = CGAffineTransform(translationX: offset.x, y: -bounds.origin.y + offset.y)
-            case .kTopRightSegment:
-                toOrigin = CGAffineTransform(translationX: -bounds.origin.x + offset.x, y: -bounds.origin.y + offset.y)
-            case .kBottomRightSegment:
-                toOrigin = CGAffineTransform(translationX: -bounds.origin.x + offset.x, y: -bounds.origin.y + offset.y)
-            default:
-                toOrigin = CGAffineTransform(translationX: offset.x, y: offset.y)
-            }
-            ret.apply(toOrigin)
+        _digitArray.forEach {
+            ret.width += $0.drawingSize.width
+            ret.height = max(ret.height, $0.drawingSize.height)
         }
         
         return ret
     }
     
     /* ################################################################## */
-    // MARK: Private Instance Methods
+    /**
+     This is the value that is assigned to the set of elements.
+     This will be expressed as a hexadecimal value (so each element is -2...15).
+     If -2, then the entire array is hidden.
+     If -1, the array is a line of center segments.
+     0...valueMax has more significant digit segments hidden (internally, -2).
+     This will not display negative values (no -A, for example).
+     */
+    var value: Int {
+        get { return 0 }
+        set { _ = max(-2, min(maxVal, newValue)) }
+    }
+
     /* ################################################################## */
     /**
-     Returns true, if the segment is selected for the current value.
-     
-     - parameter inSegment: This indicates which segment we want to test.
-     
-     - returns: true, if the segment is selected, false, otherwise
+     Returns the number of digits, represented by this array.
      */
-    private func _isSegmentSelected(_ inSegment: SegmentIndexes) -> Bool {
-        var ret: Bool = false
-        let selectedSegments = Self._c_g_segmentSelection[_value + 2]
-    
-        for segmentPathIndex in selectedSegments where segmentPathIndex == inSegment {
-            ret = true
-            break
-        }
-        
-        return ret
-    }
+    var numberOfDigits: Int { _digitArray.count }
 }
 
 /* ###################################################################################################################################### */
@@ -761,20 +860,6 @@ public extension RVS_RetroLEDDisplayBase {
 }
 
 /* ###################################################################################################################################### */
-// MARK: Public Base Class Overrides
-/* ###################################################################################################################################### */
-public extension RVS_RetroLEDDisplayBase {
-    /* ################################################################## */
-    /**
-     Called to render this image.
-     
-     - parameter inDrawingRect: The rect in which to render the digit.
-     */
-    override func draw(_ inDrawingRect: CGRect) {
-    }
-}
-
-/* ###################################################################################################################################### */
 // MARK: - Retro LED Display (Single LED Digit) -
 /* ###################################################################################################################################### */
 /**
@@ -807,5 +892,19 @@ public extension RVS_RetroLEDSingleDigitDisplay {
                 setNeedsDisplay()
             }
         }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Public Base Class Overrides
+/* ###################################################################################################################################### */
+public extension RVS_RetroLEDSingleDigitDisplay {
+    /* ################################################################## */
+    /**
+     Called to render this image.
+     
+     - parameter inDrawingRect: The rect in which to render the digit.
+     */
+    override func draw(_ inDrawingRect: CGRect) {
     }
 }
