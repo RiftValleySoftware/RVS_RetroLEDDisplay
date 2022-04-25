@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RVS_RetroLEDDigitalDisplay Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/RVS_RetroLEDDigitalDisplay" class="dashAnchor"></a>
+
+    <a title="RVS_RetroLEDDigitalDisplay Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          RVS_RetroLEDDisplay Doumentation
+        </a>
+         (100% documented)
+      </p>
+    
+      <div class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </div>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay">
+            <img class="header-icon" src="../img/gh.png" alt="GitHub"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html"> Reference</a>
+      <img class="carat" src="../img/carat.png" alt=""/>
+      RVS_RetroLEDDigitalDisplay Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/LED_MultipleDigits.html">LED_MultipleDigits</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/LED_SingleDigit.html">LED_SingleDigit</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/LED_SingleDigit/SegmentIndexes.html">– SegmentIndexes</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RVS_RetroLEDDigitalDisplay.html">RVS_RetroLEDDigitalDisplay</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/BinaryInteger.html">BinaryInteger</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/CGPoint.html">CGPoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIImage.html">UIImage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/LED_Element.html">LED_Element</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>RVS_RetroLEDDigitalDisplay</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">@IBDesignable</span>
+<span class="kd">open</span> <span class="kd">class</span> <span class="kt">RVS_RetroLEDDigitalDisplay</span> <span class="p">:</span> <span class="kt">UIImageView</span></code></pre>
+
+                </div>
+              </div>
+            <p>The display is a subclass of UIImageView. We do this, so we can easily have a background image.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC13_digitFactory33_8AEF5C6CA196661701B3B2BF13CBFBFBLLAA18LED_MultipleDigitsCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_digitFactory" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC13_digitFactory33_8AEF5C6CA196661701B3B2BF13CBFBFBLLAA18LED_MultipleDigitsCSgvp">_digitFactory</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This holds the instance that will generate the paths we use for display.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_digitFactory</span><span class="p">:</span> <span class="kt"><a href="../Classes/LED_MultipleDigits.html">LED_MultipleDigits</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC24_originalBackgroundColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_originalBackgroundColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC24_originalBackgroundColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp">_originalBackgroundColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This caches the original background color. It is set at load time.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_originalBackgroundColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC18_originalTintColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_originalTintColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC18_originalTintColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp">_originalTintColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This caches the original tint color. It is set at load time.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_originalTintColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC13_onColorLayer33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7CALayerCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_onColorLayer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC13_onColorLayer33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7CALayerCSgvp">_onColorLayer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This caches the gradient layer for the &ldquo;On&rdquo; segments. This is set when the gradient is redrawn.
+If this is not-nil, then it will be fetched, instead of redrawing the gradient.
+In order to force the gradient to redraw, set this to nil.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_onColorLayer</span><span class="p">:</span> <span class="kt">CALayer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC21_onGradientStartColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_onGradientStartColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC21_onGradientStartColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp">_onGradientStartColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The starting color for the gradient.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_onGradientStartColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC19_onGradientEndColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_onGradientEndColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC19_onGradientEndColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp">_onGradientEndColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The ending color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_onGradientEndColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC25_onGradientAngleInDegrees33_8AEF5C6CA196661701B3B2BF13CBFBFBLL12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/_onGradientAngleInDegrees" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC25_onGradientAngleInDegrees33_8AEF5C6CA196661701B3B2BF13CBFBFBLL12CoreGraphics7CGFloatVvp">_onGradientAngleInDegrees</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The angle of the gradient, in degrees.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_onGradientAngleInDegrees</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC14_offColorLayer33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7CALayerCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_offColorLayer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC14_offColorLayer33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7CALayerCSgvp">_offColorLayer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This caches the gradient layer for the &ldquo;Off&rdquo; segments. This is set when the gradient is redrawn.
+If this is not-nil, then it will be fetched, instead of redrawing the gradient.
+In order to force the gradient to redraw, set this to nil.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_offColorLayer</span><span class="p">:</span> <span class="kt">CALayer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC22_offGradientStartColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_offGradientStartColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC22_offGradientStartColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp">_offGradientStartColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The starting color for the gradient.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_offGradientStartColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC20_offGradientEndColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_offGradientEndColor" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC20_offGradientEndColor33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIColorCSgvp">_offGradientEndColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The ending color.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_offGradientEndColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC26_offGradientAngleInDegrees33_8AEF5C6CA196661701B3B2BF13CBFBFBLL12CoreGraphics7CGFloatVvp"></a>
+                    <a name="//apple_ref/swift/Property/_offGradientAngleInDegrees" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC26_offGradientAngleInDegrees33_8AEF5C6CA196661701B3B2BF13CBFBFBLL12CoreGraphics7CGFloatVvp">_offGradientAngleInDegrees</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The angle of the gradient, in degrees.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_offGradientAngleInDegrees</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC13_ledPathMaker33_8AEF5C6CA196661701B3B2BF13CBFBFBLLAA18LED_MultipleDigitsCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_ledPathMaker" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC13_ledPathMaker33_8AEF5C6CA196661701B3B2BF13CBFBFBLLAA18LED_MultipleDigitsCSgvp">_ledPathMaker</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the LED digit[s] that is|are used to produce the bezier paths for this display.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_ledPathMaker</span><span class="p">:</span> <span class="kt"><a href="../Classes/LED_MultipleDigits.html">LED_MultipleDigits</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC8_onImage33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIImageCSgvp"></a>
+                    <a name="//apple_ref/swift/Property/_onImage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC8_onImage33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7UIImageCSgvp">_onImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This image, if provided, will be used instead of a gradient, for the &ldquo;active&rdquo; LED segments.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="k">var</span> <span class="nv">_onImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Private%20Instance%20Methods"></a>
+                <a name="//apple_ref/swift/Section/Private Instance Methods" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Private%20Instance%20Methods"></a>
+                  <h3 class="section-name"><span>Private Instance Methods</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC17_makeOnColorLayer33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7CALayerCSgyF"></a>
+                    <a name="//apple_ref/swift/Method/_makeOnColorLayer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC17_makeOnColorLayer33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7CALayerCSgyF">_makeOnColorLayer()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This creates the &ldquo;On&rdquo; gradient/image layer, using our specified start and stop colors.
+If the gradient cache is available, we immediately return that, instead.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">func</span> <span class="nf">_makeOnColorLayer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CALayer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The color layer (it has also been assigned to the <code><a href="../Classes/RVS_RetroLEDDigitalDisplay.html#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC13_onColorLayer33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7CALayerCSgvp">_onColorLayer</a></code> cache property).</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC18_makeOffColorLayer33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7CALayerCSgyF"></a>
+                    <a name="//apple_ref/swift/Method/_makeOffColorLayer()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC18_makeOffColorLayer33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7CALayerCSgyF">_makeOffColorLayer()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This creates the &ldquo;Off&rdquo; gradient/image layer, using our specified start and stop colors.
+If the gradient cache is available, we immediately return that, instead.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">func</span> <span class="nf">_makeOffColorLayer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">CALayer</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The color layer (it has also been assigned to the <code><a href="../Classes/RVS_RetroLEDDigitalDisplay.html#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC14_offColorLayer33_8AEF5C6CA196661701B3B2BF13CBFBFBLLSo7CALayerCSgvp">_offColorLayer</a></code> cache property).</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Public%20Computed%20Properties"></a>
+                <a name="//apple_ref/swift/Section/Public Computed Properties" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Computed%20Properties"></a>
+                  <h3 class="section-name"><span>Public Computed Properties</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)onGradientStartColor"></a>
+                    <a name="//apple_ref/swift/Property/onGradientStartColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)onGradientStartColor">onGradientStartColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The starting color for the &ldquo;On&rdquo; gradient.
+If not provided, the view backgroundColor is used.
+If that is not provided, then the view tintColor is used.
+If that is not provided, then the super (parent) view tintColor is used.
+If that is not provided, the AccentColor is used.
+If that is not provided, the class will not work.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="k">var</span> <span class="nv">onGradientStartColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)onGradientEndColor"></a>
+                    <a name="//apple_ref/swift/Property/onGradientEndColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)onGradientEndColor">onGradientEndColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The ending color. If not provided, then the starting color is used.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="k">var</span> <span class="nv">onGradientEndColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)onGradientAngleInDegrees"></a>
+                    <a name="//apple_ref/swift/Property/onGradientAngleInDegrees" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)onGradientAngleInDegrees">onGradientAngleInDegrees</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The angle of the gradient, in degrees. 0 (default) is top-to-bottom.
+Zero is top-to-bottom.
+Negative is counter-clockwise, and positive is clockwise.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="k">var</span> <span class="nv">onGradientAngleInDegrees</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)offGradientStartColor"></a>
+                    <a name="//apple_ref/swift/Property/offGradientStartColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)offGradientStartColor">offGradientStartColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The starting color for the &ldquo;Off&rdquo; gradient.
+If not provided, the view backgroundColor is used.
+If that is not provided, then the view tintColor is used.
+If that is not provided, then the super (parent) view tintColor is used.
+If that is not provided, the AccentColor is used.
+If that is not provided, the class will not work.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="k">var</span> <span class="nv">offGradientStartColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)offGradientEndColor"></a>
+                    <a name="//apple_ref/swift/Property/offGradientEndColor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)offGradientEndColor">offGradientEndColor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The ending color. If not provided, then the starting color is used.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="k">var</span> <span class="nv">offGradientEndColor</span><span class="p">:</span> <span class="kt">UIColor</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)offGradientAngleInDegrees"></a>
+                    <a name="//apple_ref/swift/Property/offGradientAngleInDegrees" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)offGradientAngleInDegrees">offGradientAngleInDegrees</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The angle of the gradient, in degrees. 0 (default) is top-to-bottom.
+Zero is top-to-bottom.
+Negative is counter-clockwise, and positive is clockwise.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="k">var</span> <span class="nv">offGradientAngleInDegrees</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)numberOfDigits"></a>
+                    <a name="//apple_ref/swift/Property/numberOfDigits" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)numberOfDigits">numberOfDigits</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is the number of digits for this group. 0 (or less), means no display.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="k">var</span> <span class="nv">numberOfDigits</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)gap"></a>
+                    <a name="//apple_ref/swift/Property/gap" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)gap">gap</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is how many calculation (not display) units separate each digit. Default is 8.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="k">var</span> <span class="nv">gap</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)onImage"></a>
+                    <a name="//apple_ref/swift/Property/onImage" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)onImage">onImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This property allows you to assign an image to the on segments.
+If this is set to an image (non-nil), then that will supersede the gradient colors.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="k">var</span> <span class="nv">onImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)value"></a>
+                    <a name="//apple_ref/swift/Property/value" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)value">value</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This is a numerical value to set to the collected digits.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="k">var</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC8minValueSivp"></a>
+                    <a name="//apple_ref/swift/Property/minValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC8minValueSivp">minValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Read-only value that returns the minimum possible value for this instance (always -2).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">minValue</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC8maxValueSivp"></a>
+                    <a name="//apple_ref/swift/Property/maxValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC8maxValueSivp">maxValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Read-only value that returns the maximum possible value for this instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">maxValue</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Public%20Base%20Class%20Overrides"></a>
+                <a name="//apple_ref/swift/Section/Public Base Class Overrides" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20Base%20Class%20Overrides"></a>
+                  <h3 class="section-name"><span>Public Base Class Overrides</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)image"></a>
+                    <a name="//apple_ref/swift/Property/image" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)image">image</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This property allows you to assign an image to the off segments.
+If this is set to an image (non-nil), then that will supersede the gradient colors.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="k">var</span> <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(im)layoutSubviews"></a>
+                    <a name="//apple_ref/swift/Method/layoutSubviews()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(im)layoutSubviews">layoutSubviews()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Called when the views are to be laid out. Most of the action happens here.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">func</span> <span class="nf">layoutSubviews</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-04-25)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
+    </section>
+  </body>
+</html>

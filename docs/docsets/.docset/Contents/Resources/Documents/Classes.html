@@ -54,7 +54,16 @@
             <a class="nav-group-name-link" href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/RVS_RetroLEDDisplay.html">RVS_RetroLEDDisplay</a>
+                <a class="nav-group-task-link" href="Classes/LED_MultipleDigits.html">LED_MultipleDigits</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/LED_SingleDigit.html">LED_SingleDigit</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/LED_SingleDigit/SegmentIndexes.html">– SegmentIndexes</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RVS_RetroLEDDigitalDisplay.html">RVS_RetroLEDDigitalDisplay</a>
               </li>
             </ul>
           </li>
@@ -62,10 +71,24 @@
             <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/BinaryInteger.html">BinaryInteger</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/CGPoint.html">CGPoint</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UIColor.html">UIColor</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/UIImage.html">UIImage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/LED_Element.html">LED_Element</a>
               </li>
             </ul>
           </li>
@@ -85,6 +108,100 @@
           <div class="section-content">
             <div class="task-group">
               <div class="task-name-container">
+                <a name="/%22LED%20Single%20Digit%22%20Class"></a>
+                <a name="//apple_ref/swift/Section/&quot;LED Single Digit&quot; Class" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/%22LED%20Single%20Digit%22%20Class"></a>
+                  <h3 class="section-name"><span>&ldquo;LED Single Digit&rdquo; Class</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay15LED_SingleDigitC"></a>
+                    <a name="//apple_ref/swift/Class/LED_SingleDigit" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay15LED_SingleDigitC">LED_SingleDigit</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This class represents a single LED digit.
+It will create paths that represent the digit, from -1 to 15. -1 is just the center segment (minus sign), and 10 - 15 are A, b, C, d E, F</p>
+
+<p>The size these paths are generated at is designed to produce a &ldquo;standard LED Display&rdquo; aspect with integer values.</p>
+
+<p>Each digit is treated as a &ldquo;classic&rdquo; Hex LED, with values that go from 0-F.
+If you give it a value of -1, then only a minus sign (center segment) is displayed.
+If you give it a value of -2, then nothing is displayed.</p>
+
+<p>We set up an arbitrary size of 250 X 492 as the control size, as it allows us to size things.
+However, it is expected that the control will be rendered at sizes more related to implementation.</p>
+
+                        <a href="Classes/LED_SingleDigit.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">LED_SingleDigit</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LED_SingleDigit</span><span class="p">:</span> <span class="kt"><a href="Protocols/LED_Element.html">LED_Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/%22LED%20Multiple%20Digit%22%20Class"></a>
+                <a name="//apple_ref/swift/Section/&quot;LED Multiple Digit&quot; Class" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/%22LED%20Multiple%20Digit%22%20Class"></a>
+                  <h3 class="section-name"><span>&ldquo;LED Multiple Digit&rdquo; Class</span>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay18LED_MultipleDigitsC"></a>
+                    <a name="//apple_ref/swift/Class/LED_MultipleDigits" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay18LED_MultipleDigitsC">LED_MultipleDigits</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This aggregates multiple single digits, into a row of them, and treats the row as an MSB -&gt; LSB hex value.</p>
+
+                        <a href="Classes/LED_MultipleDigits.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">LED_MultipleDigits</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">LED_MultipleDigits</span><span class="p">:</span> <span class="kt"><a href="Protocols/LED_Element.html">LED_Element</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
                 <a name="/Retro%20LED%20Display%20As%20An%20Image%20View"></a>
                 <a name="//apple_ref/swift/Section/Retro LED Display As An Image View" class="dashAnchor"></a>
                 <div class="section-name-container">
@@ -97,9 +214,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDisplay"></a>
-                    <a name="//apple_ref/swift/Class/RVS_RetroLEDDisplay" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDisplay">RVS_RetroLEDDisplay</a>
+                    <a name="/c:@M@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay"></a>
+                    <a name="//apple_ref/swift/Class/RVS_RetroLEDDigitalDisplay" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay">RVS_RetroLEDDigitalDisplay</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -109,13 +226,14 @@
                       <div class="abstract">
                         <p>The display is a subclass of UIImageView. We do this, so we can easily have a background image.</p>
 
-                        <a href="Classes/RVS_RetroLEDDisplay.html" class="slightly-smaller">See more</a>
+                        <a href="Classes/RVS_RetroLEDDigitalDisplay.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">RVS_RetroLEDDisplay</span> <span class="p">:</span> <span class="kt">UIImageView</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@IBDesignable</span>
+<span class="kd">open</span> <span class="kd">class</span> <span class="kt">RVS_RetroLEDDigitalDisplay</span> <span class="p">:</span> <span class="kt">UIImageView</span></code></pre>
 
                         </div>
                       </div>
@@ -130,7 +248,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-04-24)</p>
+      <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-04-25)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

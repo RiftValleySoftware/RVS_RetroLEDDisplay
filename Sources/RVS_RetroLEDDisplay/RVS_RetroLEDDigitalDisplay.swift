@@ -83,21 +83,17 @@ extension UIImage {
 fileprivate extension BinaryInteger {
     /* ################################################################## */
     /**
-     Returns an array of integers; each representing the numerical value of the integer, as a decimal number.
+     Returns an array of integers; each representing the numerical value of the integer, as a decimal number (0...9).
+     > The first "digit" could be a negative sign.
      */
     var digits: [Int] { String(format: "%d", Int(self)).compactMap { Int(String($0)) } }
 
     /* ################################################################## */
     /**
-     As above, but for hex digits.
+     Returns an array of integers; each representing the numerical value of the integer, as a hexadecimal number (0...F).
+     > The first "digit" could be a negative sign.
      */
-    var hexDigits: [Int] {
-        let ret = String(format: "%x", Int(self))
-        return ret.compactMap {
-            let string = String($0)
-            return Int(string, radix: 16)
-        }
-    }
+    var hexDigits: [Int] { String(format: "%x", Int(self)).compactMap { Int(String($0), radix: 16) } }
 }
 
 /* ###################################################################################################################################### */
