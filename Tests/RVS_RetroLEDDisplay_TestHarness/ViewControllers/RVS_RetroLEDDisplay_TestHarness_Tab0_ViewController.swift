@@ -32,6 +32,26 @@ import RVS_RetroLEDDisplay
 class RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController: RVS_RetroLEDDisplay_TestHarness_BaseViewController {
     /* ################################################################## */
     /**
+    */
+    static private let _defaultOnImageName = "OnImage"
+    
+    /* ################################################################## */
+    /**
+    */
+    static private let _defaultOffImageName = "OffImage"
+    
+    /* ################################################################## */
+    /**
+    */
+    static private let _uglyOnImageName = "Pattern1"
+    
+    /* ################################################################## */
+    /**
+    */
+    static private let _uglyOffImageName = "Pattern0"
+    
+    /* ################################################################## */
+    /**
      This is the instance of a triple "LED" digit to be tested.
     */
     @IBOutlet weak var testTargetImage: RVS_RetroLEDDigitalDisplay?
@@ -49,7 +69,12 @@ class RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController: RVS_RetroLEDDisplay_T
     /* ################################################################## */
     /**
     */
-    @IBOutlet weak var fillSegmentedSwitch: UISegmentedControl?
+    @IBOutlet weak var onFillSegmentedSwitch: UISegmentedControl?
+
+    /* ################################################################## */
+    /**
+    */
+    @IBOutlet weak var offFillSegmentedSwitch: UISegmentedControl?
 
     /* ################################################################## */
     /**
@@ -79,14 +104,22 @@ extension RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController {
             aspectSegmentedSwitchChanged(aspectSegmentedSwitch)
         }
         
-        if let fillSegmentedSwitch = fillSegmentedSwitch {
+        if let fillSegmentedSwitch = onFillSegmentedSwitch {
             for index in 0..<fillSegmentedSwitch.numberOfSegments {
                 fillSegmentedSwitch.setTitle((fillSegmentedSwitch.titleForSegment(at: index) ?? "ERROR").localizedVariant, forSegmentAt: index)
             }
             
-            fillSegmentedSwitchChanged(fillSegmentedSwitch)
+            onFillSegmentedSwitchChanged(fillSegmentedSwitch)
         }
         
+        if let fillSegmentedSwitch = offFillSegmentedSwitch {
+            for index in 0..<fillSegmentedSwitch.numberOfSegments {
+                fillSegmentedSwitch.setTitle((fillSegmentedSwitch.titleForSegment(at: index) ?? "ERROR").localizedVariant, forSegmentAt: index)
+            }
+            
+            offFillSegmentedSwitchChanged(fillSegmentedSwitch)
+        }
+
         if let min = testTargetImage?.minValue,
            let max = testTargetImage?.maxValue {
             valueSlider?.minimumValue = Float(min)
@@ -138,9 +171,55 @@ extension RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController {
     /* ################################################################## */
     /**
     */
-    @IBAction func fillSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
+    @IBAction func onFillSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
+        switch inSegmentedControl.selectedSegmentIndex {
+        case 0:
+            testTargetImage?.onImage = UIImage(named: Self._defaultOnImageName)
+
+        case 1:
+            testTargetImage?.onImage = UIImage(named: Self._uglyOnImageName)
+
+        case 2:
+            testTargetImage?.onImage = nil
+            testTargetImage?.onGradientStartColor = UIColor(named: "GradientOnTopColor")
+            testTargetImage?.onGradientEndColor = UIColor(named: "GradientOnBottomColor")
+
+        case 3:
+            testTargetImage?.onImage = nil
+            testTargetImage?.onGradientStartColor = .label.inverted
+            testTargetImage?.onGradientEndColor = nil
+
+        default:
+            break
+        }
     }
     
+    /* ################################################################## */
+    /**
+    */
+    @IBAction func offFillSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
+        switch inSegmentedControl.selectedSegmentIndex {
+        case 0:
+            testTargetImage?.image = UIImage(named: Self._defaultOffImageName)
+
+        case 1:
+            testTargetImage?.image = UIImage(named: Self._uglyOffImageName)
+
+        case 2:
+            testTargetImage?.image = nil
+            testTargetImage?.offGradientStartColor = UIColor(named: "GradientOffTopColor")
+            testTargetImage?.offGradientEndColor = UIColor(named: "GradientOffBottomColor")
+
+        case 3:
+            testTargetImage?.image = nil
+            testTargetImage?.offGradientStartColor = .clear
+            testTargetImage?.offGradientEndColor = nil
+
+        default:
+            break
+        }
+    }
+
     /* ################################################################## */
     /**
     */

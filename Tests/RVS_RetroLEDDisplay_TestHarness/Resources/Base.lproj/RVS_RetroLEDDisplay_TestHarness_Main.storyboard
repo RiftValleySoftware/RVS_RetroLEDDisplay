@@ -16,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o3B-Pt-FNM">
-                                <rect key="frame" x="83" y="66" width="248" height="31"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o3B-Pt-FNM">
+                                <rect key="frame" x="83" y="28" width="248" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="3ju-wF-Ana"/>
+                                    <constraint firstAttribute="height" constant="30" id="W8p-tl-knO"/>
                                 </constraints>
                                 <segments>
                                     <segment title="SLUG-SEG-FILL-0"/>
@@ -28,10 +28,25 @@
                                     <segment title="SLUG-SEG-FILL-3"/>
                                 </segments>
                                 <connections>
-                                    <action selector="fillSegmentedSwitchChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="YXj-O5-HKt"/>
+                                    <action selector="onFillSegmentedSwitchChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="dJP-Ov-b3s"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="3vf-cQ-WiW">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7L3-iz-I5L">
+                                <rect key="frame" x="83" y="66" width="248" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="OXw-iv-8Ec"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="SLUG-SEG-FILL-0"/>
+                                    <segment title="SLUG-SEG-FILL-1"/>
+                                    <segment title="SLUG-SEG-FILL-2"/>
+                                    <segment title="SLUG-SEG-FILL-3"/>
+                                </segments>
+                                <connections>
+                                    <action selector="offFillSegmentedSwitchChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="cvQ-aV-2U6"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="3vf-cQ-WiW">
                                 <rect key="frame" x="83" y="104" width="248" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7Au-IA-Ziy"/>
@@ -83,28 +98,32 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aJ7-vg-R3L" firstAttribute="trailing" secondItem="3vf-cQ-WiW" secondAttribute="trailing" id="1KN-OG-4sP"/>
+                            <constraint firstItem="7L3-iz-I5L" firstAttribute="top" secondItem="o3B-Pt-FNM" secondAttribute="bottom" constant="8" symbolic="YES" id="5ak-Va-SWD"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="width" secondItem="5lG-E1-Z0v" secondAttribute="width" priority="750" id="7S7-QL-0dq"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="top" secondItem="OjT-1T-kAq" secondAttribute="bottom" constant="8" symbolic="YES" id="Ed5-JV-BG1"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="height" relation="lessThanOrEqual" secondItem="5lG-E1-Z0v" secondAttribute="height" multiplier="0.6" id="Eyg-c8-P0R"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="width" relation="lessThanOrEqual" secondItem="5lG-E1-Z0v" secondAttribute="width" multiplier="0.6" id="FnF-R5-jmD"/>
+                            <constraint firstItem="7L3-iz-I5L" firstAttribute="trailing" secondItem="o3B-Pt-FNM" secondAttribute="trailing" id="JD7-hg-wJx"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="height" secondItem="5lG-E1-Z0v" secondAttribute="height" priority="750" id="KmC-i7-5Ul"/>
                             <constraint firstItem="aJ7-vg-R3L" firstAttribute="leading" secondItem="OjT-1T-kAq" secondAttribute="trailing" constant="8" symbolic="YES" id="MAn-2D-yp0"/>
+                            <constraint firstItem="3vf-cQ-WiW" firstAttribute="top" secondItem="7L3-iz-I5L" secondAttribute="bottom" constant="8" symbolic="YES" id="XEz-4z-jjo"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="leading" secondItem="3vf-cQ-WiW" secondAttribute="leading" id="cLf-No-V90"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="centerY" secondItem="5lG-E1-Z0v" secondAttribute="centerY" id="fHf-Tx-MbH"/>
                             <constraint firstItem="OjT-1T-kAq" firstAttribute="top" secondItem="3vf-cQ-WiW" secondAttribute="bottom" constant="8" symbolic="YES" id="fbN-19-A0q"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="centerX" secondItem="5lG-E1-Z0v" secondAttribute="centerX" id="gGQ-jq-zbF"/>
-                            <constraint firstItem="3vf-cQ-WiW" firstAttribute="top" secondItem="o3B-Pt-FNM" secondAttribute="bottom" constant="8" symbolic="YES" id="gsx-bQ-DbD"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="trailing" secondItem="3vf-cQ-WiW" secondAttribute="trailing" id="nux-wk-IRm"/>
                             <constraint firstItem="aJ7-vg-R3L" firstAttribute="centerY" secondItem="OjT-1T-kAq" secondAttribute="centerY" id="ocz-Am-eTr"/>
-                            <constraint firstItem="3vf-cQ-WiW" firstAttribute="leading" secondItem="o3B-Pt-FNM" secondAttribute="leading" id="omE-ej-ri3"/>
-                            <constraint firstItem="3vf-cQ-WiW" firstAttribute="trailing" secondItem="o3B-Pt-FNM" secondAttribute="trailing" id="wGA-FK-J37"/>
+                            <constraint firstItem="7L3-iz-I5L" firstAttribute="leading" secondItem="o3B-Pt-FNM" secondAttribute="leading" id="qsG-ro-x3Z"/>
+                            <constraint firstItem="3vf-cQ-WiW" firstAttribute="leading" secondItem="7L3-iz-I5L" secondAttribute="leading" id="xZ7-zQ-Dp7"/>
+                            <constraint firstItem="3vf-cQ-WiW" firstAttribute="trailing" secondItem="7L3-iz-I5L" secondAttribute="trailing" id="zEf-tf-xbT"/>
                             <constraint firstItem="OjT-1T-kAq" firstAttribute="leading" secondItem="3vf-cQ-WiW" secondAttribute="leading" id="zMm-oi-jew"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="SLUG-TAB-0-TITLE" image="Tab0" id="tzO-k8-SCB"/>
                     <connections>
                         <outlet property="aspectSegmentedSwitch" destination="3vf-cQ-WiW" id="IuJ-wa-sOE"/>
-                        <outlet property="fillSegmentedSwitch" destination="o3B-Pt-FNM" id="ped-PH-w9g"/>
+                        <outlet property="offFillSegmentedSwitch" destination="7L3-iz-I5L" id="jap-M7-qJD"/>
+                        <outlet property="onFillSegmentedSwitch" destination="o3B-Pt-FNM" id="ped-PH-w9g"/>
                         <outlet property="stepper" destination="aJ7-vg-R3L" id="5eE-iH-J5I"/>
                         <outlet property="testTargetImage" destination="lGt-iQ-8qX" id="R89-XP-PEP"/>
                         <outlet property="valueSlider" destination="OjT-1T-kAq" id="hav-ut-PJv"/>

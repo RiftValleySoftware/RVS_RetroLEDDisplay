@@ -24,6 +24,22 @@ import UIKit
 import RVS_RetroLEDDisplay
 
 /* ###################################################################################################################################### */
+// MARK: - Private UIColor Extension For Inverting Colors -
+/* ###################################################################################################################################### */
+extension UIColor {
+    /* ################################################################## */
+    /**
+     Returns the inverted color.
+     NOTE: This is quite primitive, and may not return exactly what may be expected.
+     [From This SO Answer](https://stackoverflow.com/a/57111280/879365)
+     */
+    var inverted: UIColor {
+        var a: CGFloat = 0.0, r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0
+        return getRed(&r, green: &g, blue: &b, alpha: &a) ? UIColor(red: 1.0-r, green: 1.0-g, blue: 1.0-b, alpha: a) : .label
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - UIView Extension -
 /* ###################################################################################################################################### */
 /**
