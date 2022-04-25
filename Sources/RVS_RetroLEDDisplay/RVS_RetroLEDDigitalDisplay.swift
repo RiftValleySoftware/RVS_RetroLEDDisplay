@@ -28,13 +28,76 @@ import UIKit
 // MARK: - Internal Extension Utilities -
 
 /* ###################################################################################################################################### */
+// MARK: - UIImage Extension -
+/* ###################################################################################################################################### */
+/**
+ This adds some simple image manipulation.
+ */
+extension UIImage {
+    /* ################################################################## */
+    /**
+     This allows an image to be resized, given a maximum dimension, and a scale will be determined to meet that dimension.
+     
+     - parameters:
+         - toScaleFactor: The scale of the resulting image, as a multiplier of the current size.
+     
+     - returns: A new image, with the given scale. May be nil, if there was an error.
+     */
+    func resized(toScaleFactor inScaleFactor: CGFloat) -> UIImage? { resized(toNewWidth: size.width * inScaleFactor, toNewHeight: size.height * inScaleFactor) }
+    
+    /* ################################################################## */
+    /**
+     This allows an image to be resized, given both a width and a height, or just one of the dimensions.
+     
+     - parameters:
+         - toNewWidth: The width (in pixels) of the desired image. If not provided, a scale will be determined from the toNewHeight parameter.
+         - toNewHeight: The height (in pixels) of the desired image. If not provided, a scale will be determined from the toNewWidth parameter.
+     
+     - returns: A new image, with the given dimensions. May be nil, if no width or height was supplied, or if there was an error.
+     */
+    func resized(toNewWidth inNewWidth: CGFloat? = nil, toNewHeight inNewHeight: CGFloat? = nil) -> UIImage? {
+        guard nil == inNewWidth,
+              nil == inNewHeight else {
+            var scaleX: CGFloat = (inNewWidth ?? size.width) / size.width
+            var scaleY: CGFloat = (inNewHeight ?? size.height) / size.height
+
+            scaleX = nil == inNewWidth ? scaleY : scaleX
+            scaleY = nil == inNewHeight ? scaleX : scaleY
+
+            let destinationSize = CGSize(width: size.width * scaleX, height: size.height * scaleY)
+            let destinationRect = CGRect(origin: .zero, size: destinationSize)
+
+            UIGraphicsBeginImageContextWithOptions(destinationSize, false, 0)
+            defer { UIGraphicsEndImageContext() }   // This makes sure that we get rid of the offscreen context.
+            draw(in: destinationRect, blendMode: .normal, alpha: 1)
+            return UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(renderingMode)
+        }
+        
+        return nil
+    }
+}
+
+/* ###################################################################################################################################### */
 // MARK: - Private BinaryInteger Extension For Accessing UInt Components -
 /* ###################################################################################################################################### */
 fileprivate extension BinaryInteger {
+    /* ################################################################## */
     /**
-     This comes pretty much [directly from here](https://www.hackingwithswift.com/example-code/language/how-to-split-an-integer-into-an-array-of-its-digits)
+     Returns an array of integers; each representing the numerical value of the integer, as a decimal number.
      */
-    var digits: [Int] { String(describing: self).compactMap { Int(String($0)) } }
+    var digits: [Int] { String(format: "%d", Int(self)).compactMap { Int(String($0)) } }
+
+    /* ################################################################## */
+    /**
+     As above, but for hex digits.
+     */
+    var hexDigits: [Int] {
+        let ret = String(format: "%x", Int(self))
+        return ret.compactMap {
+            let string = String($0)
+            return Int(string, radix: 16)
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -147,6 +210,12 @@ protocol LED_Element {
      The maximum value of this Array.
      */
     var maxVal: Int {get}
+    
+    /* ################################################################## */
+    /**
+     The ideal aspect ratio (X / Y) of the display.
+     */
+    var idealAspect: CGFloat {get}
 }
 
 /* ###################################################################################################################################### */
@@ -157,7 +226,13 @@ extension LED_Element {
     /**
      The maximum value of this Array (it is calculated by default, from the number of digits).
      */
-    var maxVal: Int { max(Int.max, Int(pow(Double(16), Double(numberOfDigits))) - 1) }
+    var maxVal: Int { min(Int.max, Int(pow(Double(16), Double(numberOfDigits))) - 1) }
+    
+    /* ################################################################## */
+    /**
+     The ideal aspect ratio (X / Y) of the display.
+     */
+    var idealAspect: CGFloat { drawingSize.width / drawingSize.height }
 }
 
 /* ###################################################################################################################################### */
@@ -583,14 +658,21 @@ class LED_MultipleDigits {
     private var _digitArray: [LED_SingleDigit] = []
 
     /* ################################################################## */
+    /**
+     This is how many calculation (not display) units separate each digit. Default is 10.
+     */
+    var gap: CGFloat = 10.0
+
+    /* ################################################################## */
     // MARK: Initializer
     /* ################################################################## */
     /**
      - parameter inValue: value, from -2 to maxVal.
      - parameter numberOfDigits: The number of digits. This should be enough to hold the value. If not specified, then it is 1.
      */
-    init(_ inValue: Int, numberOfDigits inNumberOfDigits: Int = 1) {
+    init(_ inValue: Int, numberOfDigits inNumberOfDigits: Int = 1, gap inGap: CGFloat = 10) {
         for _ in 0..<inNumberOfDigits { _digitArray.append(LED_SingleDigit(0)) }
+        gap = inGap
         value = inValue
     }
 }
@@ -610,7 +692,7 @@ extension LED_MultipleDigits: LED_Element {
         
         _digitArray.forEach {
             let transform = CGAffineTransform(translationX: xOffset, y: 0)
-            xOffset += $0.drawingSize.width
+            xOffset += ($0.drawingSize.width + gap)
             let paths = $0.allSegments
             paths.apply(transform)
             ret.append(paths)
@@ -630,7 +712,7 @@ extension LED_MultipleDigits: LED_Element {
         
         _digitArray.forEach {
             let transform = CGAffineTransform(translationX: xOffset, y: 0)
-            xOffset += $0.drawingSize.width
+            xOffset += ($0.drawingSize.width + gap)
             let paths = $0.activeSegments
             paths.apply(transform)
             ret.append(paths)
@@ -650,7 +732,7 @@ extension LED_MultipleDigits: LED_Element {
         
         _digitArray.forEach {
             let transform = CGAffineTransform(translationX: xOffset, y: 0)
-            xOffset += $0.drawingSize.width
+            xOffset += ($0.drawingSize.width + gap)
             let paths = $0.inactiveSegments
             paths.apply(transform)
             ret.append(paths)
@@ -670,9 +752,12 @@ extension LED_MultipleDigits: LED_Element {
     var drawingSize: CGSize {
         var ret = CGSize.zero
         
+        var gaps: CGFloat = 0
+        
         _digitArray.forEach {
-            ret.width += $0.drawingSize.width
+            ret.width += ($0.drawingSize.width + gaps)
             ret.height = max(ret.height, $0.drawingSize.height)
+            gaps = gap
         }
         
         return ret
@@ -706,14 +791,12 @@ extension LED_MultipleDigits: LED_Element {
             if 0 > totalValue {
                 _digitArray.forEach { $0.value = totalValue }
             } else {
-                var index = numberOfDigits - 1
-                totalValue.digits.reversed().forEach {
+                _digitArray.forEach { $0.value = -2 }
+                let digits = totalValue.hexDigits
+                var index = 0
+                digits.forEach {
                     _digitArray[index].value = $0
                     index += 1
-                }
-                // We hide the rest.
-                while 0 < index {
-                    _digitArray[index].value = -2
                 }
             }
         }
@@ -758,7 +841,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      If this is not-nil, then it will be fetched, instead of redrawing the gradient.
      In order to force the gradient to redraw, set this to nil.
      */
-    private var _onGradientLayer: CAGradientLayer?
+    private var _onColorLayer: CALayer?
 
     /* ################################################################## */
     /**
@@ -766,7 +849,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _onGradientStartColor: UIColor? {
         didSet {
-            _onGradientLayer = nil
+            _onColorLayer = nil
             setNeedsLayout()
         }
     }
@@ -777,7 +860,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _onGradientEndColor: UIColor? {
         didSet {
-            _onGradientLayer = nil
+            _onColorLayer = nil
             setNeedsLayout()
         }
     }
@@ -788,7 +871,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _onGradientAngleInDegrees: CGFloat = 0 {
         didSet {
-            _onGradientLayer = nil
+            _onColorLayer = nil
             setNeedsLayout()
         }
     }
@@ -799,7 +882,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      If this is not-nil, then it will be fetched, instead of redrawing the gradient.
      In order to force the gradient to redraw, set this to nil.
      */
-    private var _offGradientLayer: CAGradientLayer?
+    private var _offColorLayer: CALayer?
 
     /* ################################################################## */
     /**
@@ -807,7 +890,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _offGradientStartColor: UIColor? {
         didSet {
-            _offGradientLayer = nil
+            _offColorLayer = nil
             setNeedsLayout()
         }
     }
@@ -818,7 +901,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _offGradientEndColor: UIColor? {
         didSet {
-            _offGradientLayer = nil
+            _offColorLayer = nil
             setNeedsLayout()
         }
     }
@@ -829,7 +912,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _offGradientAngleInDegrees: CGFloat = 0 {
         didSet {
-            _offGradientLayer = nil
+            _offColorLayer = nil
             setNeedsLayout()
         }
     }
@@ -839,23 +922,17 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      This is the LED digit[s] that is|are used to produce the bezier paths for this display.
      */
     private var _ledPathMaker: LED_MultipleDigits?
-}
 
-/* ###################################################################################################################################### */
-// MARK: Private Computed Properties
-/* ###################################################################################################################################### */
-private extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
-     This returns the "On" background gradient layer, rendering it, if necessary.
+     This image, if provided, will be used instead of a gradient, for the "active" LED segments.
      */
-    var _fetchOnGradientLayer: CALayer? { _makeOnGradientLayer() }
-    
-    /* ################################################################## */
-    /**
-     This returns the "Off" background gradient layer, rendering it, if necessary.
-     */
-    var _fetchOffGradientLayer: CALayer? { _makeOffGradientLayer() }
+    private var _onImage: UIImage? {
+        didSet {
+            _onColorLayer = nil
+            setNeedsLayout()
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -864,42 +941,60 @@ private extension RVS_RetroLEDDigitalDisplay {
 private extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
-     This creates the "On" gradient layer, using our specified start and stop colors.
+     This creates the "On" gradient/image layer, using our specified start and stop colors.
      If the gradient cache is available, we immediately return that, instead.
+     - returns: The color layer (it has also been assigned to the `_onColorLayer` cache property).
      */
-    func _makeOnGradientLayer() -> CALayer? {
-        guard nil == _onGradientLayer else { return _onGradientLayer }
+    @discardableResult
+    func _makeOnColorLayer() -> CALayer? {
+        guard nil == _onColorLayer else { return _onColorLayer }
         
-        // We try to get whatever the user explicitly set. If not that, then we use the label color.
-        let startColor = onGradientStartColor ?? .label
-        let endColor = onGradientEndColor ?? startColor
-        _onGradientLayer = CAGradientLayer()
-        _onGradientLayer?.frame = bounds
-        _onGradientLayer?.colors = [startColor.cgColor, endColor.cgColor]
-        _onGradientLayer?.startPoint = CGPoint(x: 0.5, y: 0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: onGradientAngleInDegrees)
-        _onGradientLayer?.endPoint = CGPoint(x: 0.5, y: 1.0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: onGradientAngleInDegrees)
+        if let image = _onImage?.resized(toNewWidth: bounds.width, toNewHeight: bounds.height)?.cgImage {
+            _onColorLayer = CALayer()
+            _onColorLayer?.frame = bounds
+            _onColorLayer?.contents = image
+        } else {
+            // We try to get whatever the user explicitly set. If not that, then we use the label color.
+            let startColor = onGradientStartColor ?? .clear
+            let endColor = onGradientEndColor ?? startColor
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = bounds
+            gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: onGradientAngleInDegrees)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: onGradientAngleInDegrees)
+            _onColorLayer = gradientLayer
+        }
         
-        return _onGradientLayer
+        return _onColorLayer
     }
     
     /* ################################################################## */
     /**
-     This creates the "Off" gradient layer, using our specified start and stop colors.
+     This creates the "Off" gradient/image layer, using our specified start and stop colors.
      If the gradient cache is available, we immediately return that, instead.
+     - returns: The color layer (it has also been assigned to the `_offColorLayer` cache property).
      */
-    func _makeOffGradientLayer() -> CALayer? {
-        guard nil == _offGradientLayer else { return _offGradientLayer }
+    @discardableResult
+    func _makeOffColorLayer() -> CALayer? {
+        guard nil == _offColorLayer else { return _offColorLayer }
         
-        // We try to get whatever the user explicitly set. If not that, then we invert the label color.
-        let startColor = offGradientStartColor ?? .label.inverted
-        let endColor = offGradientEndColor ?? startColor
-        _offGradientLayer = CAGradientLayer()
-        _offGradientLayer?.frame = bounds
-        _offGradientLayer?.colors = [startColor.cgColor, endColor.cgColor]
-        _offGradientLayer?.startPoint = CGPoint(x: 0.5, y: 0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: offGradientAngleInDegrees)
-        _offGradientLayer?.endPoint = CGPoint(x: 0.5, y: 1.0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: offGradientAngleInDegrees)
+        if let image = image?.resized(toNewWidth: bounds.width, toNewHeight: bounds.height)?.cgImage {
+            _offColorLayer = CALayer()
+            _offColorLayer?.frame = bounds
+            _offColorLayer?.contents = image
+        } else {
+            // We try to get whatever the user explicitly set. If not that, then we invert the label color.
+            let startColor = offGradientStartColor ?? .clear
+            let endColor = offGradientEndColor ?? startColor
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = bounds
+            gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: offGradientAngleInDegrees)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: offGradientAngleInDegrees)
+            _offColorLayer = gradientLayer
+        }
         
-        return _onGradientLayer
+        return _offColorLayer
     }
 }
 
@@ -977,7 +1072,50 @@ public extension RVS_RetroLEDDigitalDisplay {
 
     /* ################################################################## */
     /**
-     This is the value that is to be displayed. It can be -2 (not shown), -1 (negative sign), or 0...maxVal
+     This is the number of digits for this group. 0 (or less), means no display.
+     */
+    @IBInspectable var numberOfDigits: Int {
+        get { _ledPathMaker?.numberOfDigits ?? 0 }
+        set {
+            if 0 >= newValue {
+                _ledPathMaker = nil
+                DispatchQueue.main.async { self.setNeedsLayout() }
+                return
+            }
+            guard nil == _ledPathMaker || _ledPathMaker?.numberOfDigits != newValue else { return }
+            let currentValue = _ledPathMaker?.value ?? 3
+            _ledPathMaker = LED_MultipleDigits(currentValue, numberOfDigits: newValue)
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     This is how many calculation (not display) units separate each digit. Default is 8.
+     */
+    @IBInspectable var gap: CGFloat {
+        get { _ledPathMaker?.gap ?? 0 }
+        set {
+            _ledPathMaker?.gap = newValue
+            setNeedsLayout()
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     This property allows you to assign an image to the on segments.
+     If this is set to an image (non-nil), then that will supersede the gradient colors.
+     */
+    @IBInspectable var onImage: UIImage? {
+        get { _onImage }
+        set {
+            _onImage = newValue
+            setNeedsLayout()
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     This is a numerical value to set to the collected digits.
      */
     @IBInspectable var value: Int {
         get { _ledPathMaker?.value ?? -2 }
@@ -986,31 +1124,72 @@ public extension RVS_RetroLEDDigitalDisplay {
             setNeedsLayout()
         }
     }
-    
+
     /* ################################################################## */
     /**
-     The maximum value of this Array
+     Read-only value that returns the minimum possible value for this instance (always -2).
      */
-    var maxVal: Int { _ledPathMaker?.maxVal ?? 0 }
+    var minValue: Int { -2 }
+
+    /* ################################################################## */
+    /**
+     Read-only value that returns the maximum possible value for this instance.
+     */
+    var maxValue: Int { _ledPathMaker?.maxVal ?? minValue }
 }
 
 /* ###################################################################################################################################### */
 // MARK: Public Base Class Overrides
 /* ###################################################################################################################################### */
 public extension RVS_RetroLEDDigitalDisplay {
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        _ledPathMaker = LED_MultipleDigits(value, numberOfDigits: value.digits.count)
-        _onGradientLayer?.removeFromSuperlayer()
-        _offGradientLayer?.removeFromSuperlayer()
+    /* ################################################################## */
+    /**
+     This property allows you to assign an image to the off segments.
+     If this is set to an image (non-nil), then that will supersede the gradient colors.
+     */
+    override var image: UIImage? {
+        get { super.image }
+        set {
+            super.image = newValue
+            setNeedsLayout()
+        }
     }
     
     /* ################################################################## */
     /**
-     Called to render this image.
-     
-     - parameter inDrawingRect: The rect in which to render the digit.
+     Called when the views are to be laid out. Most of the action happens here.
      */
-//    override func draw(_ inDrawingRect: CGRect) {
-//    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        _onColorLayer?.removeFromSuperlayer()
+        _onColorLayer = nil
+        _offColorLayer?.removeFromSuperlayer()
+        _offColorLayer = nil
+        if let pathMaker = _ledPathMaker {
+            let scaleTransform = CGAffineTransform(scaleX: bounds.size.width / pathMaker.drawingSize.width, y: bounds.size.height / pathMaker.drawingSize.height)
+            if let newLayer = _makeOffColorLayer() {
+                let shape = CAShapeLayer()
+                let path = pathMaker.inactiveSegments
+                path.apply(scaleTransform)
+                shape.path = path.cgPath
+                newLayer.mask = shape
+                layer.addSublayer(newLayer)
+            }
+            
+            if let newLayer = _makeOnColorLayer() {
+                let shape = CAShapeLayer()
+                let path = pathMaker.activeSegments
+                path.apply(scaleTransform)
+                shape.path = path.cgPath
+                newLayer.mask = shape
+                layer.addSublayer(newLayer)
+            }
+            
+            let shape = CAShapeLayer()
+            let path = pathMaker.allSegments
+            path.apply(scaleTransform)
+            shape.path = path.cgPath
+            layer.mask = shape
+        }
+    }
 }

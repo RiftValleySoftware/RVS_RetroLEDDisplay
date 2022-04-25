@@ -24,15 +24,70 @@ import UIKit
 import RVS_RetroLEDDisplay
 
 /* ###################################################################################################################################### */
-// MARK: - Main Screen View Controller For Tab 0 (Single Character) -
+// MARK: - Main Screen View Controller For Tab 0 -
 /* ###################################################################################################################################### */
 /**
- The View Controller for the Tab 0 (Single Character) screen.
+ The View Controller for the Tab 0 (Basic) screen.
  */
 class RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController: RVS_RetroLEDDisplay_TestHarness_BaseViewController {
     /* ################################################################## */
     /**
-     This is the instance of a single "LED" digit to be tested.
+     This is the instance of a triple "LED" digit to be tested.
     */
     @IBOutlet weak var testTargetImage: RVS_RetroLEDDigitalDisplay?
+    
+    /* ################################################################## */
+    /**
+    */
+    @IBOutlet weak var valueSlider: UISlider?
+    
+    /* ################################################################## */
+    /**
+    */
+    @IBOutlet weak var aspectSegmentedSwitch: UISegmentedControl?
+}
+
+/* ###################################################################################################################################### */
+// MARK: Base Class Overrides
+/* ###################################################################################################################################### */
+extension RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController {
+    /* ################################################################## */
+    /**
+    */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let count = aspectSegmentedSwitch?.numberOfSegments {
+            for index in 0..<count {
+                aspectSegmentedSwitch?.setTitle((aspectSegmentedSwitch?.titleForSegment(at: index) ?? "ERROR").localizedVariant, forSegmentAt: index)
+            }
+        }
+        
+        if let min = testTargetImage?.minValue,
+           let max = testTargetImage?.maxValue {
+            valueSlider?.minimumValue = Float(min)
+            valueSlider?.maximumValue = Float(max)
+            valueSlider?.value = round(Float(max) / 2)
+            testTargetImage?.value = Int(round(Float(max) / 2))
+        }
+    }
+}
+
+/* ###################################################################################################################################### */
+// MARK: Callbacks
+/* ###################################################################################################################################### */
+extension RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController {
+    /* ################################################################## */
+    /**
+    */
+    @IBAction func valueSliderChanged(_ inSlider: UISlider) {
+        let intValue = Int(inSlider.value)
+        testTargetImage?.value = intValue
+        inSlider.value = Float(intValue)
+    }
+    
+    /* ################################################################## */
+    /**
+    */
+    @IBAction func aspectSegmentedSwitchChanged(_ sender: UISegmentedControl) {
+    }
 }
