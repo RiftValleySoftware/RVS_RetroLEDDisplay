@@ -589,8 +589,16 @@ extension LED_MultipleDigits: LED_Element {
     var allSegments: UIBezierPath {
         let ret: UIBezierPath = UIBezierPath()
         
-        _digitArray.forEach { ret.append($0.allSegments) }
+        var xOffset: CGFloat = 0
         
+        _digitArray.forEach {
+            let transform = CGAffineTransform(translationX: xOffset, y: 0)
+            xOffset += $0.drawingSize.width
+            let paths = $0.allSegments
+            paths.apply(transform)
+            ret.append(paths)
+        }
+
         return ret
     }
     
@@ -601,8 +609,16 @@ extension LED_MultipleDigits: LED_Element {
     var activeSegments: UIBezierPath {
         let ret: UIBezierPath = UIBezierPath()
         
-        _digitArray.forEach { ret.append($0.activeSegments) }
+        var xOffset: CGFloat = 0
         
+        _digitArray.forEach {
+            let transform = CGAffineTransform(translationX: xOffset, y: 0)
+            xOffset += $0.drawingSize.width
+            let paths = $0.activeSegments
+            paths.apply(transform)
+            ret.append(paths)
+        }
+
         return ret
     }
     
@@ -613,7 +629,15 @@ extension LED_MultipleDigits: LED_Element {
     var inactiveSegments: UIBezierPath {
         let ret: UIBezierPath = UIBezierPath()
         
-        _digitArray.forEach { ret.append($0.inactiveSegments) }
+        var xOffset: CGFloat = 0
+        
+        _digitArray.forEach {
+            let transform = CGAffineTransform(translationX: xOffset, y: 0)
+            xOffset += $0.drawingSize.width
+            let paths = $0.inactiveSegments
+            paths.apply(transform)
+            ret.append(paths)
+        }
         
         return ret
     }
@@ -806,9 +830,15 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
 private extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
-     This returns the background gradient layer, rendering it, if necessary.
+     This returns the "On" background gradient layer, rendering it, if necessary.
      */
-    var _fetchGradientLayer: CALayer? { _makeGradientLayer() }
+    var _fetchOnGradientLayer: CALayer? { _makeOnGradientLayer() }
+    
+    /* ################################################################## */
+    /**
+     This returns the "Off" background gradient layer, rendering it, if necessary.
+     */
+    var _fetchOffGradientLayer: CALayer? { _makeOffGradientLayer() }
 }
 
 /* ###################################################################################################################################### */
@@ -817,10 +847,10 @@ private extension RVS_RetroLEDDigitalDisplay {
 private extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
-     This creates the gradient layer, using our specified start and stop colors.
+     This creates the "On" gradient layer, using our specified start and stop colors.
      If the gradient cache is available, we immediately return that, instead.
      */
-    func _makeGradientLayer() -> CALayer? {
+    func _makeOnGradientLayer() -> CALayer? {
         guard nil == _onGradientLayer else { return _onGradientLayer }
         
         // We try to get whatever the user explicitly set. If not that, then a background color, then the tint color (both ours and super), and, finally, the accent color. If not that, we give up.
@@ -832,8 +862,28 @@ private extension RVS_RetroLEDDigitalDisplay {
             _onGradientLayer?.startPoint = CGPoint(x: 0.5, y: 0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: onGradientAngleInDegrees)
             _onGradientLayer?.endPoint = CGPoint(x: 0.5, y: 1.0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: onGradientAngleInDegrees)
         } else {
-            assertionFailure("No Starting Color Provided for the RVS_MaskButton class!")
+            assertionFailure("No Starting Color Provided for the RVS_RetroLEDDigitalDisplay class!")
         }
+        
+        return _onGradientLayer
+    }
+    
+    /* ################################################################## */
+    /**
+     This creates the "Off" gradient layer, using our specified start and stop colors.
+     If the gradient cache is available, we immediately return that, instead.
+     */
+    func _makeOffGradientLayer() -> CALayer? {
+        guard nil == _offGradientLayer else { return _offGradientLayer }
+        
+        // We try to get whatever the user explicitly set. If not that, then a background color, then the tint color (both ours and super), and, finally, the accent color. If not that, we give up.
+        let startColor = offGradientStartColor ?? .label
+        let endColor = offGradientEndColor ?? startColor
+        _offGradientLayer = CAGradientLayer()
+        _offGradientLayer?.frame = bounds
+        _offGradientLayer?.colors = [startColor.cgColor, endColor.cgColor]
+        _offGradientLayer?.startPoint = CGPoint(x: 0.5, y: 0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: offGradientAngleInDegrees)
+        _offGradientLayer?.endPoint = CGPoint(x: 0.5, y: 1.0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: offGradientAngleInDegrees)
         
         return _onGradientLayer
     }
@@ -918,7 +968,7 @@ public extension RVS_RetroLEDDigitalDisplay {
     @IBInspectable var value: Int {
         get { _ledPathMaker?.value ?? -2 }
         set {
-            _ledPathMaker = LED_MultipleDigits(newValue, numberOfDigits: newValue.digits.count)
+            _ledPathMaker?.value = newValue
             setNeedsLayout()
         }
     }
@@ -934,6 +984,13 @@ public extension RVS_RetroLEDDigitalDisplay {
 // MARK: Public Base Class Overrides
 /* ###################################################################################################################################### */
 public extension RVS_RetroLEDDigitalDisplay {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        _ledPathMaker = LED_MultipleDigits(value, numberOfDigits: value.digits.count)
+        _onGradientLayer?.removeFromSuperlayer()
+        _offGradientLayer?.removeFromSuperlayer()
+    }
+    
     /* ################################################################## */
     /**
      Called to render this image.
