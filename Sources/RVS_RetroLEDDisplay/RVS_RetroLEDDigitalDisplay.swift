@@ -789,7 +789,7 @@ extension LED_MultipleDigits: LED_Element {
             } else {
                 _digitArray.forEach { $0.value = -2 }
                 let digits = totalValue.hexDigits
-                var index = 0
+                var index = numberOfDigits - digits.count
                 digits.forEach {
                     _digitArray[index].value = $0
                     index += 1
@@ -1132,6 +1132,12 @@ public extension RVS_RetroLEDDigitalDisplay {
      Read-only value that returns the maximum possible value for this instance.
      */
     var maxValue: Int { _ledPathMaker?.maxVal ?? minValue }
+    
+    /* ################################################################## */
+    /**
+     The ideal aspect ratio (X / Y) of the display.
+     */
+    var idealAspect: CGFloat { _ledPathMaker?.idealAspect ?? 1.0 }
 }
 
 /* ###################################################################################################################################### */

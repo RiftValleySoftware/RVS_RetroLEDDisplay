@@ -29,7 +29,7 @@ import RVS_RetroLEDDisplay
 /**
  We add a couple of ways to deal with first responders.
  */
-fileprivate extension UIView {
+extension UIView {
     /* ################################################################## */
     /**
      This allows us to add a subview, and set it up with auto-layout constraints to fill the superview.

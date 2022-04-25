@@ -23,3 +23,7 @@
 "SLUG-SEG-0"            =   "Tall";
 "SLUG-SEG-1"            =   "Square";
 "SLUG-SEG-2"            =   "Normal";
+"SLUG-SEG-FILL-0"       =   "Default";
+"SLUG-SEG-FILL-1"       =   "Ugly";
+"SLUG-SEG-FILL-2"       =   "Gradients";
+"SLUG-SEG-FILL-3"       =   "Solid";

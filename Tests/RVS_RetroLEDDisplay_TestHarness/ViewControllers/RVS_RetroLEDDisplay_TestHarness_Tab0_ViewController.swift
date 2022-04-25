@@ -45,6 +45,21 @@ class RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController: RVS_RetroLEDDisplay_T
     /**
     */
     @IBOutlet weak var aspectSegmentedSwitch: UISegmentedControl?
+    
+    /* ################################################################## */
+    /**
+    */
+    @IBOutlet weak var fillSegmentedSwitch: UISegmentedControl?
+
+    /* ################################################################## */
+    /**
+    */
+    @IBOutlet weak var stepper: UIStepper!
+
+    /* ################################################################## */
+    /**
+    */
+    weak var aspectConstraint: NSLayoutConstraint?
 }
 
 /* ###################################################################################################################################### */
@@ -56,10 +71,20 @@ extension RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController {
     */
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let count = aspectSegmentedSwitch?.numberOfSegments {
-            for index in 0..<count {
-                aspectSegmentedSwitch?.setTitle((aspectSegmentedSwitch?.titleForSegment(at: index) ?? "ERROR").localizedVariant, forSegmentAt: index)
+        if let aspectSegmentedSwitch = aspectSegmentedSwitch {
+            for index in 0..<aspectSegmentedSwitch.numberOfSegments {
+                aspectSegmentedSwitch.setTitle((aspectSegmentedSwitch.titleForSegment(at: index) ?? "ERROR").localizedVariant, forSegmentAt: index)
             }
+            
+            aspectSegmentedSwitchChanged(aspectSegmentedSwitch)
+        }
+        
+        if let fillSegmentedSwitch = fillSegmentedSwitch {
+            for index in 0..<fillSegmentedSwitch.numberOfSegments {
+                fillSegmentedSwitch.setTitle((fillSegmentedSwitch.titleForSegment(at: index) ?? "ERROR").localizedVariant, forSegmentAt: index)
+            }
+            
+            fillSegmentedSwitchChanged(fillSegmentedSwitch)
         }
         
         if let min = testTargetImage?.minValue,
@@ -88,6 +113,42 @@ extension RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController {
     /* ################################################################## */
     /**
     */
-    @IBAction func aspectSegmentedSwitchChanged(_ sender: UISegmentedControl) {
+    @IBAction func aspectSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
+        if let idealAspect = testTargetImage?.idealAspect {
+            aspectConstraint?.isActive = false
+            
+            switch inSegmentedControl.selectedSegmentIndex {
+            case 0:
+                aspectConstraint = testTargetImage?.autoLayoutAspectConstraint(aspectRatio: idealAspect)
+
+            case 1:
+                aspectConstraint = testTargetImage?.autoLayoutAspectConstraint(aspectRatio: 1)
+
+            case 2:
+                aspectConstraint = testTargetImage?.autoLayoutAspectConstraint(aspectRatio: 1 / idealAspect)
+
+            default:
+                break
+            }
+            
+            aspectConstraint?.isActive = true
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+    */
+    @IBAction func fillSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
+    }
+    
+    /* ################################################################## */
+    /**
+    */
+    @IBAction func stepperHit(_ inStepper: UIStepper) {
+        if let valueSlider = valueSlider {
+            valueSlider.value += Float(inStepper.value)
+            inStepper.value = 0
+            valueSliderChanged(valueSlider)
+        }
     }
 }
