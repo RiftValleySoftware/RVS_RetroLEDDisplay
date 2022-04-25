@@ -74,6 +74,22 @@ fileprivate extension CGPoint {
     }
 }
 
+/* ###################################################################################################################################### */
+// MARK: - Private UIColor Extension For Inverting Colors -
+/* ###################################################################################################################################### */
+fileprivate extension UIColor {
+    /* ################################################################## */
+    /**
+     Returns the inverted color.
+     NOTE: This is quite primitive, and may not return exactly what may be expected.
+     [From This SO Answer](https://stackoverflow.com/a/57111280/879365)
+     */
+    var inverted: UIColor {
+        var a: CGFloat = 0.0, r: CGFloat = 0.0, g: CGFloat = 0.0, b: CGFloat = 0.0
+        return getRed(&r, green: &g, blue: &b, alpha: &a) ? UIColor(red: 1.0-r, green: 1.0-g, blue: 1.0-b, alpha: a) : .label
+    }
+}
+
 // MARK: -
 // MARK: - Main Implementation -
 
@@ -554,6 +570,7 @@ extension LED_SingleDigit: LED_Element {
 // MARK: - "LED Multiple Digit" Class -
 /* ###################################################################################################################################### */
 /**
+ This aggregates multiple single digits, into a row of them, and treats the row as an MSB -> LSB hex value.
  */
 class LED_MultipleDigits {
     /* ################################################################## */
@@ -853,17 +870,14 @@ private extension RVS_RetroLEDDigitalDisplay {
     func _makeOnGradientLayer() -> CALayer? {
         guard nil == _onGradientLayer else { return _onGradientLayer }
         
-        // We try to get whatever the user explicitly set. If not that, then a background color, then the tint color (both ours and super), and, finally, the accent color. If not that, we give up.
-        if let startColor = onGradientStartColor ?? _originalBackgroundColor ?? _originalTintColor ?? superview?.tintColor ?? UIColor(named: "AccentColor") {
-            let endColor = onGradientEndColor ?? startColor
-            _onGradientLayer = CAGradientLayer()
-            _onGradientLayer?.frame = bounds
-            _onGradientLayer?.colors = [startColor.cgColor, endColor.cgColor]
-            _onGradientLayer?.startPoint = CGPoint(x: 0.5, y: 0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: onGradientAngleInDegrees)
-            _onGradientLayer?.endPoint = CGPoint(x: 0.5, y: 1.0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: onGradientAngleInDegrees)
-        } else {
-            assertionFailure("No Starting Color Provided for the RVS_RetroLEDDigitalDisplay class!")
-        }
+        // We try to get whatever the user explicitly set. If not that, then we use the label color.
+        let startColor = onGradientStartColor ?? .label
+        let endColor = onGradientEndColor ?? startColor
+        _onGradientLayer = CAGradientLayer()
+        _onGradientLayer?.frame = bounds
+        _onGradientLayer?.colors = [startColor.cgColor, endColor.cgColor]
+        _onGradientLayer?.startPoint = CGPoint(x: 0.5, y: 0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: onGradientAngleInDegrees)
+        _onGradientLayer?.endPoint = CGPoint(x: 0.5, y: 1.0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: onGradientAngleInDegrees)
         
         return _onGradientLayer
     }
@@ -876,8 +890,8 @@ private extension RVS_RetroLEDDigitalDisplay {
     func _makeOffGradientLayer() -> CALayer? {
         guard nil == _offGradientLayer else { return _offGradientLayer }
         
-        // We try to get whatever the user explicitly set. If not that, then a background color, then the tint color (both ours and super), and, finally, the accent color. If not that, we give up.
-        let startColor = offGradientStartColor ?? .label
+        // We try to get whatever the user explicitly set. If not that, then we invert the label color.
+        let startColor = offGradientStartColor ?? .label.inverted
         let endColor = offGradientEndColor ?? startColor
         _offGradientLayer = CAGradientLayer()
         _offGradientLayer?.frame = bounds
