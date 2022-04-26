@@ -74,7 +74,7 @@
 
 <p>This is designed as an &ldquo;aesthetic&rdquo; widget, for use by apps that want to mimic &ldquo;old time&rdquo; displays, and want a bit more realism and customization than can be provided by &ldquo;digital&rdquo; fonts.</p>
 
-<p>That said, a font gives you a great deal of flexibility, when it comes to content, and you may find <a href="https://github.com/RiftValleySoftware/RVS_MaskButton">The RVS_MaskButton</a> module intersting, as well. <a href="https://github.com/RiftValleySoftware/RVS_MaskButton">RVS_MaskButton</a> is not quite as customizable as this widget, but does allow you to use any font you want, in a very similar manner.</p>
+<p>That said, a font gives you a great deal of flexibility, when it comes to content, and you may find <a href="https://github.com/RiftValleySoftware/RVS_MaskButton">The RVS_MaskButton</a> module interesting, as well. <a href="https://github.com/RiftValleySoftware/RVS_MaskButton">RVS_MaskButton</a> is not quite as customizable as this widget, but does allow you to use any font you want, in a very similar manner.</p>
 
 <p>You can specify the widget as a set of horizontally-connected digits, and treat it as a &ldquo;whole,&rdquo; with the ability to change the radix (numbering base) of the display.</p>
 
@@ -139,6 +139,15 @@
 <td style="text-align: center"><img src="img/Figure-08.png" alt="Figure 8"></td>
 </tr>
 </tbody></table>
+<h2 id='requirements' class='heading'>Requirements</h2>
+<h4 id='swift-only-ukit-module' class='heading'>Swift-Only UKit Module</h4>
+
+<p>The module is a <a href="https://developer.apple.com/swift/">Swift</a>-only <a href="https://swift.org/package-manager/">Swift Package Manager (SPM)</a> module. It is a <a href="https://developer.apple.com/documentation/uikit">UIKit</a> widget.</p>
+<h4 id='dependencies' class='heading'>Dependencies</h4>
+
+<p>The button class, itself, has no dependencies, but the test harness depends on the <a href="https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox">RVS_Generic_Swift_Toolbox module</a>.</p>
+
+<p>The test harness also uses a couple of pattern images derived from <a href="https://www.freepik.com/free-vector/paisley-pattern-set_8565932.htm">Paisley Patterns, by ilonitta</a>. These are not required to use the package.</p>
 <h2 id='usage' class='heading'>Usage</h2>
 <h3 id='where-to-get' class='heading'>Where to Get</h3>
 
@@ -262,6 +271,8 @@ This slider allows you to skew the widget.</p></li>
 This sets the number of digits displayed. The choices are 1, 2, 4, and 8.</p></li>
 </ul>
 <h3 id='find-out-more' class='heading'>Find Out More</h3>
+
+<p>The package has full <a href="https://developer.apple.com/documentation/docc/">DocC support</a>, so it should integrate perfectly into your project.</p>
 
 <p><a href="https://riftvalleysoftware.github.io/RVS_RetroLEDDisplay">This is the technical documentation for the package</a>. It discusses the exposed public API, and the various properties that you can access.</p>
 

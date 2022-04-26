@@ -9,7 +9,7 @@ This is a UIKit widget that displays a "classic" LED display (seven-segmented, s
 
 This is designed as an "aesthetic" widget, for use by apps that want to mimic "old time" displays, and want a bit more realism and customization than can be provided by "digital" fonts.
 
-That said, a font gives you a great deal of flexibility, when it comes to content, and you may find [The RVS_MaskButton](https://github.com/RiftValleySoftware/RVS_MaskButton) module intersting, as well. [RVS_MaskButton](https://github.com/RiftValleySoftware/RVS_MaskButton) is not quite as customizable as this widget, but does allow you to use any font you want, in a very similar manner.
+That said, a font gives you a great deal of flexibility, when it comes to content, and you may find [The RVS_MaskButton](https://github.com/RiftValleySoftware/RVS_MaskButton) module interesting, as well. [RVS_MaskButton](https://github.com/RiftValleySoftware/RVS_MaskButton) is not quite as customizable as this widget, but does allow you to use any font you want, in a very similar manner.
 
 You can specify the widget as a set of horizontally-connected digits, and treat it as a "whole," with the ability to change the radix (numbering base) of the display.
 
@@ -44,6 +44,18 @@ And you can also have blank "inactive" segments, and apply a "skew" of the displ
 |Figure 8: A Long Skew|
 |:--:|
 |![Figure 8](img/Figure-08.png)|
+
+## Requirements
+
+#### Swift-Only UKit Module
+
+The module is a [Swift](https://developer.apple.com/swift/)-only [Swift Package Manager (SPM)](https://swift.org/package-manager/) module. It is a [UIKit](https://developer.apple.com/documentation/uikit) widget.
+
+#### Dependencies
+
+The button class, itself, has no dependencies, but the test harness depends on the [RVS_Generic_Swift_Toolbox module](https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox).
+
+The test harness also uses a couple of pattern images derived from [Paisley Patterns, by ilonitta](https://www.freepik.com/free-vector/paisley-pattern-set_8565932.htm). These are not required to use the package.
 
 ## Usage
 
@@ -82,7 +94,6 @@ It can also have a "skew" applied, that gives it the classic "lean" of LED digit
 #### Radix (Numbering Base)
 
 The widget supports Base-2 (Binary), Base-8 (Octal), Base-10 (Decimal), and Base-16 (Hexadecimal) numbering systems. You tell it what to use by setting [the `radix` property](https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1267).
-
 
 #### Value
 
@@ -162,6 +173,8 @@ The controls are set ups thusly (top to bottom):
     This sets the number of digits displayed. The choices are 1, 2, 4, and 8.
 
 ### Find Out More
+
+The package has full [DocC support](https://developer.apple.com/documentation/docc/), so it should integrate perfectly into your project.
 
 [This is the technical documentation for the package](https://riftvalleysoftware.github.io/RVS_RetroLEDDisplay). It discusses the exposed public API, and the various properties that you can access.
 
