@@ -16,8 +16,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="vGY-F2-83J">
+                                <rect key="frame" x="83" y="135" width="248" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="jp5-HL-Iuz"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="2"/>
+                                    <segment title="8"/>
+                                    <segment title="10"/>
+                                    <segment title="16"/>
+                                </segments>
+                                <connections>
+                                    <action selector="radixSegmentedSwitchChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="uOb-xx-OPk"/>
+                                </connections>
+                            </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o3B-Pt-FNM">
-                                <rect key="frame" x="83" y="28" width="248" height="31"/>
+                                <rect key="frame" x="83" y="173" width="248" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="W8p-tl-knO"/>
                                 </constraints>
@@ -32,7 +47,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7L3-iz-I5L">
-                                <rect key="frame" x="83" y="66" width="248" height="31"/>
+                                <rect key="frame" x="83" y="211" width="248" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="OXw-iv-8Ec"/>
                                 </constraints>
@@ -47,7 +62,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="3vf-cQ-WiW">
-                                <rect key="frame" x="83" y="104" width="248" height="31"/>
+                                <rect key="frame" x="83" y="249" width="248" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7Au-IA-Ziy"/>
                                 </constraints>
@@ -61,7 +76,7 @@
                                 </connections>
                             </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17" minValue="-2" maxValue="4095" translatesAutoresizingMaskIntoConstraints="NO" id="OjT-1T-kAq">
-                                <rect key="frame" x="81" y="142" width="150" height="30"/>
+                                <rect key="frame" x="81" y="287" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="aT2-5u-zUC"/>
                                 </constraints>
@@ -69,8 +84,20 @@
                                     <action selector="valueSliderChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="TUI-YB-asj"/>
                                 </connections>
                             </slider>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-1" maximumValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aJ7-vg-R3L">
+                                <rect key="frame" x="237" y="285.5" width="94" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="GbH-Pg-HK3"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="stepperHit:" destination="egX-1G-hMU" eventType="valueChanged" id="hwX-pA-mMb"/>
+                                </connections>
+                            </stepper>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OffImage" translatesAutoresizingMaskIntoConstraints="NO" id="lGt-iQ-8qX" customClass="RVS_RetroLEDDigitalDisplay" customModule="RVS_RetroLEDDisplay">
-                                <rect key="frame" x="83" y="179" width="248" height="538"/>
+                                <rect key="frame" x="83" y="324" width="248" height="248"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lGt-iQ-8qX" secondAttribute="height" multiplier="1:1" placeholder="YES" id="x4a-dc-hm1"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="numberOfDigits">
                                         <integer key="value" value="3"/>
@@ -84,25 +111,19 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="onImage" value="OnImage"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-1" maximumValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aJ7-vg-R3L">
-                                <rect key="frame" x="237" y="140.5" width="94" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="GbH-Pg-HK3"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="stepperHit:" destination="egX-1G-hMU" eventType="valueChanged" id="hwX-pA-mMb"/>
-                                </connections>
-                            </stepper>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WjK-8Z-hAs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="aJ7-vg-R3L" firstAttribute="trailing" secondItem="3vf-cQ-WiW" secondAttribute="trailing" id="1KN-OG-4sP"/>
+                            <constraint firstItem="o3B-Pt-FNM" firstAttribute="top" secondItem="vGY-F2-83J" secondAttribute="bottom" constant="8" symbolic="YES" id="39z-b3-C5q"/>
                             <constraint firstItem="7L3-iz-I5L" firstAttribute="top" secondItem="o3B-Pt-FNM" secondAttribute="bottom" constant="8" symbolic="YES" id="5ak-Va-SWD"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="width" secondItem="5lG-E1-Z0v" secondAttribute="width" priority="750" id="7S7-QL-0dq"/>
+                            <constraint firstItem="o3B-Pt-FNM" firstAttribute="trailing" secondItem="vGY-F2-83J" secondAttribute="trailing" id="8Zb-Gn-P2o"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="top" secondItem="OjT-1T-kAq" secondAttribute="bottom" constant="8" symbolic="YES" id="Ed5-JV-BG1"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="height" relation="lessThanOrEqual" secondItem="5lG-E1-Z0v" secondAttribute="height" multiplier="0.6" id="Eyg-c8-P0R"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="width" relation="lessThanOrEqual" secondItem="5lG-E1-Z0v" secondAttribute="width" multiplier="0.6" id="FnF-R5-jmD"/>
+                            <constraint firstItem="o3B-Pt-FNM" firstAttribute="leading" secondItem="vGY-F2-83J" secondAttribute="leading" id="Gr1-Bn-DTZ"/>
                             <constraint firstItem="7L3-iz-I5L" firstAttribute="trailing" secondItem="o3B-Pt-FNM" secondAttribute="trailing" id="JD7-hg-wJx"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="height" secondItem="5lG-E1-Z0v" secondAttribute="height" priority="750" id="KmC-i7-5Ul"/>
                             <constraint firstItem="aJ7-vg-R3L" firstAttribute="leading" secondItem="OjT-1T-kAq" secondAttribute="trailing" constant="8" symbolic="YES" id="MAn-2D-yp0"/>
@@ -124,6 +145,7 @@
                         <outlet property="aspectSegmentedSwitch" destination="3vf-cQ-WiW" id="IuJ-wa-sOE"/>
                         <outlet property="offFillSegmentedSwitch" destination="7L3-iz-I5L" id="jap-M7-qJD"/>
                         <outlet property="onFillSegmentedSwitch" destination="o3B-Pt-FNM" id="ped-PH-w9g"/>
+                        <outlet property="radixSegmentedSwitch" destination="vGY-F2-83J" id="2CB-3S-Eh0"/>
                         <outlet property="stepper" destination="aJ7-vg-R3L" id="5eE-iH-J5I"/>
                         <outlet property="testTargetImage" destination="lGt-iQ-8qX" id="R89-XP-PEP"/>
                         <outlet property="valueSlider" destination="OjT-1T-kAq" id="hav-ut-PJv"/>

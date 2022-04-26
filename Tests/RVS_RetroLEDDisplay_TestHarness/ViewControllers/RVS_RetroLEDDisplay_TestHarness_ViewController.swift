@@ -183,6 +183,11 @@ class RVS_RetroLEDDisplay_TestHarness_ViewController: UIViewController {
     /**
     */
     @IBOutlet weak var stepper: UIStepper!
+
+    /* ################################################################## */
+    /**
+    */
+    @IBOutlet weak var radixSegmentedSwitch: UISegmentedControl!
 }
 
 /* ###################################################################################################################################### */
@@ -364,6 +369,21 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
             valueSlider.value += Float(inStepper.value)
             inStepper.value = 0
             valueSliderChanged(valueSlider)
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+    */
+    @IBAction func radixSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
+        guard let newRadix = Int(inSegmentedControl.titleForSegment(at: inSegmentedControl.selectedSegmentIndex) ?? "") else { return }
+        testTargetImage?.radix = newRadix
+        if let min = testTargetImage?.minValue,
+           let max = testTargetImage?.maxValue {
+            valueSlider?.minimumValue = Float(min)
+            valueSlider?.maximumValue = Float(max)
+            valueSlider?.value = round(Float(max) / 2)
+            testTargetImage?.value = Int(round(Float(max) / 2))
         }
     }
 }

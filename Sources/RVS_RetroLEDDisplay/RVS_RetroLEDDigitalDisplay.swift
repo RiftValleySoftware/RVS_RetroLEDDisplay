@@ -83,10 +83,24 @@ extension UIImage {
 fileprivate extension BinaryInteger {
     /* ################################################################## */
     /**
+     Returns an array of integers; each representing the numerical value of the integer, as a binary number (0...1).
+     > The first "digit" could be a negative sign.
+     */
+    var binaryDigits: [Int] { String(format: "%x", Int(self)).compactMap { Int(String($0), radix: 2) } }
+
+    /* ################################################################## */
+    /**
+     Returns an array of integers; each representing the numerical value of the integer, as an octal number (0...7).
+     > The first "digit" could be a negative sign.
+     */
+    var octalDigits: [Int] { String(format: "%x", Int(self)).compactMap { Int(String($0), radix: 8) } }
+
+    /* ################################################################## */
+    /**
      Returns an array of integers; each representing the numerical value of the integer, as a decimal number (0...9).
      > The first "digit" could be a negative sign.
      */
-    var digits: [Int] { String(format: "%d", Int(self)).compactMap { Int(String($0)) } }
+    var decimalDigits: [Int] { String(format: "%d", Int(self)).compactMap { Int(String($0)) } }
 
     /* ################################################################## */
     /**
@@ -212,6 +226,13 @@ protocol LED_Element {
      The ideal aspect ratio (X / Y) of the display.
      */
     var idealAspect: CGFloat {get}
+    
+    /* ################################################################## */
+    /**
+     The numerical base of the display (2, 8, 10, 16). 16 is default.
+     If you set a different radix from the ones listed, the set will be refused.
+     */
+    var radix: Int {get set}
 }
 
 /* ###################################################################################################################################### */
@@ -222,7 +243,7 @@ extension LED_Element {
     /**
      The maximum value of this Array (it is calculated by default, from the number of digits).
      */
-    var maxVal: Int { min(Int.max, Int(pow(Double(16), Double(numberOfDigits))) - 1) }
+    var maxVal: Int { min(Int.max, Int(pow(Double(radix), Double(numberOfDigits))) - 1) }
     
     /* ################################################################## */
     /**
@@ -361,6 +382,13 @@ class LED_SingleDigit {
     private var _value: Int = -2
     
     /* ################################################################## */
+    /**
+     The numerical base of the display (2, 8, 10, 16). 16 is default.
+     If you set a different radix from the ones listed, the set will be refused.
+     */
+    private var _radix: Int = 16
+
+    /* ################################################################## */
     // MARK: Initializer
     /* ################################################################## */
     /**
@@ -477,6 +505,19 @@ extension LED_SingleDigit {
 // MARK: LED_Element Conformance
 /* ###################################################################################################################################### */
 extension LED_SingleDigit: LED_Element {
+    /* ################################################################## */
+    /**
+     The numerical base of the display (2, 8, 10, 16). 16 is default.
+     If you set a different radix from the ones listed, the set will be refused.
+     */
+    var radix: Int {
+        get { _radix }
+        set {
+            guard 2 == newValue || 8 == newValue || 10 == newValue || 16 == newValue else { return }
+            _radix = newValue
+        }
+    }
+
     /* ################################################################## */
     /**
      Get all segments as one path.
@@ -626,7 +667,7 @@ extension LED_SingleDigit: LED_Element {
      */
     var value: Int {
         get { return _value }
-        set { _value = max(-2, min(15, newValue)) }
+        set { _value = max(-2, min(radix - 1, newValue)) }
     }
     
     /* ################################################################## */
@@ -655,6 +696,13 @@ class LED_MultipleDigits {
 
     /* ################################################################## */
     /**
+     The numerical base of the display (2, 8, 10, 16). 16 is default.
+     If you set a different radix from the ones listed, the set will be refused.
+     */
+    private var _radix: Int = 16
+
+    /* ################################################################## */
+    /**
      This is how many calculation (not display) units separate each digit. Default is 10.
      */
     var gap: CGFloat = 10.0
@@ -677,6 +725,19 @@ class LED_MultipleDigits {
 // MARK: LED_Element Conformance
 /* ###################################################################################################################################### */
 extension LED_MultipleDigits: LED_Element {
+    /* ################################################################## */
+    /**
+     The numerical base of the display (2, 8, 10, 16). 16 is default.
+     If you set a different radix from the ones listed, the set will be refused.
+     */
+    var radix: Int {
+        get { _radix }
+        set {
+            guard 2 == newValue || 8 == newValue || 10 == newValue || 16 == newValue else { return }
+            _radix = newValue
+        }
+    }
+
     /* ################################################################## */
     /**
      Get all segments as one path.
@@ -788,7 +849,21 @@ extension LED_MultipleDigits: LED_Element {
                 _digitArray.forEach { $0.value = totalValue }
             } else {
                 _digitArray.forEach { $0.value = -2 }
-                let digits = totalValue.hexDigits
+                var digits: [Int]
+                
+                switch radix {
+                case 2:
+                    digits = totalValue.binaryDigits
+                case 8:
+                    digits = totalValue.octalDigits
+                case 10:
+                    digits = totalValue.decimalDigits
+                case 16:
+                    digits = totalValue.hexDigits
+                default:
+                    digits = []
+                }
+
                 var index = numberOfDigits - digits.count
                 digits.forEach {
                     _digitArray[index].value = $0
@@ -1170,6 +1245,23 @@ public extension RVS_RetroLEDDigitalDisplay {
      The ideal aspect ratio (X / Y) of the display.
      */
     var idealAspect: CGFloat { _ledPathMaker?.idealAspect ?? 1.0 }
+
+    /* ################################################################## */
+    /**
+     The numerical base of the display (2, 8, 10, 16). 16 is default.
+     If you set a different radix from the ones listed, the set will be refused.
+     */
+    var radix: Int? {
+        get { _ledPathMaker?.radix }
+        set {
+            let oldRadix = _ledPathMaker?.radix ?? 0
+            guard let newValue = newValue else { return }
+            _ledPathMaker?.radix = newValue
+            if oldRadix != newValue {
+                setNeedsLayout()
+            }
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
