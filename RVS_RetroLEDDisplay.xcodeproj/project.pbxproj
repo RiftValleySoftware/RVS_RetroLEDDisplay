@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D45A2C582814B80C00AEE770 /* RVS_RetroLEDDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4C3B8F42814B16D00BA3B41 /* RVS_RetroLEDDisplay.framework */; platformFilter = ios; };
-		D45A2C592814B80C00AEE770 /* RVS_RetroLEDDisplay.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4C3B8F42814B16D00BA3B41 /* RVS_RetroLEDDisplay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D45A2C592814B80C00AEE770 /* RVS_RetroLEDDisplay.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4C3B8F42814B16D00BA3B41 /* RVS_RetroLEDDisplay.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D47EA89F2814B9C500337D4B /* RVS_RetroLEDDigitalDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47EA89E2814B9C500337D4B /* RVS_RetroLEDDigitalDisplay.swift */; };
 		D47EA8A22814BA2E00337D4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D47EA8A02814BA2E00337D4B /* Localizable.strings */; };
 		D4C3B90A2814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness_AppSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C3B9092814B2B800BA3B41 /* RVS_RetroLEDDisplay_TestHarness_AppSceneDelegate.swift */; };
@@ -470,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0000;
 				DEFINES_MODULE = YES;
@@ -480,6 +481,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -501,6 +504,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0000;
 				DEFINES_MODULE = YES;
@@ -511,6 +515,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -551,6 +557,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-RetroLEDDisplay-TestHarness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -581,6 +588,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-RetroLEDDisplay-TestHarness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
