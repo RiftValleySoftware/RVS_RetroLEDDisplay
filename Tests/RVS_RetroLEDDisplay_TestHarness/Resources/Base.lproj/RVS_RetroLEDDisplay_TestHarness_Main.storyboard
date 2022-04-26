@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rrX-Ad-wDD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="egX-1G-hMU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -11,7 +11,7 @@
         <!--SLUG-TAB-0-TITLE-->
         <scene sceneID="kiH-xh-o6K">
             <objects>
-                <viewController id="egX-1G-hMU" customClass="RVS_RetroLEDDisplay_TestHarness_Tab0_ViewController" customModule="RVS_RetroLEDDisplay_TestHarness" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="egX-1G-hMU" customClass="RVS_RetroLEDDisplay_TestHarness_ViewController" customModule="RVS_RetroLEDDisplay_TestHarness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5lG-E1-Z0v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -132,23 +132,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kws-Ei-177" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1298.5507246376812" y="-698.4375"/>
-        </scene>
-        <!--RetroLED Display Test Harness Tab Bar Controller-->
-        <scene sceneID="xNy-0q-AiC">
-            <objects>
-                <tabBarController id="rrX-Ad-wDD" customClass="RVS_RetroLEDDisplay_TestHarness_TabBarController" customModule="RVS_RetroLEDDisplay_TestHarness" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nQJ-AY-nwP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="egX-1G-hMU" kind="relationship" relationship="viewControllers" id="8ZJ-gv-66s"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UEk-2B-Ar5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="504" y="-698"/>
         </scene>
     </scenes>
     <designables>

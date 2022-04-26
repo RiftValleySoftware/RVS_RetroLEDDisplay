@@ -845,7 +845,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _onGradientStartColor: UIColor? {
         didSet {
-            _onColorLayer = nil
+            _clearOnColorLayer()
             setNeedsLayout()
         }
     }
@@ -856,7 +856,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _onGradientEndColor: UIColor? {
         didSet {
-            _onColorLayer = nil
+            _clearOnColorLayer()
             setNeedsLayout()
         }
     }
@@ -867,7 +867,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _onGradientAngleInDegrees: CGFloat = 0 {
         didSet {
-            _onColorLayer = nil
+            _clearOnColorLayer()
             setNeedsLayout()
         }
     }
@@ -886,7 +886,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _offGradientStartColor: UIColor? {
         didSet {
-            _offColorLayer = nil
+            _clearOffColorLayer()
             setNeedsLayout()
         }
     }
@@ -897,7 +897,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _offGradientEndColor: UIColor? {
         didSet {
-            _offColorLayer = nil
+            _clearOffColorLayer()
             setNeedsLayout()
         }
     }
@@ -908,7 +908,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _offGradientAngleInDegrees: CGFloat = 0 {
         didSet {
-            _offColorLayer = nil
+            _clearOffColorLayer()
             setNeedsLayout()
         }
     }
@@ -925,7 +925,7 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      */
     private var _onImage: UIImage? {
         didSet {
-            _onColorLayer = nil
+            _clearOnColorLayer()
             setNeedsLayout()
         }
     }
@@ -937,13 +937,34 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
 private extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
+     This completely removes the "On" color layer, so the next call of `_makeOnColorLayer()` will rebuild it.
+     */
+    private func _clearOnColorLayer() {
+        _onColorLayer?.removeFromSuperlayer()
+        _onColorLayer = nil
+    }
+    
+    /* ################################################################## */
+    /**
+     This completely removes the "Off" color layer, so the next call of `_makeOffColorLayer()` will rebuild it.
+     */
+    private func _clearOffColorLayer() {
+        _offColorLayer?.removeFromSuperlayer()
+        _offColorLayer = nil
+    }
+    
+    /* ################################################################## */
+    /**
      This creates the "On" gradient/image layer, using our specified start and stop colors.
      If the gradient cache is available, we immediately return that, instead.
      - returns: The color layer (it has also been assigned to the `_onColorLayer` cache property).
      */
     @discardableResult
     func _makeOnColorLayer() -> CALayer? {
-        guard nil == _onColorLayer else { return _onColorLayer }
+        guard nil == _onColorLayer else {
+            _onColorLayer?.frame = bounds
+            return _onColorLayer
+        }
         
         if let image = _onImage?.resized(toNewWidth: bounds.width, toNewHeight: bounds.height)?.cgImage {
             _onColorLayer = CALayer()
@@ -961,6 +982,10 @@ private extension RVS_RetroLEDDigitalDisplay {
             _onColorLayer = gradientLayer
         }
         
+        if let newLayer = _onColorLayer {
+            layer.addSublayer(newLayer)
+        }
+
         return _onColorLayer
     }
     
@@ -972,7 +997,10 @@ private extension RVS_RetroLEDDigitalDisplay {
      */
     @discardableResult
     func _makeOffColorLayer() -> CALayer? {
-        guard nil == _offColorLayer else { return _offColorLayer }
+        guard nil == _offColorLayer else {
+            _offColorLayer?.frame = bounds
+            return _offColorLayer
+        }
         
         if let image = image?.resized(toNewWidth: bounds.width, toNewHeight: bounds.height)?.cgImage {
             _offColorLayer = CALayer()
@@ -988,6 +1016,10 @@ private extension RVS_RetroLEDDigitalDisplay {
             gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: offGradientAngleInDegrees)
             gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)._rotated(around: CGPoint(x: 0.5, y: 0.5), byDegrees: offGradientAngleInDegrees)
             _offColorLayer = gradientLayer
+        }
+        
+        if let newLayer = _offColorLayer {
+            layer.addSublayer(newLayer)
         }
         
         return _offColorLayer
@@ -1153,6 +1185,7 @@ public extension RVS_RetroLEDDigitalDisplay {
         get { super.image }
         set {
             super.image = newValue
+            _clearOffColorLayer()
             setNeedsLayout()
         }
     }
@@ -1163,10 +1196,6 @@ public extension RVS_RetroLEDDigitalDisplay {
      */
     override func layoutSubviews() {
         super.layoutSubviews()
-        _onColorLayer?.removeFromSuperlayer()
-        _onColorLayer = nil
-        _offColorLayer?.removeFromSuperlayer()
-        _offColorLayer = nil
         if let pathMaker = _ledPathMaker {
             let scaleTransform = CGAffineTransform(scaleX: bounds.size.width / pathMaker.drawingSize.width, y: bounds.size.height / pathMaker.drawingSize.height)
             if let newLayer = _makeOffColorLayer() {
@@ -1175,7 +1204,6 @@ public extension RVS_RetroLEDDigitalDisplay {
                 path.apply(scaleTransform)
                 shape.path = path.cgPath
                 newLayer.mask = shape
-                layer.addSublayer(newLayer)
             }
             
             if let newLayer = _makeOnColorLayer() {
@@ -1184,7 +1212,6 @@ public extension RVS_RetroLEDDigitalDisplay {
                 path.apply(scaleTransform)
                 shape.path = path.cgPath
                 newLayer.mask = shape
-                layer.addSublayer(newLayer)
             }
             
             let shape = CAShapeLayer()
