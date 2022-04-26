@@ -86,28 +86,28 @@ fileprivate extension BinaryInteger {
      Returns an array of integers; each representing the numerical value of the integer, as a binary number (0...1).
      > The first "digit" could be a negative sign.
      */
-    var binaryDigits: [Int] { String(format: "%x", Int(self)).compactMap { Int(String($0), radix: 2) } }
+    var binaryDigits: [Int] { String(self, radix: 2).compactMap { Int(String($0), radix: 2) } }
 
     /* ################################################################## */
     /**
      Returns an array of integers; each representing the numerical value of the integer, as an octal number (0...7).
      > The first "digit" could be a negative sign.
      */
-    var octalDigits: [Int] { String(format: "%x", Int(self)).compactMap { Int(String($0), radix: 8) } }
+    var octalDigits: [Int] { String(self, radix: 8).compactMap { Int(String($0), radix: 8) } }
 
     /* ################################################################## */
     /**
      Returns an array of integers; each representing the numerical value of the integer, as a decimal number (0...9).
      > The first "digit" could be a negative sign.
      */
-    var decimalDigits: [Int] { String(format: "%d", Int(self)).compactMap { Int(String($0)) } }
+    var decimalDigits: [Int] { String(self).compactMap { Int(String($0)) } }
 
     /* ################################################################## */
     /**
      Returns an array of integers; each representing the numerical value of the integer, as a hexadecimal number (0...F).
      > The first "digit" could be a negative sign.
      */
-    var hexDigits: [Int] { String(format: "%x", Int(self)).compactMap { Int(String($0), radix: 16) } }
+    var hexDigits: [Int] { String(self, radix: 16).compactMap { Int(String($0), radix: 16) } }
 }
 
 /* ###################################################################################################################################### */
