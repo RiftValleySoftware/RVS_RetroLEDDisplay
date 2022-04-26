@@ -395,8 +395,9 @@ class LED_SingleDigit {
      Instantiates each of the segments.
      
      - parameter inValue: value, from -2 to 15 (-2 is nothing. -1 is the minus sign).
+     - parameter radix: The numbering base to use for this display. Default is 16
      */
-    init(_ inValue: Int) {
+    init(_ inValue: Int, radix inRadix: Int = 16) {
         _topSegment = Self._newSegmentShape(inSegment: .kTopSegment)
         _topLeftSegment = Self._newSegmentShape(inSegment: .kTopLeftSegment)
         _bottomLeftSegment = Self._newSegmentShape(inSegment: .kBottomLeftSegment)
@@ -404,6 +405,7 @@ class LED_SingleDigit {
         _bottomRightSegment = Self._newSegmentShape(inSegment: .kBottomRightSegment)
         _bottomSegment = Self._newSegmentShape(inSegment: .kBottomSegment)
         _centerSegment = Self._newSegmentShape(inSegment: .kCenterSegment)
+        radix = inRadix
         value = inValue
     }
 }
@@ -713,9 +715,11 @@ class LED_MultipleDigits {
     /**
      - parameter inValue: value, from -2 to maxVal.
      - parameter numberOfDigits: The number of digits. This should be enough to hold the value. If not specified, then it is 1.
+     - parameter radix: The numbering base to use for this display. Default is 16.
+     - parameter gap: The gap, in computational units (not display units). The default is 10.
      */
-    init(_ inValue: Int, numberOfDigits inNumberOfDigits: Int = 1, gap inGap: CGFloat = 10) {
-        for _ in 0..<inNumberOfDigits { _digitArray.append(LED_SingleDigit(0)) }
+    init(_ inValue: Int, numberOfDigits inNumberOfDigits: Int = 1, radix inRadix: Int, gap inGap: CGFloat = 10) {
+        for _ in 0..<inNumberOfDigits { _digitArray.append(LED_SingleDigit(0, radix: inRadix)) }
         gap = inGap
         value = inValue
     }
@@ -735,6 +739,7 @@ extension LED_MultipleDigits: LED_Element {
         set {
             guard 2 == newValue || 8 == newValue || 10 == newValue || 16 == newValue else { return }
             _radix = newValue
+            _digitArray.forEach { $0.radix = newValue }
         }
     }
 
@@ -833,7 +838,7 @@ extension LED_MultipleDigits: LED_Element {
         get {
             return _digitArray.reduce(0) { current, next in
                 if 0 <= next.value {
-                    return (current * 16) + next.value
+                    return (current * radix) + next.value
                 } else if -1 == next.value {
                     return -1
                 } else {
@@ -1189,8 +1194,10 @@ public extension RVS_RetroLEDDigitalDisplay {
                 return
             }
             guard nil == _ledPathMaker || _ledPathMaker?.numberOfDigits != newValue else { return }
-            let currentValue = _ledPathMaker?.value ?? 3
-            _ledPathMaker = LED_MultipleDigits(currentValue, numberOfDigits: newValue)
+            let currentValue = _ledPathMaker?.value ?? -2
+            let currentRadix = _ledPathMaker?.radix ?? 16
+            _ledPathMaker = LED_MultipleDigits(currentValue, numberOfDigits: newValue, radix: currentRadix)
+            DispatchQueue.main.async { self.setNeedsLayout() }
         }
     }
 
@@ -1241,7 +1248,10 @@ public extension RVS_RetroLEDDigitalDisplay {
     /**
      Read-only value that returns the maximum possible value for this instance.
      */
-    var maxValue: Int { _ledPathMaker?.maxVal ?? minValue }
+    var maxValue: Int {
+        let max = _ledPathMaker?.maxVal ?? minValue
+        return max
+    }
     
     /* ################################################################## */
     /**

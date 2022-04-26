@@ -446,13 +446,15 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
     @IBAction func radixSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
         guard let newRadix = Int(inSegmentedControl.titleForSegment(at: inSegmentedControl.selectedSegmentIndex) ?? "") else { return }
         testTargetImage?.radix = newRadix
-        if let min = testTargetImage?.minValue,
-           let max = testTargetImage?.maxValue,
-           let aspectSegmentedSwitch = aspectSegmentedSwitch {
-            valueSlider?.minimumValue = Float(min)
-            valueSlider?.maximumValue = Float(max)
-            valueSlider?.value = round(Float(max) / 2)
-            testTargetImage?.value = Int(round(Float(max) / 2))
+        if let valueSlider = valueSlider,
+           let aspectSegmentedSwitch = aspectSegmentedSwitch,
+           let min = testTargetImage?.minValue,
+           let max = testTargetImage?.maxValue {
+            let value = Int(round(Float(max) / 2))
+            valueSlider.minimumValue = Float(min)
+            valueSlider.maximumValue = Float(max)
+            valueSlider.value = Float(value)
+            testTargetImage?.value = value
             aspectSegmentedSwitchChanged(aspectSegmentedSwitch)
         }
     }
@@ -465,13 +467,22 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
     @IBAction func numberOfDigitsSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
         guard let newValue = Int(inSegmentedControl.titleForSegment(at: inSegmentedControl.selectedSegmentIndex) ?? "") else { return }
         testTargetImage?.numberOfDigits = newValue
-        if let min = testTargetImage?.minValue,
-           let max = testTargetImage?.maxValue {
-            valueSlider?.minimumValue = Float(min)
-            valueSlider?.maximumValue = Float(max)
-            valueSlider?.value = round(Float(max) / 2)
-            testTargetImage?.value = Int(round(Float(max) / 2))
-            view?.setNeedsLayout()
+        if let radixSegmentedSwitch = radixSegmentedSwitch,
+           let aspectSegmentedSwitch = aspectSegmentedSwitch,
+           let radix = Int(radixSegmentedSwitch.titleForSegment(at: radixSegmentedSwitch.selectedSegmentIndex) ?? "") {
+            testTargetImage?.radix = radix
+            if let valueSlider = valueSlider,
+               let min = testTargetImage?.minValue,
+               let max = testTargetImage?.maxValue {
+                let value = Int(round(Float(max) / 2))
+                valueSlider.minimumValue = Float(min)
+                valueSlider.maximumValue = Float(max)
+                valueSlider.value = Float(value)
+                testTargetImage?.value = value
+                valueSliderChanged(valueSlider)
+            }
+            
+            aspectSegmentedSwitchChanged(aspectSegmentedSwitch)
         }
     }
 
