@@ -29,7 +29,7 @@ import UIKit
  This is a simple application delegate that allows the app to start up.
  */
 @main
-class RVS_RetroLEDDisplay_TestHarness_AppSceneDelegate: UIResponder {
+class RVS_RetroLEDDisplay_TestHarness_AppSceneDelegate: UIResponder, UIWindowSceneDelegate {
     /* ################################################################## */
     /**
      The name of our default configuration.
@@ -71,10 +71,4 @@ extension RVS_RetroLEDDisplay_TestHarness_AppSceneDelegate: UIApplicationDelegat
     func application(_: UIApplication, configurationForConnecting inConnectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         return UISceneConfiguration(name: Self._configurationName, sessionRole: inConnectingSceneSession.role)
     }
-}
-
-/* ###################################################################################################################################### */
-// MARK: UIWindowSceneDelegate Conformance
-/* ###################################################################################################################################### */
-extension RVS_RetroLEDDisplay_TestHarness_AppSceneDelegate: UIWindowSceneDelegate {
 }

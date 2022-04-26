@@ -27,9 +27,6 @@ import RVS_Generic_Swift_Toolbox
 /* ###################################################################################################################################### */
 // MARK: - UIView Extension -
 /* ###################################################################################################################################### */
-/**
- We add a way to set up an aspect constraint.
- */
 extension UIView {
     /* ################################################################## */
     /**
@@ -45,7 +42,7 @@ extension UIView {
 }
 
 /* ###################################################################################################################################### */
-// MARK: - Private UIColor Extension For Inverting Colors -
+// MARK: - UIColor Extension For Inverting Colors -
 /* ###################################################################################################################################### */
 extension UIColor {
     /* ################################################################## */
@@ -106,21 +103,25 @@ class RVS_RetroLEDDisplay_TestHarness_ViewController: UIViewController {
     
     /* ################################################################## */
     /**
+     The name for the image we use for the solid-color-fill On image.
     */
     static private let _defaultOnImageName = "OnImage"
     
     /* ################################################################## */
     /**
+     The name for the image we use for the solid-color-fill Off image.
     */
     static private let _defaultOffImageName = "OffImage"
     
     /* ################################################################## */
     /**
+     The name for the image we use for the paisley On image.
     */
     static private let _uglyOnImageName = "Pattern1"
     
     /* ################################################################## */
     /**
+     The name for the image we use for the paisley Off image.
     */
     static private let _uglyOffImageName = "Pattern0"
     
@@ -150,6 +151,7 @@ class RVS_RetroLEDDisplay_TestHarness_ViewController: UIViewController {
 
     /* ################################################################## */
     /**
+     This constraint is used to set the aspect ratio of the code under test.
     */
     weak var aspectConstraint: NSLayoutConstraint?
 
@@ -161,38 +163,81 @@ class RVS_RetroLEDDisplay_TestHarness_ViewController: UIViewController {
     
     /* ################################################################## */
     /**
+     This slider controls the actual numerical value, displayed by the code under test.
     */
     @IBOutlet weak var valueSlider: UISlider?
     
     /* ################################################################## */
     /**
+     This switches between three different aspect ratios for the code under test.
     */
     @IBOutlet weak var aspectSegmentedSwitch: UISegmentedControl?
     
     /* ################################################################## */
     /**
+     This controls the fill for the "on" segments.
     */
     @IBOutlet weak var onFillSegmentedSwitch: UISegmentedControl?
 
     /* ################################################################## */
     /**
+     This controls the angle of both gradients. It will only be enabled, if one of the segmented switches is (or both are) set to "gradient."
+    */
+    @IBOutlet weak var gradientAngleSlider: UISlider?
+
+    /* ################################################################## */
+    /**
+     This controls the fill for the "off" segments.
     */
     @IBOutlet weak var offFillSegmentedSwitch: UISegmentedControl?
 
     /* ################################################################## */
     /**
+     This is a precision stepper, for changing the value in small increments/decrements.
     */
-    @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var stepper: UIStepper?
 
     /* ################################################################## */
     /**
+     This changes the base for the numbers displayed by the code under test.
     */
-    @IBOutlet weak var radixSegmentedSwitch: UISegmentedControl!
+    @IBOutlet weak var radixSegmentedSwitch: UISegmentedControl?
 
     /* ################################################################## */
     /**
+     This changes the skew of the code under test.
     */
-    @IBOutlet weak var skewSlider: UISlider!
+    @IBOutlet weak var skewSlider: UISlider?
+
+    /* ################################################################## */
+    /**
+     This allows us to change the number of digits, displayed by the code under test.
+    */
+    @IBOutlet weak var numberOfDigitsSegmentedSwitch: UISegmentedControl?
+}
+
+/* ###################################################################################################################################### */
+// MARK: Instance Methods
+/* ###################################################################################################################################### */
+extension RVS_RetroLEDDisplay_TestHarness_ViewController {
+    /* ################################################################## */
+    /**
+     This determines whether or not the gradient angle switch is enabled.
+     In order for it to be enabled, at least one of the fill switches needs to be set to "gradient."
+    */
+    func determineGradientSliderEnabledState() {
+        if let onFillSegmentedSwitch = onFillSegmentedSwitch,
+           let offFillSegmentedSwitch = offFillSegmentedSwitch,
+           let gradientAngleSlider = gradientAngleSlider {
+            gradientAngleSlider.isEnabled = (onFillSegmentedSwitch.selectedSegmentIndex == FillSwitchIndexes.gradients.rawValue)
+                                            || (offFillSegmentedSwitch.selectedSegmentIndex == FillSwitchIndexes.gradients.rawValue)
+            if !gradientAngleSlider.isEnabled {
+                gradientAngleSlider.value = 0
+            }
+            
+            gradientAngleSliderChanged(gradientAngleSlider) // When it is disabled, we will set it back to 0.
+        }
+    }
 }
 
 /* ###################################################################################################################################### */
@@ -201,6 +246,8 @@ class RVS_RetroLEDDisplay_TestHarness_ViewController: UIViewController {
 extension RVS_RetroLEDDisplay_TestHarness_ViewController {
     /* ################################################################## */
     /**
+     Called after the view hierarchy is loaded.
+     We use this to set everything up, and apply localizations.
     */
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -265,13 +312,32 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
             
             offFillSegmentedSwitchChanged(fillSegmentedSwitch)
         }
-
+        
+        if let numberOfDigitsSegmentedSwitch = numberOfDigitsSegmentedSwitch {
+            numberOfDigitsSegmentedSwitchChanged(numberOfDigitsSegmentedSwitch)
+        }
+        
+        if let radixSegmentedSwitch = radixSegmentedSwitch {
+            radixSegmentedSwitchChanged(radixSegmentedSwitch)
+        }
+        
+        determineGradientSliderEnabledState()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the subviews are being laid out.
+    */
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         if let min = testTargetImage?.minValue,
-           let max = testTargetImage?.maxValue {
+           let max = testTargetImage?.maxValue,
+           let aspectSegmentedSwitch = aspectSegmentedSwitch {
             valueSlider?.minimumValue = Float(min)
             valueSlider?.maximumValue = Float(max)
             valueSlider?.value = round(Float(max) / 2)
             testTargetImage?.value = Int(round(Float(max) / 2))
+            aspectSegmentedSwitchChanged(aspectSegmentedSwitch)
         }
     }
 }
@@ -282,15 +348,8 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
 extension RVS_RetroLEDDisplay_TestHarness_ViewController {
     /* ################################################################## */
     /**
-    */
-    @IBAction func valueSliderChanged(_ inSlider: UISlider) {
-        let intValue = Int(inSlider.value)
-        testTargetImage?.value = intValue
-        inSlider.value = Float(intValue)
-    }
-    
-    /* ################################################################## */
-    /**
+     Called when the aspect segmented control has changed.
+     - parameter inSegmentedControl: The segmented switch that changed.
     */
     @IBAction func aspectSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
         if let idealAspect = testTargetImage?.idealAspect {
@@ -321,6 +380,8 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
     
     /* ################################################################## */
     /**
+     Called when the on fill segmented control has changed.
+     - parameter inSegmentedControl: The segmented switch that changed.
     */
     @IBAction func onFillSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
         switch inSegmentedControl.selectedSegmentIndex {
@@ -343,10 +404,14 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
         default:
             break
         }
+        
+        determineGradientSliderEnabledState()
     }
     
     /* ################################################################## */
     /**
+     Called when the off fill segmented control has changed.
+     - parameter inSegmentedControl: The segmented switch that changed.
     */
     @IBAction func offFillSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
         switch inSegmentedControl.selectedSegmentIndex {
@@ -369,10 +434,81 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
         default:
             break
         }
+        
+        determineGradientSliderEnabledState()
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the radix (number base) switch has changed
+     - parameter inSegmentedControl: The segmented switch that changed.
+    */
+    @IBAction func radixSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
+        guard let newRadix = Int(inSegmentedControl.titleForSegment(at: inSegmentedControl.selectedSegmentIndex) ?? "") else { return }
+        testTargetImage?.radix = newRadix
+        if let min = testTargetImage?.minValue,
+           let max = testTargetImage?.maxValue,
+           let aspectSegmentedSwitch = aspectSegmentedSwitch {
+            valueSlider?.minimumValue = Float(min)
+            valueSlider?.maximumValue = Float(max)
+            valueSlider?.value = round(Float(max) / 2)
+            testTargetImage?.value = Int(round(Float(max) / 2))
+            aspectSegmentedSwitchChanged(aspectSegmentedSwitch)
+        }
     }
 
     /* ################################################################## */
     /**
+     The number of digits has changed.
+     - parameter inSegmentedControl: The segmented control that changed.
+    */
+    @IBAction func numberOfDigitsSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
+        guard let newValue = Int(inSegmentedControl.titleForSegment(at: inSegmentedControl.selectedSegmentIndex) ?? "") else { return }
+        testTargetImage?.numberOfDigits = newValue
+        if let min = testTargetImage?.minValue,
+           let max = testTargetImage?.maxValue {
+            valueSlider?.minimumValue = Float(min)
+            valueSlider?.maximumValue = Float(max)
+            valueSlider?.value = round(Float(max) / 2)
+            testTargetImage?.value = Int(round(Float(max) / 2))
+            view?.setNeedsLayout()
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     Called when the value has changed.
+     - parameter inSlider: The slider instance.
+    */
+    @IBAction func valueSliderChanged(_ inSlider: UISlider) {
+        let intValue = Int(inSlider.value)
+        testTargetImage?.value = intValue
+        inSlider.value = Float(intValue)
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the skew slider has changed.
+     - parameter inSlider: The slider instance.
+    */
+    @IBAction func skewSliderChanged(_ inSlider: UISlider) {
+        testTargetImage?.skew = CGFloat(inSlider.value)
+    }
+    
+    /* ################################################################## */
+    /**
+     Called when the gradient angle slider has changed.
+     - parameter inSlider: The slider instance.
+    */
+    @IBAction func gradientAngleSliderChanged(_ inSlider: UISlider) {
+        testTargetImage?.onGradientAngleInDegrees = CGFloat(inSlider.value)
+        testTargetImage?.offGradientAngleInDegrees = CGFloat(inSlider.value)
+    }
+
+    /* ################################################################## */
+    /**
+     Called when the incremental value stepper has changed.
+     - parameter inStepper: The stepper that changed.
     */
     @IBAction func stepperHit(_ inStepper: UIStepper) {
         if let valueSlider = valueSlider {
@@ -380,27 +516,5 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
             inStepper.value = 0
             valueSliderChanged(valueSlider)
         }
-    }
-    
-    /* ################################################################## */
-    /**
-    */
-    @IBAction func radixSegmentedSwitchChanged(_ inSegmentedControl: UISegmentedControl) {
-        guard let newRadix = Int(inSegmentedControl.titleForSegment(at: inSegmentedControl.selectedSegmentIndex) ?? "") else { return }
-        testTargetImage?.radix = newRadix
-        if let min = testTargetImage?.minValue,
-           let max = testTargetImage?.maxValue {
-            valueSlider?.minimumValue = Float(min)
-            valueSlider?.maximumValue = Float(max)
-            valueSlider?.value = round(Float(max) / 2)
-            testTargetImage?.value = Int(round(Float(max) / 2))
-        }
-    }
-
-    /* ################################################################## */
-    /**
-    */
-    @IBAction func skewSliderChanged(_ inSlider: UISlider) {
-        testTargetImage?.skew = CGFloat(inSlider.value)
     }
 }
