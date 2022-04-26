@@ -893,18 +893,6 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      This holds the instance that will generate the paths we use for display.
      */
     private var _digitFactory: LED_MultipleDigits?
-    
-    /* ################################################################## */
-    /**
-     This caches the original background color. It is set at load time.
-     */
-    private var _originalBackgroundColor: UIColor?
-    
-    /* ################################################################## */
-    /**
-     This caches the original tint color. It is set at load time.
-     */
-    private var _originalTintColor: UIColor?
 
     /* ################################################################## */
     /**
@@ -913,6 +901,14 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      In order to force the gradient to redraw, set this to nil.
      */
     private var _onColorLayer: CALayer?
+
+    /* ################################################################## */
+    /**
+     This caches the gradient layer for the "Off" segments. This is set when the gradient is redrawn.
+     If this is not-nil, then it will be fetched, instead of redrawing the gradient.
+     In order to force the gradient to redraw, set this to nil.
+     */
+    private var _offColorLayer: CALayer?
 
     /* ################################################################## */
     /**
@@ -946,14 +942,6 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
             setNeedsLayout()
         }
     }
-
-    /* ################################################################## */
-    /**
-     This caches the gradient layer for the "Off" segments. This is set when the gradient is redrawn.
-     If this is not-nil, then it will be fetched, instead of redrawing the gradient.
-     In order to force the gradient to redraw, set this to nil.
-     */
-    private var _offColorLayer: CALayer?
 
     /* ################################################################## */
     /**
@@ -1004,6 +992,17 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
             setNeedsLayout()
         }
     }
+    
+    /* ################################################################## */
+    /**
+     This allows you to apply a "skew" to the widget.
+     This means that there is a "lean," like many classic LED displays.
+     A positive skew, means that the widget "leans right," with the top moving right, and the bottom, moving left.
+     A negative skew, is in the other direction.
+     This is limited to -1...1.
+     This will change the size of the widget, horizontally (but not vertically).
+     */
+    private var _skew: CGFloat = 0 { didSet { setNeedsLayout() } }
 }
 
 /* ###################################################################################################################################### */
@@ -1107,12 +1106,21 @@ private extension RVS_RetroLEDDigitalDisplay {
 public extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
+     This allows you to apply a "skew" to the widget.
+     This means that there is a "lean," like many classic LED displays.
+     A positive skew, means that the widget "leans right," with the top moving right, and the bottom, moving left.
+     A negative skew, is in the other direction.
+     This is limited to -1...1.
+     This will change the size of the widget, horizontally (but not vertically).
+     */
+    @IBInspectable var skew: CGFloat {
+        get { _skew }
+        set { _skew = max(-1.0, min(1.0, newValue)) }
+    }
+
+    /* ################################################################## */
+    /**
      The starting color for the "On" gradient.
-     If not provided, the view backgroundColor is used.
-     If that is not provided, then the view tintColor is used.
-     If that is not provided, then the super (parent) view tintColor is used.
-     If that is not provided, the AccentColor is used.
-     If that is not provided, the class will not work.
      */
     @IBInspectable var onGradientStartColor: UIColor? {
         get { _onGradientStartColor }
@@ -1142,11 +1150,6 @@ public extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
      The starting color for the "Off" gradient.
-     If not provided, the view backgroundColor is used.
-     If that is not provided, then the view tintColor is used.
-     If that is not provided, then the super (parent) view tintColor is used.
-     If that is not provided, the AccentColor is used.
-     If that is not provided, the class will not work.
      */
     @IBInspectable var offGradientStartColor: UIColor? {
         get { _offGradientStartColor }
@@ -1311,6 +1314,8 @@ public extension RVS_RetroLEDDigitalDisplay {
             path.apply(scaleTransform)
             shape.path = path.cgPath
             layer.mask = shape
+            
+            transform = CGAffineTransform(a: 1, b: 0, c: -skew, d: 1, tx: 0, ty: 0)
         }
     }
 }

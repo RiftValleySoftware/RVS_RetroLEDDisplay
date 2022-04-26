@@ -111,10 +111,21 @@
                                     <userDefinedRuntimeAttribute type="image" keyPath="onImage" value="OnImage"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eJk-dq-lqw">
+                                <rect key="frame" x="81" y="580" width="252" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="TU6-3A-bgW"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="skewSliderChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="jgH-Zn-Czl"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WjK-8Z-hAs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="eJk-dq-lqw" firstAttribute="top" secondItem="lGt-iQ-8qX" secondAttribute="bottom" constant="8" symbolic="YES" id="07U-c8-45f"/>
+                            <constraint firstItem="eJk-dq-lqw" firstAttribute="leading" secondItem="lGt-iQ-8qX" secondAttribute="leading" id="16t-JL-dcg"/>
                             <constraint firstItem="aJ7-vg-R3L" firstAttribute="trailing" secondItem="3vf-cQ-WiW" secondAttribute="trailing" id="1KN-OG-4sP"/>
                             <constraint firstItem="o3B-Pt-FNM" firstAttribute="top" secondItem="vGY-F2-83J" secondAttribute="bottom" constant="8" symbolic="YES" id="39z-b3-C5q"/>
                             <constraint firstItem="7L3-iz-I5L" firstAttribute="top" secondItem="o3B-Pt-FNM" secondAttribute="bottom" constant="8" symbolic="YES" id="5ak-Va-SWD"/>
@@ -123,17 +134,20 @@
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="top" secondItem="OjT-1T-kAq" secondAttribute="bottom" constant="8" symbolic="YES" id="Ed5-JV-BG1"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="height" relation="lessThanOrEqual" secondItem="5lG-E1-Z0v" secondAttribute="height" multiplier="0.6" id="Eyg-c8-P0R"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="width" relation="lessThanOrEqual" secondItem="5lG-E1-Z0v" secondAttribute="width" multiplier="0.6" id="FnF-R5-jmD"/>
+                            <constraint firstItem="vGY-F2-83J" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WjK-8Z-hAs" secondAttribute="top" id="GHl-mZ-ilN"/>
                             <constraint firstItem="o3B-Pt-FNM" firstAttribute="leading" secondItem="vGY-F2-83J" secondAttribute="leading" id="Gr1-Bn-DTZ"/>
                             <constraint firstItem="7L3-iz-I5L" firstAttribute="trailing" secondItem="o3B-Pt-FNM" secondAttribute="trailing" id="JD7-hg-wJx"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="height" secondItem="5lG-E1-Z0v" secondAttribute="height" priority="750" id="KmC-i7-5Ul"/>
                             <constraint firstItem="aJ7-vg-R3L" firstAttribute="leading" secondItem="OjT-1T-kAq" secondAttribute="trailing" constant="8" symbolic="YES" id="MAn-2D-yp0"/>
                             <constraint firstItem="3vf-cQ-WiW" firstAttribute="top" secondItem="7L3-iz-I5L" secondAttribute="bottom" constant="8" symbolic="YES" id="XEz-4z-jjo"/>
+                            <constraint firstItem="eJk-dq-lqw" firstAttribute="trailing" secondItem="lGt-iQ-8qX" secondAttribute="trailing" id="aoj-3m-QOE"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="leading" secondItem="3vf-cQ-WiW" secondAttribute="leading" id="cLf-No-V90"/>
-                            <constraint firstItem="lGt-iQ-8qX" firstAttribute="centerY" secondItem="5lG-E1-Z0v" secondAttribute="centerY" id="fHf-Tx-MbH"/>
+                            <constraint firstItem="lGt-iQ-8qX" firstAttribute="centerY" secondItem="5lG-E1-Z0v" secondAttribute="centerY" priority="750" id="fHf-Tx-MbH"/>
                             <constraint firstItem="OjT-1T-kAq" firstAttribute="top" secondItem="3vf-cQ-WiW" secondAttribute="bottom" constant="8" symbolic="YES" id="fbN-19-A0q"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="centerX" secondItem="5lG-E1-Z0v" secondAttribute="centerX" id="gGQ-jq-zbF"/>
                             <constraint firstItem="lGt-iQ-8qX" firstAttribute="trailing" secondItem="3vf-cQ-WiW" secondAttribute="trailing" id="nux-wk-IRm"/>
                             <constraint firstItem="aJ7-vg-R3L" firstAttribute="centerY" secondItem="OjT-1T-kAq" secondAttribute="centerY" id="ocz-Am-eTr"/>
+                            <constraint firstItem="WjK-8Z-hAs" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="eJk-dq-lqw" secondAttribute="bottom" id="odK-ra-eKq"/>
                             <constraint firstItem="7L3-iz-I5L" firstAttribute="leading" secondItem="o3B-Pt-FNM" secondAttribute="leading" id="qsG-ro-x3Z"/>
                             <constraint firstItem="3vf-cQ-WiW" firstAttribute="leading" secondItem="7L3-iz-I5L" secondAttribute="leading" id="xZ7-zQ-Dp7"/>
                             <constraint firstItem="3vf-cQ-WiW" firstAttribute="trailing" secondItem="7L3-iz-I5L" secondAttribute="trailing" id="zEf-tf-xbT"/>
@@ -146,6 +160,7 @@
                         <outlet property="offFillSegmentedSwitch" destination="7L3-iz-I5L" id="jap-M7-qJD"/>
                         <outlet property="onFillSegmentedSwitch" destination="o3B-Pt-FNM" id="ped-PH-w9g"/>
                         <outlet property="radixSegmentedSwitch" destination="vGY-F2-83J" id="2CB-3S-Eh0"/>
+                        <outlet property="skewSlider" destination="eJk-dq-lqw" id="y1y-Bu-5qD"/>
                         <outlet property="stepper" destination="aJ7-vg-R3L" id="5eE-iH-J5I"/>
                         <outlet property="testTargetImage" destination="lGt-iQ-8qX" id="R89-XP-PEP"/>
                         <outlet property="valueSlider" destination="OjT-1T-kAq" id="hav-ut-PJv"/>

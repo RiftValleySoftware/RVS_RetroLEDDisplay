@@ -188,6 +188,11 @@ class RVS_RetroLEDDisplay_TestHarness_ViewController: UIViewController {
     /**
     */
     @IBOutlet weak var radixSegmentedSwitch: UISegmentedControl!
+
+    /* ################################################################## */
+    /**
+    */
+    @IBOutlet weak var skewSlider: UISlider!
 }
 
 /* ###################################################################################################################################### */
@@ -306,6 +311,11 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
             }
             
             aspectConstraint?.isActive = true
+            
+            if let skewSlider = skewSlider {
+                skewSlider.value = 0
+                skewSliderChanged(skewSlider)
+            }
         }
     }
     
@@ -385,5 +395,12 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
             valueSlider?.value = round(Float(max) / 2)
             testTargetImage?.value = Int(round(Float(max) / 2))
         }
+    }
+
+    /* ################################################################## */
+    /**
+    */
+    @IBAction func skewSliderChanged(_ inSlider: UISlider) {
+        testTargetImage?.skew = CGFloat(inSlider.value)
     }
 }
