@@ -234,7 +234,7 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
             if !gradientAngleSlider.isEnabled {
                 gradientAngleSlider.value = 0
             }
-            
+            gradientAngleSlider.setNeedsLayout()
             gradientAngleSliderChanged(gradientAngleSlider) // When it is disabled, we will set it back to 0.
         }
     }
