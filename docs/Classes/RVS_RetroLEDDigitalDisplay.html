@@ -94,6 +94,39 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)skew"></a>
+                    <a name="//apple_ref/swift/Property/skew" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)skew">skew</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This allows you to apply a &ldquo;skew&rdquo; to the widget.
+This means that there is a &ldquo;lean,&rdquo; like many classic LED displays.
+A positive skew, means that the widget &ldquo;leans right,&rdquo; with the top moving right, and the bottom, moving left.
+A negative skew, is in the other direction.
+This is limited to -1&hellip;1.
+This will change the size of the widget, horizontally (but not vertically).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@IBInspectable</span>
+<span class="k">var</span> <span class="nv">skew</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)onGradientStartColor"></a>
                     <a name="//apple_ref/swift/Property/onGradientStartColor" class="dashAnchor"></a>
                     <a class="token" href="#/c:@CM@RVS_RetroLEDDisplay@objc(cs)RVS_RetroLEDDigitalDisplay(py)onGradientStartColor">onGradientStartColor</a>
@@ -104,12 +137,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The starting color for the &ldquo;On&rdquo; gradient.
-If not provided, the view backgroundColor is used.
-If that is not provided, then the view tintColor is used.
-If that is not provided, then the super (parent) view tintColor is used.
-If that is not provided, the AccentColor is used.
-If that is not provided, the class will not work.</p>
+                        <p>The starting color for the &ldquo;On&rdquo; gradient.</p>
 
                       </div>
                       <div class="declaration">
@@ -195,12 +223,7 @@ Negative is counter-clockwise, and positive is clockwise.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The starting color for the &ldquo;Off&rdquo; gradient.
-If not provided, the view backgroundColor is used.
-If that is not provided, then the view tintColor is used.
-If that is not provided, then the super (parent) view tintColor is used.
-If that is not provided, the AccentColor is used.
-If that is not provided, the class will not work.</p>
+                        <p>The starting color for the &ldquo;Off&rdquo; gradient.</p>
 
                       </div>
                       <div class="declaration">
@@ -461,6 +484,34 @@ If this is set to an image (non-nil), then that will supersede the gradient colo
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">idealAspect</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC5radixSiSgvp"></a>
+                    <a name="//apple_ref/swift/Property/radix" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RVS_RetroLEDDisplay0a1_B17LEDDigitalDisplayC5radixSiSgvp">radix</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The numerical base of the display (2, 8, 10, 16). 16 is default.
+If you set a different radix from the ones listed, the set will be refused.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">radix</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
