@@ -17,6 +17,7 @@
 		D4C3B9132814B2BD00BA3B41 /* RVS_RetroLEDDisplay_TestHarness_Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4C3B9122814B2BD00BA3B41 /* RVS_RetroLEDDisplay_TestHarness_Assets.xcassets */; };
 		D4C3B9162814B2BD00BA3B41 /* RVS_RetroLEDDisplay_TestHarness_LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4C3B9142814B2BD00BA3B41 /* RVS_RetroLEDDisplay_TestHarness_LaunchScreen.storyboard */; };
 		D4EEA3D2281598CA00FA8887 /* RVS-Generic-Swift-Toolbox in Frameworks */ = {isa = PBXBuildFile; productRef = D4EEA3D1281598CA00FA8887 /* RVS-Generic-Swift-Toolbox */; };
+		D4F1509E2818A30900F21F90 /* RVS_RetroLEDDisplay.docc in Sources */ = {isa = PBXBuildFile; fileRef = D4F1509D2818A30900F21F90 /* RVS_RetroLEDDisplay.docc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		D4C3B9152814B2BD00BA3B41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RVS_RetroLEDDisplay_TestHarness_LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D4C3B9172814B2BD00BA3B41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4C3B91C2814B35A00BA3B41 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
+		D4F1509D2818A30900F21F90 /* RVS_RetroLEDDisplay.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = RVS_RetroLEDDisplay.docc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				D47EA89E2814B9C500337D4B /* RVS_RetroLEDDigitalDisplay.swift */,
+				D4F1509D2818A30900F21F90 /* RVS_RetroLEDDisplay.docc */,
 			);
 			path = RVS_RetroLEDDisplay;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D47EA89F2814B9C500337D4B /* RVS_RetroLEDDigitalDisplay.swift in Sources */,
+				D4F1509E2818A30900F21F90 /* RVS_RetroLEDDisplay.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -71,22 +71,206 @@
 <h2 id='overview' class='heading'>Overview</h2>
 
 <p>This is a UIKit widget that displays a &ldquo;classic&rdquo; LED display (seven-segmented, simple digitital display). It does this by displaying a customizable background through a mask that simulates the &ldquo;look and feel&rdquo; of an old-fashioned LED display.</p>
-<h3 id='customizable' class='heading'>Customizable</h3>
 
-<p>The widget subclasses <a href="https://developer.apple.com/documentation/uikit/uiimageview"><code>UIImageView</code></a>, with the <a href="https://developer.apple.com/documentation/uikit/uiimageview/1621069-image"><code>image</code></a> property being applied to the &ldquo;off&rdquo; segments of the display.</p>
+<p>This is designed as an &ldquo;aesthetic&rdquo; widget, for use by apps that want to mimic &ldquo;old time&rdquo; displays, and want a bit more realism and customization than can be provided by &ldquo;digital&rdquo; fonts.</p>
 
-<p>You can also supply an image for the &ldquo;on&rdquo; segments of the display.</p>
+<p>That said, a font gives you a great deal of flexibility, when it comes to content, and you may find <a href="https://github.com/RiftValleySoftware/RVS_MaskButton">The RVS_MaskButton</a> module intersting, as well. <a href="https://github.com/RiftValleySoftware/RVS_MaskButton">RVS_MaskButton</a> is not quite as customizable as this widget, but does allow you to use any font you want, in a very similar manner.</p>
 
-<p>If you do not supply an image, then you can specify colors (including a gradient), to be used behind the display.</p>
+<p>You can specify the widget as a set of horizontally-connected digits, and treat it as a &ldquo;whole,&rdquo; with the ability to change the radix (numbering base) of the display.</p>
 
-<p>The &ldquo;on&rdquo; and &ldquo;off&rdquo; backgrounds are independent of each other. You could, for example, have a gradient for the &ldquo;off&rdquo; segments, and an image for the &ldquo;on&rdquo; segments.</p>
+<p>This widget is strictly for displaying old-fashioned LED digits.</p>
+
+<p>It uses vector drawing, so does not require resources.</p>
+<h2 id='what-problem-does-this-solve' class='heading'>What Problem Does This Solve?</h2>
+
+<p>This widget was designed specifically for the rewrite of <a href="https://riftvalleysoftware.com/work/ios-apps/ambiamara/">The AmbiaMara Timer App</a>. That app presents <a href="https://en.wikipedia.org/wiki/Vacuum_fluorescent_display">a classic &ldquo;Vacuum Fluorescent&rdquo;-style display</a>.</p>
+<h2 id='find-out-more' class='heading'>Find Out More</h2>
+
+<p>The following screengrabs are from <a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/tree/master/Tests/RVS_RetroLEDDisplay_TestHarness">the Test Harness Project</a>, included with this package.</p>
+
+<p>It&rsquo;s possible to use images and gradients to offer a lot of custom appearances:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Figure 1: Standard Appearance</th>
+<th style="text-align: center">Figure 2: With Gradients</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><img src="img/Figure-01.png" alt="Figure 1"></td>
+<td style="text-align: center"><img src="img/Figure-02.png" alt="Figure 2"></td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Figure 3: Images In the &ldquo;Active&rdquo; Segments</th>
+<th style="text-align: center">Figure 4: And Also In the &ldquo;Inactive&rdquo; Segments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><img src="img/Figure-03.png" alt="Figure 3"></td>
+<td style="text-align: center"><img src="img/Figure-04.png" alt="Figure 4"></td>
+</tr>
+</tbody></table>
+
+<p>And you can also have blank &ldquo;inactive&rdquo; segments, and apply a &ldquo;skew&rdquo; of the display:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Figure 5: Blank &ldquo;Inactive&rdquo; Segments</th>
+<th style="text-align: center">Figure 6: Skewed to the Right</th>
+<th style="text-align: center">Figure 7: Skewed to the Left</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><img src="img/Figure-05.png" alt="Figure 5"></td>
+<td style="text-align: center"><img src="img/Figure-06.png" alt="Figure 6"></td>
+<td style="text-align: center"><img src="img/Figure-07.png" alt="Figure 7"></td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Figure 8: A Long Skew</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><img src="img/Figure-08.png" alt="Figure 8"></td>
+</tr>
+</tbody></table>
+<h2 id='usage' class='heading'>Usage</h2>
+<h3 id='where-to-get' class='heading'>Where to Get</h3>
+
+<p>In order to use this class, you should install it as a <a href="https://swift.org/package-manager/">Swift Package Manager (SPM)</a> module.</p>
+
+<p>You can use SPM to load the project as a dependency, by referencing its GitHub Repo URI (SSH: <a href="mailto:git@github.com">git@github.com</a>:RiftValleySoftware/RVS_RetroLEDDisplay.git, or HTTPS: <a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay.git">https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay.git</a>.</p>
+
+<p>Once you have installed the module, you should include it in the file that will need to access it, like so:</p>
+<pre class="highlight plaintext"><code>import RVS_RetroLEDDisplay
+</code></pre>
+
+<p>You can initialize via the Storyboard Editor, or directly, programmatically.</p>
+<h3 id='storyboard-editor-setup' class='heading'>Storyboard Editor Setup</h3>
+
+<p>You start by dragging in an Image View (<a href="https://developer.apple.com/documentation/uikit/uiimageview"><code>UIImageView</code></a>), then setting the class and module to <code>RVS_RetroLEDDisplay</code>:</p>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Figure 9: Dragging In the Object As A UIImage</th>
+<th style="text-align: center">Figure 10: Setting The Class And Module</th>
+<th style="text-align: center">Figure 11: The Inspectable Properties</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><img src="img/Figure-09.png" alt="Figure 9"></td>
+<td style="text-align: center"><img src="img/Figure-10.png" alt="Figure 10"></td>
+<td style="text-align: center"><img src="img/Figure-11.png" alt="Figure 11"></td>
+</tr>
+</tbody></table>
+<h3 id='programmatic-setup' class='heading'>Programmatic Setup</h3>
+
+<p>You can simply initialize an instance of <code>RVS_RetroLEDDisplay</code>, as you would an instance of <a href="https://developer.apple.com/documentation/uikit/uiimageview"><code>UIImageView</code></a>. If you initialize it with an image (setting the <a href="https://developer.apple.com/documentation/uikit/uiimageview/1621069-image"><code>image</code></a> property), then that image will be used as &ldquo;fill&rdquo; for the &ldquo;inactive&rdquo; segments.</p>
+
+<p>You can also supply an image for the &ldquo;active&rdquo; segments of the display, by setting the <a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1221"><code>onImage</code></a> property.</p>
+
+<p>If you do not supply an image, then you can specify colors (including a gradient), to be used in the display.</p>
+
+<p>The &ldquo;active&rdquo; and &ldquo;inactive&rdquo; backgrounds are independent of each other. You could, for example, have a gradient for the &ldquo;inactive&rdquo; segments, and an image for the &ldquo;active&rdquo; segments.</p>
 
 <p>It can also have a &ldquo;skew&rdquo; applied, that gives it the classic &ldquo;lean&rdquo; of LED digital displays.</p>
+<h4 id='radix-numbering-base' class='heading'>Radix (Numbering Base)</h4>
+
+<p>The widget supports Base-2 (Binary), Base-8 (Octal), Base-10 (Decimal), and Base-16 (Hexadecimal) numbering systems. You tell it what to use by setting <a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1267">the <code>radix</code> property</a>.</p>
+<h4 id='value' class='heading'>Value</h4>
+
+<p>The widget value is an Integer (signed). It will be displayed in whatever radix has been set for the widget. Additionally, the value will be clipped at the maximum displayable, depending on the radix, and number of digits.</p>
+
+<p>You set the value, via <a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1233">the <code>value</code> property</a>.</p>
+
+<p>-1 and -2 are special values:</p>
+
+<ul>
+<li>-2 means that no segments will be active. Only inactive segments will be shown (&ldquo;blank&rdquo; display).</li>
+<li>-1 Means that a minus sign (-), for single-digit displays will be shown, or a line of minus signs, for multiple-digit displays.</li>
+</ul>
+
+<p>Negative numbers are not displayed. In order to display a negative number, you should place a single digit widget in front of another widget that is to display numbers, and have that display a -1 value.</p>
+<h4 id='skew' class='heading'>Skew</h4>
+
+<p>&ldquo;Skew&rdquo; is the &ldquo;slant&rdquo; of the widget. It is set by setting <a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1121">the <code>skew</code> property</a> (floating point) to a value in the range of <code>-1...1</code>. Zero means no skew. Negative means &ldquo;lean left,&rdquo; and positive means &ldquo;lean right.&rdquo;</p>
+<h4 id='number-of-digits' class='heading'>Number of Digits</h4>
+
+<p>You can specify how many digits will be available in the widget. These will be treated as a display of a numeric value, bound by the radix, and the number of available digits. The minimum is 1, and there is no upper limit (but don&rsquo;t get too crazy. This is a signed integer, so there are limits).</p>
+
+<p>You specify the number of digits by setting <a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1188">the <code>numberOfDigits</code> property</a>.</p>
+
+<blockquote>
+<p><strong>NOTE</strong>
+You may want to be careful about the order in which you set these values. For example, if you start with two digits, in base 16, you will not be able to set a value of 256 (100 hex), until you have increased the digit count to 3 (or more). Also, the radix property will affect the maximum value. For example, if the value is 255 (FF hex), and the radix is Base 16, switching the radix to Base 10, without increasing the number of digits, first, will truncate the value to 99.</p>
+</blockquote>
+<h4 id='appearance' class='heading'>Appearance</h4>
+
+<p>When changing the colors, the presence of an image supersedes any colors in the gradient start and end slots.</p>
+
+<p>If you want to have a solid color, you can use a small image, scaled out, with a solid color, or you can define only a start color for the gradients.</p>
+<h2 id='the-test-harness-project' class='heading'>The Test Harness Project</h2>
+
+<p>The Test Harness is a very simple, 1-screen app, with a number of controls, designed to stimulate the various aspects of the widget.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Figure 12: The Test Harness App</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><img src="img/Figure-12.png" alt="Figure 12"></td>
+</tr>
+</tbody></table>
+
+<p>The controls are set ups thusly (top to bottom):</p>
+
+<ul>
+<li><p><strong>Radix</strong>
+The top segmented switch changes the numbering base of the widget.</p></li>
+<li><p><strong>Active Segment Fill</strong>
+The second from top segmented switch controls the fill for &ldquo;active&rdquo; segments. The choices are:</p>
+
+<ul>
+<li><strong>Default</strong>
+This uses a simple, 1-color image to fill the segments. It is visually identical to setting a solid color.</li>
+<li><strong>Ugly</strong>
+This applies a paisley pattern image.</li>
+<li><strong>Gradients</strong>
+This applies a red-to-orange gradient.</li>
+<li><strong>Solid</strong>
+This uses a single color, specified in the gradient properties (just the start).</li>
+</ul></li>
+<li><p><strong>Gradient Angle</strong>
+This is only enabled when one (or both) of the fill switches is set to &ldquo;Gradients.&rdquo; It allows you to change the angle the gradient fills.</p></li>
+<li><p><strong>Inactive Segment Fill</strong>
+This is almost exactly like the Active Segment Fill Switch, but uses different colors/patterns.</p></li>
+<li><p><strong>Aspect</strong>
+This applies different aspects to the control. The rightmost one (&ldquo;Normal&rdquo;), uses <a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1260">the <code>idealAspect</code> property</a> to determine the optimal aspect for the control display. The leftmost one, rotates that by 90 degrees (π/2).</p></li>
+<li><p><strong>Value Slider And Stepper</strong>
+This allows you to change the value, sent to the widget. The stepper allows 1-by-1 value changes. The leftmost two values are -2, and -1, respectively. The maximum is the maximum available for the control, given the radix and the number of digits.</p></li>
+<li><p><strong>The Widget</strong>
+This is the Code Under Test. It displays the widget, according to the current settings.</p></li>
+<li><p><strong>Skew</strong>
+This slider allows you to skew the widget.</p></li>
+<li><p><strong>Number of Digits</strong>
+This sets the number of digits displayed. The choices are 1, 2, 4, and 8.</p></li>
+</ul>
+<h3 id='find-out-more' class='heading'>Find Out More</h3>
+
+<p><a href="https://riftvalleysoftware.github.io/RVS_RetroLEDDisplay">This is the technical documentation for the package</a>. It discusses the exposed public API, and the various properties that you can access.</p>
+
+<p><a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/tree/master/Tests/RVS_RetroLEDDisplay_TestHarness">This is the Test Harness Project</a>. It has been designed as a simple project, and should provide excellent guidance in use of this package.</p>
 <h2 id='legal' class='heading'>Legal</h2>
 
-<p><a href="https://www.freepik.com/free-vector/paisley-pattern-set_8565932.htm">Attribution usage required for Paisley Patterns, by ilonitta</a></p>
+<p><a href="https://www.freepik.com/free-vector/paisley-pattern-set_8565932.htm">Attribution required for usage of Paisley Patterns, by ilonitta</a></p>
 
-<p>These patterns are only used in the <a href="">Test Harness</a>, and no attribution is required for use of the package.</p>
+<p>These patterns are only used in the <a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/tree/master/Tests/RVS_RetroLEDDisplay_TestHarness">Test Harness</a>, so no attribution is required for use of the package.</p>
 <h3 id='mit-license' class='heading'>MIT License</h3>
 
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation

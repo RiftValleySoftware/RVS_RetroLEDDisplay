@@ -1,4 +1,3 @@
-![Icon](icon.png)
 # ``RVS_RetroLEDDisplay``
 
 Simple, Classic, Customizable Digital Display.
@@ -29,21 +28,21 @@ It's possible to use images and gradients to offer a lot of custom appearances:
 
 |Figure 1: Standard Appearance|Figure 2: With Gradients|
 |:--:|:--:|
-|![Figure 1](img/Figure-01.png)|![Figure 2](img/Figure-02.png)|
+|![Figure 1](Figure-01.png)|![Figure 2](Figure-02.png)|
 
 |Figure 3: Images In the "Active" Segments|Figure 4: And Also In the "Inactive" Segments|
 |:--:|:--:|
-|![Figure 3](img/Figure-03.png)|![Figure 4](img/Figure-04.png)|
+|![Figure 3](Figure-03.png)|![Figure 4](Figure-04.png)|
 
 And you can also have blank "inactive" segments, and apply a "skew" of the display:
 
 |Figure 5: Blank "Inactive" Segments|Figure 6: Skewed to the Right|Figure 7: Skewed to the Left|
 |:--:|:--:|:--:|
-|![Figure 5](img/Figure-05.png)|![Figure 6](img/Figure-06.png)|![Figure 7](img/Figure-07.png)|
+|![Figure 5](Figure-05.png)|![Figure 6](Figure-06.png)|![Figure 7](Figure-07.png)|
 
 |Figure 8: A Long Skew|
 |:--:|
-|![Figure 8](img/Figure-08.png)|
+|![Figure 8](Figure-08.png)|
 
 ## Usage
 
@@ -65,7 +64,7 @@ You start by dragging in an Image View ([`UIImageView`](https://developer.apple.
 
 |Figure 9: Dragging In the Object As A UIImage|Figure 10: Setting The Class And Module|Figure 11: The Inspectable Properties|
 |:--:|:--:|:--:|
-|![Figure 9](img/Figure-09.png)|![Figure 10](img/Figure-10.png)|![Figure 11](img/Figure-11.png)|
+|![Figure 9](Figure-09.png)|![Figure 10](Figure-10.png)|![Figure 11](Figure-11.png)|
 
 ### Programmatic Setup
 
@@ -107,7 +106,6 @@ You can specify how many digits will be available in the widget. These will be t
 
 You specify the number of digits by setting [the `numberOfDigits` property](https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1188).
 
-> **NOTE**
 > You may want to be careful about the order in which you set these values. For example, if you start with two digits, in base 16, you will not be able to set a value of 256 (100 hex), until you have increased the digit count to 3 (or more). Also, the radix property will affect the maximum value. For example, if the value is 255 (FF hex), and the radix is Base 16, switching the radix to Base 10, without increasing the number of digits, first, will truncate the value to 99.
 
 #### Appearance
@@ -122,7 +120,7 @@ The Test Harness is a very simple, 1-screen app, with a number of controls, desi
 
 |Figure 12: The Test Harness App|
 |:--:|
-|![Figure 12](img/Figure-12.png)|
+|![Figure 12](Figure-12.png)|
 
 The controls are set ups thusly (top to bottom):
 
