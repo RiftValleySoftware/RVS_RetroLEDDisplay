@@ -133,7 +133,7 @@ The Test Harness is a very simple, 1-screen app, with a number of controls, desi
 |:--:|
 |![Figure 12](Figure-12.png)|
 
-The controls are set ups thusly (top to bottom):
+The controls are (top to bottom):
 
 - **Radix**
     The top segmented switch changes the numbering base of the widget.
