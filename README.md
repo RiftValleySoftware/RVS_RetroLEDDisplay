@@ -53,7 +53,7 @@ The module is a [Swift](https://developer.apple.com/swift/)-only [Swift Package 
 
 #### Dependencies
 
-The button class, itself, has no dependencies, but the test harness depends on the [RVS_Generic_Swift_Toolbox module](https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox).
+The image class, itself, has no dependencies, but the test harness depends on the [RVS_Generic_Swift_Toolbox module](https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox).
 
 The test harness also uses a couple of pattern images derived from [Paisley Patterns, by ilonitta](https://www.freepik.com/free-vector/paisley-pattern-set_8565932.htm). These are not required to use the package.
 
