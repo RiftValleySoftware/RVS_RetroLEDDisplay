@@ -16,8 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="vGY-F2-83J">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="vGY-F2-83J">
                                 <rect key="frame" x="41.5" y="71" width="331" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="31" id="5zt-mq-ILC"/>
+                                </constraints>
                                 <segments>
                                     <segment title="2"/>
                                     <segment title="8"/>
@@ -28,14 +31,17 @@
                                     <action selector="radixSegmentedSwitchChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="uOb-xx-OPk"/>
                                 </connections>
                             </segmentedControl>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-180" maxValue="180" translatesAutoresizingMaskIntoConstraints="NO" id="h7d-Im-yBe">
+                            <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-180" maxValue="180" translatesAutoresizingMaskIntoConstraints="NO" id="h7d-Im-yBe">
                                 <rect key="frame" x="39.5" y="149" width="335" height="31"/>
                                 <connections>
                                     <action selector="gradientAngleSliderChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="xKW-5F-qws"/>
                                 </connections>
                             </slider>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7L3-iz-I5L">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7L3-iz-I5L">
                                 <rect key="frame" x="41.5" y="187" width="331" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="31" id="MlY-BQ-go9"/>
+                                </constraints>
                                 <segments>
                                     <segment title="SLUG-SEG-FILL-0"/>
                                     <segment title="SLUG-SEG-FILL-1"/>
@@ -46,8 +52,11 @@
                                     <action selector="offFillSegmentedSwitchChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="cvQ-aV-2U6"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="3vf-cQ-WiW">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="3vf-cQ-WiW">
                                 <rect key="frame" x="41.5" y="226" width="331" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="31" id="55t-29-ZDJ"/>
+                                </constraints>
                                 <segments>
                                     <segment title="SLUG-SEG-0"/>
                                     <segment title="SLUG-SEG-1"/>
@@ -57,13 +66,13 @@
                                     <action selector="aspectSegmentedSwitchChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="H1h-US-hyO"/>
                                 </connections>
                             </segmentedControl>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-1" maximumValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aJ7-vg-R3L">
+                            <stepper opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-1" maximumValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aJ7-vg-R3L">
                                 <rect key="frame" x="278.5" y="264" width="94" height="32"/>
                                 <connections>
                                     <action selector="stepperHit:" destination="egX-1G-hMU" eventType="valueChanged" id="hwX-pA-mMb"/>
                                 </connections>
                             </stepper>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-JZ-fMc">
+                            <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-JZ-fMc">
                                 <rect key="frame" x="41.5" y="303" width="331" height="300"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OffImage" translatesAutoresizingMaskIntoConstraints="NO" id="lGt-iQ-8qX" customClass="RVS_RetroLEDDigitalDisplay" customModule="RVS_RetroLEDDisplay">
@@ -93,16 +102,20 @@
                                     <constraint firstItem="lGt-iQ-8qX" firstAttribute="centerX" secondItem="fdH-JZ-fMc" secondAttribute="centerX" id="QA5-fz-iXa"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="d7n-GC-aAx"/>
                                     <constraint firstItem="lGt-iQ-8qX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fdH-JZ-fMc" secondAttribute="leading" id="gfN-pG-q8p"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="ydu-qM-cdC"/>
                                 </constraints>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eJk-dq-lqw">
+                            <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eJk-dq-lqw">
                                 <rect key="frame" x="39.5" y="611" width="335" height="31"/>
                                 <connections>
                                     <action selector="skewSliderChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="jgH-Zn-Czl"/>
                                 </connections>
                             </slider>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o3B-Pt-FNM">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o3B-Pt-FNM">
                                 <rect key="frame" x="41.5" y="110" width="331" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="31" id="85c-B4-yXw"/>
+                                </constraints>
                                 <segments>
                                     <segment title="SLUG-SEG-FILL-0"/>
                                     <segment title="SLUG-SEG-FILL-1"/>
@@ -113,8 +126,11 @@
                                     <action selector="onFillSegmentedSwitchChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="dJP-Ov-b3s"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="a9i-4Y-WRf">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="a9i-4Y-WRf">
                                 <rect key="frame" x="41.5" y="649" width="331" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="31" id="C6W-bR-3Rv"/>
+                                </constraints>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -125,13 +141,13 @@
                                     <action selector="numberOfDigitsSegmentedSwitchChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="SjF-dL-5SQ"/>
                                 </connections>
                             </segmentedControl>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17" minValue="-2" maxValue="4095" translatesAutoresizingMaskIntoConstraints="NO" id="OjT-1T-kAq">
+                            <slider opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17" minValue="-2" maxValue="4095" translatesAutoresizingMaskIntoConstraints="NO" id="OjT-1T-kAq">
                                 <rect key="frame" x="39.5" y="265" width="233" height="31"/>
                                 <connections>
                                     <action selector="valueSliderChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="TUI-YB-asj"/>
                                 </connections>
                             </slider>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MTn-th-SV6">
+                            <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="MTn-th-SV6">
                                 <rect key="frame" x="89" y="688" width="236" height="31"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qEa-PG-DoW">
@@ -151,6 +167,12 @@
                                         </connections>
                                     </switch>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="qEa-PG-DoW" secondAttribute="bottom" id="BWO-LI-Xk6"/>
+                                    <constraint firstAttribute="bottom" secondItem="YdK-4V-mUm" secondAttribute="bottom" id="Sx4-mO-PSk"/>
+                                    <constraint firstItem="qEa-PG-DoW" firstAttribute="top" secondItem="MTn-th-SV6" secondAttribute="top" id="VmX-uV-4rb"/>
+                                    <constraint firstItem="YdK-4V-mUm" firstAttribute="top" secondItem="MTn-th-SV6" secondAttribute="top" id="wqX-u1-3no"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WjK-8Z-hAs"/>
@@ -183,9 +205,9 @@
                             <constraint firstItem="eJk-dq-lqw" firstAttribute="leading" secondItem="vGY-F2-83J" secondAttribute="leading" id="fZx-Kn-Ecn"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="width" secondItem="WjK-8Z-hAs" secondAttribute="width" priority="750" id="gF8-k1-8aJ"/>
                             <constraint firstItem="7L3-iz-I5L" firstAttribute="trailing" secondItem="vGY-F2-83J" secondAttribute="trailing" id="kQR-XZ-h4h"/>
-                            <constraint firstItem="WjK-8Z-hAs" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MTn-th-SV6" secondAttribute="bottom" id="nvL-cn-7jv"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MTn-th-SV6" secondAttribute="bottom" id="nvL-cn-7jv"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="height" relation="lessThanOrEqual" secondItem="WjK-8Z-hAs" secondAttribute="height" id="qCj-Kj-9P1"/>
-                            <constraint firstItem="vGY-F2-83J" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WjK-8Z-hAs" secondAttribute="top" id="qaT-fm-Mes"/>
+                            <constraint firstItem="vGY-F2-83J" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5lG-E1-Z0v" secondAttribute="top" id="qaT-fm-Mes"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="height" secondItem="WjK-8Z-hAs" secondAttribute="height" priority="750" id="shD-MV-8MW"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="leading" secondItem="vGY-F2-83J" secondAttribute="leading" id="srt-xx-aya"/>
                             <constraint firstItem="7L3-iz-I5L" firstAttribute="top" secondItem="h7d-Im-yBe" secondAttribute="bottom" constant="8" id="wt1-DR-fzW"/>
