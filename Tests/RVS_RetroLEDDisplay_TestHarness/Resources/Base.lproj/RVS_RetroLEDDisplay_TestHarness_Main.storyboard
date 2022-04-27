@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="vGY-F2-83J">
-                                <rect key="frame" x="83" y="97" width="248" height="32"/>
+                                <rect key="frame" x="41.5" y="71" width="331" height="32"/>
                                 <segments>
                                     <segment title="2"/>
                                     <segment title="8"/>
@@ -29,13 +29,13 @@
                                 </connections>
                             </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-180" maxValue="180" translatesAutoresizingMaskIntoConstraints="NO" id="h7d-Im-yBe">
-                                <rect key="frame" x="81" y="175" width="252" height="31"/>
+                                <rect key="frame" x="39.5" y="149" width="335" height="31"/>
                                 <connections>
                                     <action selector="gradientAngleSliderChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="xKW-5F-qws"/>
                                 </connections>
                             </slider>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7L3-iz-I5L">
-                                <rect key="frame" x="83" y="213" width="248" height="32"/>
+                                <rect key="frame" x="41.5" y="187" width="331" height="32"/>
                                 <segments>
                                     <segment title="SLUG-SEG-FILL-0"/>
                                     <segment title="SLUG-SEG-FILL-1"/>
@@ -47,7 +47,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="3vf-cQ-WiW">
-                                <rect key="frame" x="83" y="252" width="248" height="32"/>
+                                <rect key="frame" x="41.5" y="226" width="331" height="32"/>
                                 <segments>
                                     <segment title="SLUG-SEG-0"/>
                                     <segment title="SLUG-SEG-1"/>
@@ -58,16 +58,16 @@
                                 </connections>
                             </segmentedControl>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-1" maximumValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aJ7-vg-R3L">
-                                <rect key="frame" x="237" y="290" width="94" height="32"/>
+                                <rect key="frame" x="278.5" y="264" width="94" height="32"/>
                                 <connections>
                                     <action selector="stepperHit:" destination="egX-1G-hMU" eventType="valueChanged" id="hwX-pA-mMb"/>
                                 </connections>
                             </stepper>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-JZ-fMc">
-                                <rect key="frame" x="83" y="329" width="248" height="248"/>
+                                <rect key="frame" x="41.5" y="303" width="331" height="300"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OffImage" translatesAutoresizingMaskIntoConstraints="NO" id="lGt-iQ-8qX" customClass="RVS_RetroLEDDigitalDisplay" customModule="RVS_RetroLEDDisplay">
-                                        <rect key="frame" x="0.0" y="0.0" width="248" height="248"/>
+                                        <rect key="frame" x="15.5" y="0.0" width="300" height="300"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="lGt-iQ-8qX" secondAttribute="height" multiplier="1:1" placeholder="YES" id="x4a-dc-hm1"/>
                                         </constraints>
@@ -96,13 +96,13 @@
                                 </constraints>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="eJk-dq-lqw">
-                                <rect key="frame" x="81" y="585" width="252" height="31"/>
+                                <rect key="frame" x="39.5" y="611" width="335" height="31"/>
                                 <connections>
                                     <action selector="skewSliderChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="jgH-Zn-Czl"/>
                                 </connections>
                             </slider>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o3B-Pt-FNM">
-                                <rect key="frame" x="83" y="136" width="248" height="32"/>
+                                <rect key="frame" x="41.5" y="110" width="331" height="32"/>
                                 <segments>
                                     <segment title="SLUG-SEG-FILL-0"/>
                                     <segment title="SLUG-SEG-FILL-1"/>
@@ -114,7 +114,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="a9i-4Y-WRf">
-                                <rect key="frame" x="83" y="623" width="248" height="32"/>
+                                <rect key="frame" x="41.5" y="649" width="331" height="32"/>
                                 <segments>
                                     <segment title="1"/>
                                     <segment title="2"/>
@@ -126,11 +126,32 @@
                                 </connections>
                             </segmentedControl>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17" minValue="-2" maxValue="4095" translatesAutoresizingMaskIntoConstraints="NO" id="OjT-1T-kAq">
-                                <rect key="frame" x="81" y="291" width="150" height="31"/>
+                                <rect key="frame" x="39.5" y="265" width="233" height="31"/>
                                 <connections>
                                     <action selector="valueSliderChanged:" destination="egX-1G-hMU" eventType="valueChanged" id="TUI-YB-asj"/>
                                 </connections>
                             </slider>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MTn-th-SV6">
+                                <rect key="frame" x="89" y="688" width="236" height="31"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qEa-PG-DoW">
+                                        <rect key="frame" x="0.0" y="0.0" width="187" height="31"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="SLUG-LEADING-ZEROES"/>
+                                        <connections>
+                                            <action selector="leadingZeroesHit:" destination="egX-1G-hMU" eventType="touchUpInside" id="4TL-dW-Jos"/>
+                                        </connections>
+                                    </button>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YdK-4V-mUm">
+                                        <rect key="frame" x="187" y="0.0" width="51" height="31"/>
+                                        <color key="onTintColor" systemColor="systemGreenColor"/>
+                                        <connections>
+                                            <action selector="leadingZeroesHit:" destination="egX-1G-hMU" eventType="valueChanged" id="xMc-z7-WMW"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WjK-8Z-hAs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -142,29 +163,31 @@
                             <constraint firstItem="OjT-1T-kAq" firstAttribute="centerY" secondItem="aJ7-vg-R3L" secondAttribute="centerY" id="4bV-Nn-fkW"/>
                             <constraint firstItem="o3B-Pt-FNM" firstAttribute="trailing" secondItem="vGY-F2-83J" secondAttribute="trailing" id="4ru-8g-ifo"/>
                             <constraint firstItem="3vf-cQ-WiW" firstAttribute="top" secondItem="7L3-iz-I5L" secondAttribute="bottom" constant="8" id="5Yb-qs-aZx"/>
+                            <constraint firstItem="MTn-th-SV6" firstAttribute="top" secondItem="a9i-4Y-WRf" secondAttribute="bottom" constant="8" symbolic="YES" id="6hC-Zv-Dby"/>
                             <constraint firstItem="h7d-Im-yBe" firstAttribute="leading" secondItem="vGY-F2-83J" secondAttribute="leading" id="8gU-rt-Yhe"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="top" secondItem="OjT-1T-kAq" secondAttribute="bottom" constant="8" id="ALD-By-4wR"/>
                             <constraint firstItem="aJ7-vg-R3L" firstAttribute="leading" secondItem="OjT-1T-kAq" secondAttribute="trailing" constant="8" symbolic="YES" id="Bgw-ir-aRU"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="centerY" secondItem="WjK-8Z-hAs" secondAttribute="centerY" id="Dxg-Wf-wcN"/>
-                            <constraint firstItem="fdH-JZ-fMc" firstAttribute="width" relation="lessThanOrEqual" secondItem="WjK-8Z-hAs" secondAttribute="width" multiplier="0.6" id="E9U-my-tVm"/>
+                            <constraint firstItem="fdH-JZ-fMc" firstAttribute="width" relation="lessThanOrEqual" secondItem="WjK-8Z-hAs" secondAttribute="width" multiplier="0.8" id="E9U-my-tVm"/>
                             <constraint firstItem="7L3-iz-I5L" firstAttribute="leading" secondItem="vGY-F2-83J" secondAttribute="leading" id="FPt-Eq-cQp"/>
-                            <constraint firstItem="a9i-4Y-WRf" firstAttribute="top" secondItem="eJk-dq-lqw" secondAttribute="bottom" constant="8" id="FmN-SS-iPh"/>
+                            <constraint firstItem="a9i-4Y-WRf" firstAttribute="top" secondItem="eJk-dq-lqw" secondAttribute="bottom" constant="8" symbolic="YES" id="HoX-Ca-SDQ"/>
                             <constraint firstItem="h7d-Im-yBe" firstAttribute="trailing" secondItem="vGY-F2-83J" secondAttribute="trailing" id="Kca-by-wjn"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="trailing" secondItem="vGY-F2-83J" secondAttribute="trailing" id="PSG-gO-JVG"/>
                             <constraint firstItem="o3B-Pt-FNM" firstAttribute="top" secondItem="vGY-F2-83J" secondAttribute="bottom" constant="8" id="R0L-Zp-fN7"/>
                             <constraint firstItem="o3B-Pt-FNM" firstAttribute="leading" secondItem="vGY-F2-83J" secondAttribute="leading" id="RvN-wc-LbH"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="centerX" secondItem="WjK-8Z-hAs" secondAttribute="centerX" id="Sk2-Za-z8t"/>
+                            <constraint firstItem="MTn-th-SV6" firstAttribute="centerX" secondItem="5lG-E1-Z0v" secondAttribute="centerX" id="XVI-eh-cDO"/>
                             <constraint firstItem="3vf-cQ-WiW" firstAttribute="trailing" secondItem="vGY-F2-83J" secondAttribute="trailing" id="YWS-xx-Rcc"/>
                             <constraint firstItem="OjT-1T-kAq" firstAttribute="leading" secondItem="vGY-F2-83J" secondAttribute="leading" id="bJu-yy-onG"/>
                             <constraint firstItem="OjT-1T-kAq" firstAttribute="top" secondItem="3vf-cQ-WiW" secondAttribute="bottom" constant="8" symbolic="YES" id="etL-wa-wOs"/>
                             <constraint firstItem="eJk-dq-lqw" firstAttribute="leading" secondItem="vGY-F2-83J" secondAttribute="leading" id="fZx-Kn-Ecn"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="width" secondItem="WjK-8Z-hAs" secondAttribute="width" priority="750" id="gF8-k1-8aJ"/>
                             <constraint firstItem="7L3-iz-I5L" firstAttribute="trailing" secondItem="vGY-F2-83J" secondAttribute="trailing" id="kQR-XZ-h4h"/>
+                            <constraint firstItem="WjK-8Z-hAs" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MTn-th-SV6" secondAttribute="bottom" id="nvL-cn-7jv"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="height" relation="lessThanOrEqual" secondItem="WjK-8Z-hAs" secondAttribute="height" id="qCj-Kj-9P1"/>
                             <constraint firstItem="vGY-F2-83J" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WjK-8Z-hAs" secondAttribute="top" id="qaT-fm-Mes"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="height" secondItem="WjK-8Z-hAs" secondAttribute="height" priority="750" id="shD-MV-8MW"/>
                             <constraint firstItem="fdH-JZ-fMc" firstAttribute="leading" secondItem="vGY-F2-83J" secondAttribute="leading" id="srt-xx-aya"/>
-                            <constraint firstItem="WjK-8Z-hAs" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="a9i-4Y-WRf" secondAttribute="bottom" id="voB-Ga-Yap"/>
                             <constraint firstItem="7L3-iz-I5L" firstAttribute="top" secondItem="h7d-Im-yBe" secondAttribute="bottom" constant="8" id="wt1-DR-fzW"/>
                             <constraint firstItem="eJk-dq-lqw" firstAttribute="top" secondItem="fdH-JZ-fMc" secondAttribute="bottom" constant="8" id="wtk-yE-Q2X"/>
                             <constraint firstItem="a9i-4Y-WRf" firstAttribute="trailing" secondItem="vGY-F2-83J" secondAttribute="trailing" id="yla-hv-5MQ"/>
@@ -175,6 +198,8 @@
                     <connections>
                         <outlet property="aspectSegmentedSwitch" destination="3vf-cQ-WiW" id="IuJ-wa-sOE"/>
                         <outlet property="gradientAngleSlider" destination="h7d-Im-yBe" id="hZh-uz-l4C"/>
+                        <outlet property="leadingZeroesLabelButton" destination="qEa-PG-DoW" id="Zv9-OO-p5b"/>
+                        <outlet property="leadingZeroesSwitch" destination="YdK-4V-mUm" id="6ww-qI-YK8"/>
                         <outlet property="numberOfDigitsSegmentedSwitch" destination="a9i-4Y-WRf" id="6cw-7s-JYF"/>
                         <outlet property="offFillSegmentedSwitch" destination="7L3-iz-I5L" id="jap-M7-qJD"/>
                         <outlet property="onFillSegmentedSwitch" destination="o3B-Pt-FNM" id="ped-PH-w9g"/>
@@ -199,8 +224,14 @@
         <image name="OffImage" width="2" height="2"/>
         <image name="OnImage" width="2" height="2"/>
         <image name="Tab0" width="26" height="26"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

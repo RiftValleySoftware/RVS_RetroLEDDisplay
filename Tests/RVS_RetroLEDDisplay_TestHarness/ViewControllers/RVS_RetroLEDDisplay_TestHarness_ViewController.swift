@@ -214,6 +214,16 @@ class RVS_RetroLEDDisplay_TestHarness_ViewController: UIViewController {
      This allows us to change the number of digits, displayed by the code under test.
     */
     @IBOutlet weak var numberOfDigitsSegmentedSwitch: UISegmentedControl?
+
+    /* ################################################################## */
+    /**
+    */
+    @IBOutlet weak var leadingZeroesLabelButton: UIButton?
+
+    /* ################################################################## */
+    /**
+    */
+    @IBOutlet weak var leadingZeroesSwitch: UISwitch?
 }
 
 /* ###################################################################################################################################### */
@@ -236,6 +246,22 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
             }
             gradientAngleSlider.setNeedsLayout()
             gradientAngleSliderChanged(gradientAngleSlider) // When it is disabled, we will set it back to 0.
+        }
+    }
+    
+    /* ################################################################## */
+    /**
+     This clears the value, and resets it to the midpoint.
+    */
+    func resetValue() {
+        if let min = testTargetImage?.minValue,
+           let max = testTargetImage?.maxValue,
+           let aspectSegmentedSwitch = aspectSegmentedSwitch {
+            valueSlider?.minimumValue = Float(min)
+            valueSlider?.maximumValue = Float(max)
+            valueSlider?.value = round(Float(max) / 2)
+            testTargetImage?.value = Int(round(Float(max) / 2))
+            aspectSegmentedSwitchChanged(aspectSegmentedSwitch)
         }
     }
 }
@@ -321,24 +347,8 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
             radixSegmentedSwitchChanged(radixSegmentedSwitch)
         }
         
+        leadingZeroesLabelButton?.setTitle("SLUG-LEADING-ZEROES".localizedVariant, for: .normal)
         determineGradientSliderEnabledState()
-    }
-    
-    /* ################################################################## */
-    /**
-     Called when the subviews are being laid out.
-    */
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        if let min = testTargetImage?.minValue,
-           let max = testTargetImage?.maxValue,
-           let aspectSegmentedSwitch = aspectSegmentedSwitch {
-            valueSlider?.minimumValue = Float(min)
-            valueSlider?.maximumValue = Float(max)
-            valueSlider?.value = round(Float(max) / 2)
-            testTargetImage?.value = Int(round(Float(max) / 2))
-            aspectSegmentedSwitchChanged(aspectSegmentedSwitch)
-        }
     }
 }
 
@@ -526,6 +536,22 @@ extension RVS_RetroLEDDisplay_TestHarness_ViewController {
             valueSlider.value += Float(inStepper.value)
             inStepper.value = 0
             valueSliderChanged(valueSlider)
+        }
+    }
+
+    /* ################################################################## */
+    /**
+     This is called, whenever either the "label" of the switch, or the switch, itself,
+     is hit.
+     
+     - parameter inSwitchOrButton: Either the switch, or the button we use as a label.
+    */
+    @IBAction func leadingZeroesHit(_ inSwitchOrButton: UIControl) {
+        if inSwitchOrButton is UIButton {
+            leadingZeroesSwitch?.setOn(!(leadingZeroesSwitch?.isOn ?? true), animated: true)
+            leadingZeroesSwitch?.sendActions(for: .valueChanged)
+        } else if let leadingZeroes = inSwitchOrButton as? UISwitch {
+            testTargetImage?.hasLeadingZeroes = leadingZeroes.isOn
         }
     }
 }

@@ -19,7 +19,7 @@
 
  The Great Rift Valley Software Company: https://riftvalleysoftware.com
  
- Version 1.0.1
+ Version 1.1.0
 */
 
 import UIKit
@@ -710,6 +710,12 @@ class LED_MultipleDigits {
     var gap: CGFloat = 10.0
 
     /* ################################################################## */
+    /**
+     This is true, if the value is to be displayed with leading zeroes.
+     */
+    var hasLeadingZeroes: Bool = false
+    
+    /* ################################################################## */
     // MARK: Initializer
     /* ################################################################## */
     /**
@@ -717,11 +723,13 @@ class LED_MultipleDigits {
      - parameter numberOfDigits: The number of digits. This should be enough to hold the value. If not specified, then it is 1.
      - parameter radix: The numbering base to use for this display. Default is 16.
      - parameter gap: The gap, in computational units (not display units). The default is 10.
+     - parameter hasLeadingZeroes: If true (default is false), then the display is made with leading zeroes (blank, otherwise).
      */
-    init(_ inValue: Int, numberOfDigits inNumberOfDigits: Int = 1, radix inRadix: Int, gap inGap: CGFloat = 10) {
+    init(_ inValue: Int, numberOfDigits inNumberOfDigits: Int = 1, radix inRadix: Int, gap inGap: CGFloat = 10, hasLeadingZeroes inHasLeadingZeroes: Bool = false) {
         for _ in 0..<inNumberOfDigits { _digitArray.append(LED_SingleDigit(0, radix: inRadix)) }
         gap = inGap
         value = inValue
+        hasLeadingZeroes = inHasLeadingZeroes
     }
 }
 
@@ -836,13 +844,13 @@ extension LED_MultipleDigits: LED_Element {
      */
     var value: Int {
         get {
+            guard _digitArray.contains(where: { -1 != $0.value }) else { return -1 }
+            guard _digitArray.contains(where: { -2 != $0.value }) else { return -2 }
             return _digitArray.reduce(0) { current, next in
                 if 0 <= next.value {
-                    return (current * radix) + next.value
-                } else if -1 == next.value {
-                    return -1
+                    return (current * self.radix) + next.value
                 } else {
-                    return -2
+                    return current
                 }
             }
         }
@@ -853,7 +861,7 @@ extension LED_MultipleDigits: LED_Element {
             if 0 > totalValue {
                 _digitArray.forEach { $0.value = totalValue }
             } else {
-                _digitArray.forEach { $0.value = -2 }
+                _digitArray.forEach { $0.value = self.hasLeadingZeroes ? 0 : -2 }
                 var digits: [Int]
                 
                 switch radix {
@@ -1183,6 +1191,20 @@ public extension RVS_RetroLEDDigitalDisplay {
 
     /* ################################################################## */
     /**
+     This is true, if values are to be displayed with leading zeores.
+     */
+    @IBInspectable var hasLeadingZeroes: Bool {
+        get { _ledPathMaker?.hasLeadingZeroes ?? false }
+        set {
+            let oldValue = value
+            _ledPathMaker?.hasLeadingZeroes = newValue
+            _ledPathMaker?.value = oldValue
+            DispatchQueue.main.async { self.setNeedsLayout() }
+        }
+    }
+    
+    /* ################################################################## */
+    /**
      This is the number of digits for this group. 0 (or less), means no display.
      */
     @IBInspectable var numberOfDigits: Int {
@@ -1194,9 +1216,10 @@ public extension RVS_RetroLEDDigitalDisplay {
                 return
             }
             guard nil == _ledPathMaker || _ledPathMaker?.numberOfDigits != newValue else { return }
+            let currentHasLeadingZeroes = hasLeadingZeroes
             let currentValue = _ledPathMaker?.value ?? -2
             let currentRadix = _ledPathMaker?.radix ?? 16
-            _ledPathMaker = LED_MultipleDigits(currentValue, numberOfDigits: newValue, radix: currentRadix)
+            _ledPathMaker = LED_MultipleDigits(currentValue, numberOfDigits: newValue, radix: currentRadix, hasLeadingZeroes: currentHasLeadingZeroes)
             DispatchQueue.main.async { self.setNeedsLayout() }
         }
     }
