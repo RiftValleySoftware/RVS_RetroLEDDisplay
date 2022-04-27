@@ -240,35 +240,58 @@ You may want to be careful about the order in which you set these values. For ex
 <p>The controls are (top to bottom):</p>
 
 <ul>
-<li><p><strong>Radix</strong>
-The top segmented switch changes the numbering base of the widget.</p></li>
-<li><p><strong>Active Segment Fill</strong>
-The second from top segmented switch controls the fill for &ldquo;active&rdquo; segments. The choices are:</p>
+<li><p><strong>Radix</strong></p>
+
+<p>The top segmented switch changes the numbering base of the widget. The choices are:</p>
 
 <ul>
-<li><strong>Default</strong>
-This uses a simple, 1-color image to fill the segments. It is visually identical to setting a solid color.</li>
-<li><strong>Ugly</strong>
-This applies a paisley pattern image.</li>
-<li><strong>Gradients</strong>
-This applies a red-to-orange gradient.</li>
-<li><strong>Solid</strong>
-This uses a single color, specified in the gradient properties (just the start).</li>
+<li><strong>2</strong> (Binary)</li>
+<li><strong>8</strong> (Octal)</li>
+<li><strong>10</strong> (Decimal)</li>
+<li><strong>16</strong> (Hexadecimal)</li>
 </ul></li>
-<li><p><strong>Gradient Angle</strong>
-This is only enabled when one (or both) of the fill switches is set to &ldquo;Gradients.&rdquo; It allows you to change the angle the gradient fills.</p></li>
-<li><p><strong>Inactive Segment Fill</strong>
-This is almost exactly like the Active Segment Fill Switch, but uses different colors/patterns.</p></li>
-<li><p><strong>Aspect</strong>
-This applies different aspects to the control. The rightmost one (&ldquo;Normal&rdquo;), uses <a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1260">the <code>idealAspect</code> property</a> to determine the optimal aspect for the control display. The leftmost one, rotates that by 90 degrees (π/2).</p></li>
-<li><p><strong>Value Slider And Stepper</strong>
-This allows you to change the value, sent to the widget. The stepper allows 1-by-1 value changes. The leftmost two values are -2, and -1, respectively. The maximum is the maximum available for the control, given the radix and the number of digits.</p></li>
-<li><p><strong>The Widget</strong>
-This is the Code Under Test. It displays the widget, according to the current settings.</p></li>
-<li><p><strong>Skew</strong>
-This slider allows you to skew the widget.</p></li>
-<li><p><strong>Number of Digits</strong>
-This sets the number of digits displayed. The choices are 1, 2, 4, and 8.</p></li>
+<li><p><strong>Active Segment Fill</strong></p>
+
+<p>The second from top segmented switch controls the fill for &ldquo;active&rdquo; segments. The choices are:</p>
+
+<ul>
+<li><p><strong>Default</strong></p>
+
+<p>This uses a simple, 1-color image to fill the segments. It is visually identical to setting a solid color.</p></li>
+<li><p><strong>Ugly</strong></p>
+
+<p>This applies a paisley pattern image.</p></li>
+<li><p><strong>Gradients</strong></p>
+
+<p>This applies a red-to-orange gradient.</p></li>
+<li><p><strong>Solid</strong></p>
+
+<p>This uses a single color, specified in the gradient properties (just the start).</p></li>
+</ul></li>
+<li><p><strong>Gradient Angle</strong></p>
+
+<p>This is only enabled when one (or both) of the fill switches is set to &ldquo;Gradients.&rdquo; It allows you to change the angle the gradient fills.</p></li>
+<li><p><strong>Inactive Segment Fill</strong></p>
+
+<p>This is almost exactly like the Active Segment Fill Switch, but uses different colors/patterns.</p></li>
+<li><p><strong>Aspect</strong></p>
+
+<p>This applies different aspects to the control. The rightmost one (&ldquo;Normal&rdquo;), uses <a href="https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1260">the <code>idealAspect</code> property</a> to determine the optimal aspect for the control display. The leftmost one, rotates that by 90 degrees (π/2).</p></li>
+<li><p><strong>Value Slider And Stepper</strong></p>
+
+<p>This allows you to change the value, sent to the widget. The stepper allows 1-by-1 value changes. The leftmost two values are -2, and -1, respectively. The maximum is the maximum available for the control, given the radix and the number of digits.</p></li>
+<li><p><strong>The Widget</strong></p>
+
+<p>This is the Code Under Test. It displays the widget, according to the current settings.</p></li>
+<li><p><strong>Skew</strong></p>
+
+<p>This slider allows you to skew the widget.</p></li>
+<li><p><strong>Number of Digits</strong></p>
+
+<p>This sets the number of digits displayed. The choices are 1, 2, 4, and 8.</p></li>
+<li><p><strong>Leading Zeroes</strong></p>
+
+<p>This switch will turn &ldquo;leading zeroes&rdquo; on and off.</p></li>
 </ul>
 <h3 id='find-out-more' class='heading'>Find Out More</h3>
 
@@ -303,7 +326,7 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-04-26)</p>
+      <p>&copy; 2022 <a class="link" href="" target="_blank" rel="external noopener"></a>. All rights reserved. (Last updated: 2022-04-27)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
     </section>
   </body>

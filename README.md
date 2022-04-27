@@ -138,39 +138,63 @@ The Test Harness is a very simple, 1-screen app, with a number of controls, desi
 The controls are (top to bottom):
 
 - **Radix**
-    The top segmented switch changes the numbering base of the widget.
+
+    The top segmented switch changes the numbering base of the widget. The choices are:
+    - **2** (Binary)
+    - **8** (Octal)
+    - **10** (Decimal)
+    - **16** (Hexadecimal)
     
 - **Active Segment Fill**
+
     The second from top segmented switch controls the fill for "active" segments. The choices are:
     - **Default**
+
         This uses a simple, 1-color image to fill the segments. It is visually identical to setting a solid color.
+
     - **Ugly**
+
         This applies a paisley pattern image.
+
     - **Gradients**
+
         This applies a red-to-orange gradient.
+
     - **Solid**
+
         This uses a single color, specified in the gradient properties (just the start).
         
 - **Gradient Angle**
+
     This is only enabled when one (or both) of the fill switches is set to "Gradients." It allows you to change the angle the gradient fills.
     
 - **Inactive Segment Fill**
+
     This is almost exactly like the Active Segment Fill Switch, but uses different colors/patterns.
     
 - **Aspect**
+
     This applies different aspects to the control. The rightmost one ("Normal"), uses [the `idealAspect` property](https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1260) to determine the optimal aspect for the control display. The leftmost one, rotates that by 90 degrees (π/2).
     
 - **Value Slider And Stepper**
+
     This allows you to change the value, sent to the widget. The stepper allows 1-by-1 value changes. The leftmost two values are -2, and -1, respectively. The maximum is the maximum available for the control, given the radix and the number of digits.
     
 - **The Widget**
+
     This is the Code Under Test. It displays the widget, according to the current settings.
     
 - **Skew**
+
     This slider allows you to skew the widget.
     
 - **Number of Digits**
+
     This sets the number of digits displayed. The choices are 1, 2, 4, and 8.
+    
+- **Leading Zeroes**
+
+    This switch will turn "leading zeroes" on and off.
 
 ### Find Out More
 
