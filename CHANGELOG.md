@@ -1,3 +1,7 @@
+**1.1.1** *May 13, 2022*
+
+- Upped the version of the `RVS_Generic_Swift_Toolbox` test harness dependency. No changes to the module.
+
 **1.1.0** *April 27, 2022*
 
 - Added the `hasLeadingZeroes` property.
