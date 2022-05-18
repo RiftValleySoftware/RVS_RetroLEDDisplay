@@ -24,7 +24,7 @@ import PackageDescription
 let package = Package(
     name: "RVS_RetroLEDDisplay",
     platforms: [
-        .iOS(.v14)
+        .iOS(.v13)
     ],
     products: [
         .library(name: "RVS-RetroLEDDisplay",
