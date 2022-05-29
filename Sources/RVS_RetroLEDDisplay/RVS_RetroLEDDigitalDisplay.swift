@@ -356,6 +356,10 @@ class LED_SingleDigit {
     private static let _c_g_displaySize = CGSize(width: 250, height: 492)
     
     /* ################################################################## */
+    /// This is the duration of change animations.
+    private static let _animationDurationInSeconds: TimeInterval = 0.25
+    
+    /* ################################################################## */
     // MARK: Private Instance Constants
     /* ################################################################## */
     /// The bezier path for the top segment
@@ -1025,19 +1029,31 @@ private extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
      This completely removes the "On" color layer, so the next call of `_makeOnColorLayer()` will rebuild it.
+     
+     - parameter isAnimated: If true, then the clear will be animated. This is optional, and default is false.
      */
-    private func _clearOnColorLayer() {
-        _onColorLayer?.removeFromSuperlayer()
-        _onColorLayer = nil
+    private func _clearOnColorLayer(isAnimated inIsAnimated: Bool = false) {
+        if inIsAnimated {
+            //_animationDurationInSeconds
+        } else {
+            _onColorLayer?.removeFromSuperlayer()
+            _onColorLayer = nil
+        }
     }
     
     /* ################################################################## */
     /**
      This completely removes the "Off" color layer, so the next call of `_makeOffColorLayer()` will rebuild it.
+     
+     - parameter isAnimated: If true, then the clear will be animated. This is optional, and default is false.
      */
-    private func _clearOffColorLayer() {
-        _offColorLayer?.removeFromSuperlayer()
-        _offColorLayer = nil
+    private func _clearOffColorLayer(isAnimated inIsAnimated: Bool = false) {
+        if inIsAnimated {
+            //_animationDurationInSeconds
+        } else {
+            _offColorLayer?.removeFromSuperlayer()
+            _offColorLayer = nil
+        }
     }
     
     /* ################################################################## */
