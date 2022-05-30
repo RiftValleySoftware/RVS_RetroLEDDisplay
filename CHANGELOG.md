@@ -1,6 +1,10 @@
-**1.1.1** *May 13, 2022*
+**1.3.0** *May 30, 2022*
 
-- Upped the version of the `RVS_Generic_Swift_Toolbox` test harness dependency. No changes to the module.
+- Added a brief animation (and an animation duration inspectable). This makes it behave like an "old-fashioned" LED.
+
+**1.2.0** *May 18, 2022*
+
+- Reduced the minimum OS level to iOS13 (so it can be used in Catalyst).
 
 **1.1.0** *April 27, 2022*
 

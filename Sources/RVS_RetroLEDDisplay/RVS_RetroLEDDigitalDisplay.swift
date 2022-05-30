@@ -19,16 +19,17 @@
 
  The Great Rift Valley Software Company: https://riftvalleysoftware.com
  
- Version 1.2.0
+ Version 1.3.0
 */
 
 import UIKit
 
+/* ###################################################################################################################################### */
 // MARK: -
 // MARK: - Internal Extension Utilities -
-
+// MARK: -
 /* ###################################################################################################################################### */
-// MARK: - UIImage Extension -
+// MARK: UIImage Extension -
 /* ###################################################################################################################################### */
 /**
  This adds some simple image manipulation.
@@ -163,11 +164,12 @@ fileprivate extension UIColor {
     }
 }
 
+/* ###################################################################################################################################### */
 // MARK: -
 // MARK: - Main Implementation -
-
+// MARK: -
 /* ###################################################################################################################################### */
-// MARK: LED Element Protocol
+// MARK: LED Element Protocol -
 /* ###################################################################################################################################### */
 /**
  This protocol specifies the interface for an element that is to be incorporated into an LED display group.
@@ -356,10 +358,6 @@ class LED_SingleDigit {
     private static let _c_g_displaySize = CGSize(width: 250, height: 492)
     
     /* ################################################################## */
-    /// This is the duration of change animations.
-    private static let _animationDurationInSeconds: TimeInterval = 0.25
-    
-    /* ################################################################## */
     // MARK: Private Instance Constants
     /* ################################################################## */
     /// The bezier path for the top segment
@@ -435,7 +433,7 @@ extension LED_SingleDigit {
         
         ret.move(to: (points[0]))
         
-        _ = points.map { ret.addLine(to: $0) }
+        points.forEach { ret.addLine(to: $0) }
         
         ret.addLine(to: points[0])
         
@@ -614,46 +612,39 @@ extension LED_SingleDigit: LED_Element {
         let ret: UIBezierPath = UIBezierPath()
         
         // We only include the ones that we're not using.
-        if !_isSegmentSelected(.kTopSegment) {
-            if let path = _topSegment {
-                ret.append(path)
-            }
+        if !_isSegmentSelected(.kTopSegment),
+           let path = _topSegment {
+            ret.append(path)
         }
         
-        if !_isSegmentSelected(.kTopLeftSegment) {
-            if let path = _topLeftSegment {
-                ret.append(path)
-            }
+        if !_isSegmentSelected(.kTopLeftSegment),
+           let path = _topLeftSegment {
+            ret.append(path)
         }
         
-        if !_isSegmentSelected(.kBottomLeftSegment) {
-            if let path = _bottomLeftSegment {
-                ret.append(path)
-            }
+        if !_isSegmentSelected(.kBottomLeftSegment),
+           let path = _bottomLeftSegment {
+            ret.append(path)
         }
         
-        if !_isSegmentSelected(.kTopRightSegment) {
-            if let path = _topRightSegment {
-                ret.append(path)
-            }
+        if !_isSegmentSelected(.kTopRightSegment),
+           let path = _topRightSegment {
+            ret.append(path)
         }
         
-        if !_isSegmentSelected(.kBottomRightSegment) {
-            if let path = _bottomRightSegment {
-                ret.append(path)
-            }
+        if !_isSegmentSelected(.kBottomRightSegment),
+           let path = _bottomRightSegment {
+            ret.append(path)
         }
         
-        if !_isSegmentSelected(.kBottomSegment) {
-            if let path = _bottomSegment {
-                ret.append(path)
-            }
+        if !_isSegmentSelected(.kBottomSegment),
+           let path = _bottomSegment {
+            ret.append(path)
         }
         
-        if !_isSegmentSelected(.kCenterSegment) {
-            if let path = _centerSegment {
-                ret.append(path)
-            }
+        if !_isSegmentSelected(.kCenterSegment),
+           let path = _centerSegment {
+            ret.append(path)
         }
         
         return ret
@@ -718,7 +709,7 @@ class LED_MultipleDigits {
      This is true, if the value is to be displayed with leading zeroes.
      */
     var hasLeadingZeroes: Bool = false
-    
+
     /* ################################################################## */
     // MARK: Initializer
     /* ################################################################## */
@@ -729,7 +720,12 @@ class LED_MultipleDigits {
      - parameter gap: The gap, in computational units (not display units). The default is 10.
      - parameter hasLeadingZeroes: If true (default is false), then the display is made with leading zeroes (blank, otherwise).
      */
-    init(_ inValue: Int, numberOfDigits inNumberOfDigits: Int = 1, radix inRadix: Int, gap inGap: CGFloat = 10, hasLeadingZeroes inHasLeadingZeroes: Bool = false) {
+    init(_ inValue: Int,
+         numberOfDigits inNumberOfDigits: Int = 1,
+         radix inRadix: Int = 16,
+         gap inGap: CGFloat = 10,
+         hasLeadingZeroes inHasLeadingZeroes: Bool = false
+    ) {
         for _ in 0..<inNumberOfDigits { _digitArray.append(LED_SingleDigit(0, radix: inRadix)) }
         gap = inGap
         value = inValue
@@ -907,6 +903,18 @@ extension LED_MultipleDigits: LED_Element {
 open class RVS_RetroLEDDigitalDisplay: UIImageView {
     /* ################################################################## */
     /**
+     This is the default duration of change animations.
+     */
+    private static let _defaultAnimationDurationInSeconds: TimeInterval = 0.125
+
+    /* ################################################################## */
+    /**
+     This is the opacity that is briefly set, when animating transitions.
+     */
+    private static let _animationOpacity = Float(0.9)
+
+    /* ################################################################## */
+    /**
      This holds the instance that will generate the paths we use for display.
      */
     private var _digitFactory: LED_MultipleDigits?
@@ -1020,6 +1028,12 @@ open class RVS_RetroLEDDigitalDisplay: UIImageView {
      This will change the size of the widget, horizontally (but not vertically).
      */
     private var _skew: CGFloat = 0 { didSet { setNeedsLayout() } }
+    
+    /* ################################################################## */
+    /**
+     This is the duration of change animations.
+     */
+    private var _animationDurationInSeconds: TimeInterval = RVS_RetroLEDDigitalDisplay._defaultAnimationDurationInSeconds
 }
 
 /* ###################################################################################################################################### */
@@ -1029,31 +1043,19 @@ private extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
      This completely removes the "On" color layer, so the next call of `_makeOnColorLayer()` will rebuild it.
-     
-     - parameter isAnimated: If true, then the clear will be animated. This is optional, and default is false.
      */
-    private func _clearOnColorLayer(isAnimated inIsAnimated: Bool = false) {
-        if inIsAnimated {
-            //_animationDurationInSeconds
-        } else {
-            _onColorLayer?.removeFromSuperlayer()
-            _onColorLayer = nil
-        }
+    private func _clearOnColorLayer() {
+        _onColorLayer?.removeFromSuperlayer()
+        _onColorLayer = nil
     }
     
     /* ################################################################## */
     /**
      This completely removes the "Off" color layer, so the next call of `_makeOffColorLayer()` will rebuild it.
-     
-     - parameter isAnimated: If true, then the clear will be animated. This is optional, and default is false.
      */
-    private func _clearOffColorLayer(isAnimated inIsAnimated: Bool = false) {
-        if inIsAnimated {
-            //_animationDurationInSeconds
-        } else {
-            _offColorLayer?.removeFromSuperlayer()
-            _offColorLayer = nil
-        }
+    private func _clearOffColorLayer() {
+        _offColorLayer?.removeFromSuperlayer()
+        _offColorLayer = nil
     }
     
     /* ################################################################## */
@@ -1064,11 +1066,12 @@ private extension RVS_RetroLEDDigitalDisplay {
      */
     @discardableResult
     func _makeOnColorLayer() -> CALayer? {
-        guard nil == _onColorLayer else {
+        guard nil == _onColorLayer
+        else {
             _onColorLayer?.frame = bounds
             return _onColorLayer
         }
-        
+
         if let image = _onImage?.resized(toNewWidth: bounds.width, toNewHeight: bounds.height)?.cgImage {
             _onColorLayer = CALayer()
             _onColorLayer?.frame = bounds
@@ -1145,6 +1148,15 @@ public extension RVS_RetroLEDDigitalDisplay {
     @IBInspectable var skew: CGFloat {
         get { _skew }
         set { _skew = max(-1.0, min(1.0, newValue)) }
+    }
+
+    /* ################################################################## */
+    /**
+     This is the duration of change animations.
+     */
+    @IBInspectable var animationDurationInSeconds: CGFloat {
+        get { CGFloat(_animationDurationInSeconds) }
+        set { _animationDurationInSeconds = TimeInterval(newValue) }
     }
 
     /* ################################################################## */
@@ -1268,12 +1280,30 @@ public extension RVS_RetroLEDDigitalDisplay {
     /* ################################################################## */
     /**
      This is a numerical value to set to the collected digits.
+     If we have an animation duration, the old value will fade.
      */
     @IBInspectable var value: Int {
         get { _ledPathMaker?.value ?? -2 }
         set {
-            _ledPathMaker?.value = newValue
-            setNeedsLayout()
+            if let oldValue = _ledPathMaker?.value,
+               oldValue != newValue {
+                _ledPathMaker?.value = newValue
+                if 0 < animationDurationInSeconds {
+                    CATransaction.begin()
+                    CATransaction.setAnimationDuration(CFTimeInterval(animationDurationInSeconds))
+                    CATransaction.setCompletionBlock({ [weak self] in
+                        self?._clearOnColorLayer()
+                        self?._clearOffColorLayer()
+                        self?.setNeedsLayout()
+                    })
+                    _onColorLayer?.opacity = Self._animationOpacity
+                    CATransaction.commit()
+                } else {
+                    _clearOnColorLayer()
+                    _clearOffColorLayer()
+                    setNeedsLayout()
+                }
+            }
         }
     }
 
