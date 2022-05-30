@@ -91,6 +91,10 @@ The "active" and "inactive" backgrounds are independent of each other. You could
 
 It can also have a "skew" applied, that gives it the classic "lean" of LED digital displays.
 
+#### Animation Duration In Seconds
+
+This allows you to specify a brief "fade" animation, when changing values (makes it behave more like a "classic" LED). If you leave it at default, it is less than a quarter-second. Set it to 0, to disable the animation.
+
 #### Radix (Numbering Base)
 
 The widget supports Base-2 (Binary), Base-8 (Octal), Base-10 (Decimal), and Base-16 (Hexadecimal) numbering systems. You tell it what to use by setting [the `radix` property](https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/blob/master/Sources/RVS_RetroLEDDisplay/RVS_RetroLEDDigitalDisplay.swift#L1267).

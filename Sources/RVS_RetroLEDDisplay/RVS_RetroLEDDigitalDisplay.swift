@@ -1152,7 +1152,7 @@ public extension RVS_RetroLEDDigitalDisplay {
 
     /* ################################################################## */
     /**
-     This is the duration of change animations.
+     This is the duration of change animations. Default is 1/8 of a second (125 mS). 0 disables the animation.
      */
     @IBInspectable var animationDurationInSeconds: CGFloat {
         get { CGFloat(_animationDurationInSeconds) }
