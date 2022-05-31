@@ -1,3 +1,7 @@
+**1.4.1** *May 31, 2022*
+
+- Updated a dependency. No other API changes.
+
 **1.4.0** *May 31, 2022*
 
 - Changed the dash-notation to underscore. No other API changes.
