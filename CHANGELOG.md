@@ -1,3 +1,7 @@
+**1.4.0** *May 31, 2022*
+
+- Changed the dash-notation to underscore. No other API changes.
+
 **1.3.0** *May 30, 2022*
 
 - Added a brief animation (and an animation duration inspectable). This makes it behave like an "old-fashioned" LED.

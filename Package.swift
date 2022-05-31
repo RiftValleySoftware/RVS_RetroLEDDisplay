@@ -27,7 +27,7 @@ let package = Package(
         .iOS(.v13)
     ],
     products: [
-        .library(name: "RVS-RetroLEDDisplay",
+        .library(name: "RVS_RetroLEDDisplay",
                  targets: ["RVS_RetroLEDDisplay"]
         )
     ],
