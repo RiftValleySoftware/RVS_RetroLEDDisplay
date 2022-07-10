@@ -1,3 +1,7 @@
+**1.4.2** *July 10, 2022*
+
+- Updated a dependency. No other API changes.
+
 **1.4.1** *May 31, 2022*
 
 - Updated a dependency. No other API changes.
