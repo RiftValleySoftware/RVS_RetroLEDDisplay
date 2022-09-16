@@ -204,6 +204,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4C3B9182814B2BD00BA3B41 /* Build configuration list for PBXNativeTarget "RVS_RetroLEDDisplay_TestHarness" */;
 			buildPhases = (
+				D446F1F628D509EE00A8D469 /* SwiftLint */,
 				D4C3B9032814B2B800BA3B41 /* Sources */,
 				D4C3B9042814B2B800BA3B41 /* Frameworks */,
 				D4C3B9052814B2B800BA3B41 /* Resources */,
@@ -230,7 +231,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1330;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					D4C3B8F32814B16D00BA3B41 = {
 						CreatedOnToolsVersion = 13.3.1;
@@ -278,8 +279,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		D446F1F628D509EE00A8D469 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if command -v swiftlint\nthen\n    swiftlint\nfi\n";
+		};
 		D47EA89D2814B95E00337D4B /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -566,7 +587,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-RetroLEDDisplay-TestHarness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -597,7 +618,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.riftvalleysoftware.RVS-RetroLEDDisplay-TestHarness";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -645,7 +666,7 @@
 			repositoryURL = "https://github.com/RiftValleySoftware/RVS_Generic_Swift_Toolbox";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.10.1;
+				minimumVersion = 1.10.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
