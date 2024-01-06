@@ -1,3 +1,7 @@
+**1.4.5** *January 6, 2024*
+- Added privacy declarations.
+- Had to remove SwiftLint, as it no longer works. :(
+)
 **1.4.4** *October 6, 2022*
 
 - Updated a dependency. No other API changes.
