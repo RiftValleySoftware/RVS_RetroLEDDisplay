@@ -1,6 +1,8 @@
 # ``RVS_RetroLEDDisplay``
 
-Simple, Classic, Customizable Digital Display.
+![](icon.png)
+
+A Simple, Classic, Customizable Digital Display.
 
 ## Overview
 
@@ -194,31 +196,3 @@ The controls are (top to bottom):
 - **Leading Zeroes**
 
     This switch will turn "leading zeroes" on and off.
-
-### Find Out More
-
-The package has full [DocC support](https://developer.apple.com/documentation/docc/), so it should integrate perfectly into your project.
-
-[This is the technical documentation for the package](https://riftvalleysoftware.github.io/RVS_RetroLEDDisplay). It discusses the exposed public API, and the various properties that you can access.
-
-[This is the Test Harness Project](https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/tree/master/Tests/RVS_RetroLEDDisplay_TestHarness). It has been designed as a simple project, and should provide excellent guidance in use of this package.
-
-## Legal
-
-[Attribution required for usage of Paisley Patterns, by ilonitta](https://www.freepik.com/free-vector/paisley-pattern-set_8565932.htm)
-
-These patterns are only used in the [Test Harness](https://github.com/RiftValleySoftware/RVS_RetroLEDDisplay/tree/master/Tests/RVS_RetroLEDDisplay_TestHarness), so no attribution is required for use of the package.
-
-### MIT License
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy,
-modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

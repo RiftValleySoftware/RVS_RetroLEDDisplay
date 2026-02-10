@@ -1,5 +1,5 @@
 /**
- © Copyright 2022, The Great Rift Valley Software Company
+ © Copyright 2022-2026, The Great Rift Valley Software Company
 
  LICENSE:
 
@@ -31,7 +31,7 @@ extension UIView {
     /* ################################################################## */
     /**
      This creates a constraint, locking the view to a given aspect ratio.
-     - parameter aspectRatio: The aspect ratio. It is W/H, so numbers less than 1.0 are wider than tall, and numbers greater than 1.0 are taller than wide.
+     - parameter inAspect: The aspect ratio. It is W/H, so numbers less than 1.0 are wider than tall, and numbers greater than 1.0 are taller than wide.
      - returns: An inactive constraint, locking this view to the given aspect ratio.
      */
     func autoLayoutAspectConstraint(aspectRatio inAspect: CGFloat) -> NSLayoutConstraint? {

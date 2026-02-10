@@ -1,3 +1,5 @@
+**1.4.6** *February 10, 2026*
+
 **1.4.5** *January 6, 2024*
 - Added privacy declarations.
 - Had to remove SwiftLint, as it no longer works. :(

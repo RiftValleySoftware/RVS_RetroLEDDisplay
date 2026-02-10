@@ -1,7 +1,7 @@
 ![Icon](icon.png)
 # ``RVS_RetroLEDDisplay``
 
-Simple, Classic, Customizable Digital Display.
+A Simple, Classic, Customizable Digital Display.
 
 ## Overview
 
